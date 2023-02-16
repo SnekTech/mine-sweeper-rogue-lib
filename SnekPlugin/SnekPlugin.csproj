@@ -3,6 +3,7 @@
     <PropertyGroup>
         <TargetFramework>netstandard2.1</TargetFramework>
         <Nullable>enable</Nullable>
+        <LangVersion>11</LangVersion>
 <!--        <_PluginDestination>D:\AsgardProjects\mine-sweeper-rogue\Assets\Plugins\$(MSBuildProjectName)</_PluginDestination>-->
 <!--        <_P>D:\AsgardProjects\mine-sweeper-rogue\Assets\Plugins\$(MSBuildProjectName)</_P>-->
     </PropertyGroup>
@@ -13,6 +14,7 @@
 
     <ItemGroup>
       <PackageReference Include="Newtonsoft.Json" Version="13.0.2" />
+      <PackageReference Include="UniTask" Version="2.3.3" />
     </ItemGroup>
 
 
