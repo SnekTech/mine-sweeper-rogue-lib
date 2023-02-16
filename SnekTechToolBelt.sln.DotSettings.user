@@ -3,6 +3,7 @@
 	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=979a7de0_002D3447_002D4b7a_002Db6d1_002Dbfc65926b643/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="Test1" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
   &lt;TestAncestor&gt;&#xD;
     &lt;TestId&gt;NUnit3x::B788B98B-6672-4E6C-AF42-0BD6C85E5AFF::net6.0::SnekPluginTest.Tests.Test1&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::B788B98B-6672-4E6C-AF42-0BD6C85E5AFF::net6.0::SnekPluginTest.DictTest.dict_keys_property_should_be_same_order_on_every_access&lt;/TestId&gt;&#xD;
   &lt;/TestAncestor&gt;&#xD;
 &lt;/SessionState&gt;</s:String>
 	<s:Boolean x:Key="/Default/UserDictionary/Words/=Aseprite/@EntryIndexedValue">True</s:Boolean></wpf:ResourceDictionary>

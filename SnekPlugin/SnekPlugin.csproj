@@ -3,10 +3,29 @@
     <PropertyGroup>
         <TargetFramework>netstandard2.1</TargetFramework>
         <Nullable>enable</Nullable>
+<!--        <_PluginDestination>D:\AsgardProjects\mine-sweeper-rogue\Assets\Plugins\$(MSBuildProjectName)</_PluginDestination>-->
+<!--        <_P>D:\AsgardProjects\mine-sweeper-rogue\Assets\Plugins\$(MSBuildProjectName)</_P>-->
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="System.Text.Json" Version="7.0.1" />
+        <_BuildResult Include="$(OutputPath)\*" Exclude="**\*.json" />
     </ItemGroup>
 
+    <ItemGroup>
+      <PackageReference Include="Newtonsoft.Json" Version="13.0.2" />
+    </ItemGroup>
+
+
+<!--    <Target Name="CopyPlugin" AfterTargets="Build">-->
+<!--        <Message Text="_FilesToCopy @(_BuildResult), to $(_P)" Importance="high"/>-->
+<!--        <Copy SourceFiles="@(_BuildResult)" DestinationFolder="$(_P)"/>-->
+<!--    </Target>-->
+<!--    -->
+<!--    <Target Name="CustomClean" BeforeTargets="CoreClean">-->
+<!--        <Message Text="Inside Custom Clean" Importance="high"/>-->
+<!--        <ItemGroup>-->
+<!--            <_CustomFilesToDelete Include="$(_P)**\*"/>-->
+<!--        </ItemGroup>-->
+<!--        <Delete Files='@(_CustomFilesToDelete)'/>-->
+<!--    </Target>-->
 </Project>
