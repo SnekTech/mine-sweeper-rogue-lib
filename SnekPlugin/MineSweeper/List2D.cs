@@ -28,11 +28,6 @@ public class List2D<T> : IEnumerable<T>
     public void ResetWith(T[,] array2D)
     {
         Clear();
-        
-        if (array2D.Length <= 0)
-        {
-            throw new ArgumentException("empty 2d array");
-        }
 
         var rowCount = array2D.GetLength(0);
         var columnCount = array2D.GetLength(1);

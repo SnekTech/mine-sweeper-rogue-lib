@@ -3,7 +3,7 @@ using SnekPlugin.MineSweeper;
 using SnekPlugin.MineSweeper.Grid;
 using SnekPluginTest.MineSweeper.Builders;
 
-namespace SnekPluginTest.MineSweeper;
+namespace SnekPluginTest.MineSweeper.Tests;
 
 [TestFixture]
 public class BombMatrixTests

@@ -2,7 +2,7 @@
 using SnekPlugin.MineSweeper;
 using SnekPlugin.MineSweeper.Grid;
 
-namespace SnekPluginTest;
+namespace SnekPluginTest.MineSweeper.Tests;
 
 [TestFixture]
 public class List2DTests
@@ -38,19 +38,27 @@ public class List2DTests
 
         var count = _list2D.Count();
 
-        count.Should().Be(6);
+        count.Should().Be(arr1.Length,
+            "list2d count which calculated using linq(IEnumerable), should match the original 2d array count");
     }
 
     [Test]
-    public void can_init_with_2d_array()
+    public void can_be_created_with_2d_array()
     {
-        var list2D = new List2D<int>(new[,]
-        {
-            {1, 2, 3},
-            {4, 5, 6},
-        });
+        var list2D = new List2D<int>(arr1);
 
-        list2D[0][2].Should().Be(3);
+        list2D[0][2].Should().Be(arr1[0,2]);
+    }
+
+    [Test]
+    public void can_be_created_using_add_row()
+    {
+        var list2D = new List2D<int>();
+        var row = new List<int> {1, 2, 3};
+        
+        list2D.AddRow(row);
+
+        list2D[0][1].Should().Be(row[1]);
     }
 
     [Test]
