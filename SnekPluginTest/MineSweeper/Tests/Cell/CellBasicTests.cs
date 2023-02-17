@@ -24,4 +24,5 @@ public class CellBasicTests
         // Assert
         cell.Parent.Should().BeSameAs(grid);
     }
+
 }

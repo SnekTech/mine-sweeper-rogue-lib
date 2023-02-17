@@ -6,7 +6,7 @@ namespace SnekPluginTest.MineSweeper.Tests;
 
 public class NeighborTests
 {
-    private static readonly IHumbleGrid basicHumbleGrid = A.MockHumbleGridBuilder.Build();
+    private static readonly IHumbleGrid SimpleHumbleGrid = A.MockHumbleGridBuilder.Build();
 
     [Test]
     public void grid_with_1_cell_with_1_bomb_should_have_zero_neighbor()
@@ -15,7 +15,7 @@ public class NeighborTests
         BombMatrix oneBombCell = A.BombMatrix.WithArray2D(new[,]{{1}});
         Grid grid = A.Grid
             .WithBombMatrix(oneBombCell)
-            .WithHumbleGrid(basicHumbleGrid);
+            .WithHumbleGrid(SimpleHumbleGrid);
 
         // Act
         var cell = grid.GetCellAt(new GridIndex(0, 0));
@@ -36,7 +36,7 @@ public class NeighborTests
         };
         BombMatrix bombMatrix = A.BombMatrix.WithArray2D(array2D);
         Grid grid = A.Grid
-            .WithHumbleGrid(basicHumbleGrid)
+            .WithHumbleGrid(SimpleHumbleGrid)
             .WithBombMatrix(bombMatrix);
 
         // Act
@@ -58,7 +58,7 @@ public class NeighborTests
         };
         BombMatrix bombMatrix = A.BombMatrix.WithArray2D(array2D);
         Grid grid = A.Grid
-            .WithHumbleGrid(basicHumbleGrid)
+            .WithHumbleGrid(SimpleHumbleGrid)
             .WithBombMatrix(bombMatrix);
         var sideCell = grid.GetCellAt(new GridIndex(0, 1));
 
@@ -81,7 +81,7 @@ public class NeighborTests
         };
         BombMatrix bombMatrix = A.BombMatrix.WithArray2D(array2D);
         Grid grid = A.Grid
-            .WithHumbleGrid(basicHumbleGrid)
+            .WithHumbleGrid(SimpleHumbleGrid)
             .WithBombMatrix(bombMatrix);
         var centerCell = grid.GetCellAt(new GridIndex(1, 1));
 
@@ -90,5 +90,53 @@ public class NeighborTests
 
         // Assert
         neighbors.Should().HaveCount(8);
+    }
+
+    [Test]
+    public void can_calculate_neighbor_bombCount()
+    {
+        // Arrange
+        var arr = new[,]
+        {
+            {1,0,1},
+            {1,0,1},
+            {1,0,1},
+        };
+        BombMatrix bombMatrix = A.BombMatrix
+            .WithArray2D(arr);
+        Grid grid = A.Grid
+            .WithBombMatrix(bombMatrix)
+            .WithHumbleGrid(SimpleHumbleGrid);
+        var centerCell = grid.GetCellAt(new GridIndex(1, 1));
+
+        // Act
+        
+
+        // Assert
+        centerCell.NeighborBombCount.Should().Be(6);
+    }
+
+    [Test]
+    public void should_return_negative_when_calculating_neighborBombCount_on_a_bomb()
+    {
+        // Arrange
+        var arr2D = new[,]
+        {
+            {1},
+        };
+        BombMatrix bombMatrix = A.BombMatrix.WithArray2D(arr2D);
+        Grid grid = A.Grid
+            .WithBombMatrix(bombMatrix)
+            .WithHumbleGrid(SimpleHumbleGrid);
+        var bombCell = grid.GetCellAt(new GridIndex(0, 0));
+
+
+        // Act
+
+
+        // Assert
+        var cellIndex = bombCell.Index;
+        bombCell.NeighborBombCount.Should()
+            .BeNegative(because: "cell at ({0}, {1}) has a bomb", cellIndex.RowIndex, cellIndex.ColumnIndex);
     }
 }

@@ -1,4 +1,5 @@
-﻿using Cysharp.Threading.Tasks;
+﻿using System.Linq;
+using Cysharp.Threading.Tasks;
 using SnekPlugin.MineSweeper.Cell.Components;
 using SnekPlugin.MineSweeper.Grid;
 
@@ -24,19 +25,19 @@ public class Cell : ICell
     public ICover Cover { get; }
     public IFlag Flag { get; }
 
-    public int NeighborBombCount { get; private set; }
+    public int NeighborBombCount => HasBomb ? -1 :
+        Parent.GetNeighborsOf(this).Count(neighbor => neighbor.HasBomb);
 
-    public void Init(int neighborBombCount)
+    public void Init()
     {
-        NeighborBombCount = neighborBombCount;
-        _humbleCell.Init(Index, neighborBombCount);
+        _humbleCell.Init(Index, NeighborBombCount);
     }
 
     public UniTask<bool> Reveal() => _humbleCell.Reveal();
 
     public UniTask<bool> SwitchFlag() => _humbleCell.SwitchFlag();
 
-    public bool HasBomb { get; set; }
+    public bool HasBomb { get; }
     public bool IsFlagged { get; }
     public bool IsCovered { get; }
     public bool IsRevealed { get; }

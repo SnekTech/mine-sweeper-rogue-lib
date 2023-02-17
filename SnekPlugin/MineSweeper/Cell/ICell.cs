@@ -12,7 +12,7 @@ public interface ICell
     ICover Cover { get; }
     IFlag Flag { get; }
     
-    void Init(int neighborBombCount);
+    void Init();
 
     UniTask<bool> Reveal();
     UniTask<bool> SwitchFlag();
