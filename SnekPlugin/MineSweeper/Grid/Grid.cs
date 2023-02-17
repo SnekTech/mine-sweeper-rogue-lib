@@ -33,7 +33,7 @@ public class Grid : IGrid
     }
 
     public GridSize Size => _bombMatrix.Size;
-    public int CellCount => Size.RowCount * Size.ColumnCount;
+    public int CellCount => Size.TotalCount;
     public int BombCount => _cellMatrix.Count(cell => cell.HasBomb);
     public int FlaggedCellCount => _cellMatrix.Count(cell => cell.IsFlagged);
     public int RevealedCellCount => _cellMatrix.Count(cell => cell.IsRevealed);

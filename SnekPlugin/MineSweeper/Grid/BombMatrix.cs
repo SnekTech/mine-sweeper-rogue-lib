@@ -1,9 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace SnekPlugin.MineSweeper.Grid;
 
-public class BombMatrix
+public class BombMatrix : IEnumerable<bool>
 {
     private readonly bool[,] _bombMatrix;
 
@@ -37,4 +38,24 @@ public class BombMatrix
 
     public bool this[int i, int j] => _bombMatrix[i, j];
     public GridSize Size => _bombMatrix.Size();
+    public int BombCount => this.Count(hasBomb => hasBomb);
+
+    public IEnumerator<bool> GetEnumerator()
+    {
+        var rowCount = Size.RowCount;
+        var columnCount = Size.ColumnCount;
+
+        for (var i = 0; i < rowCount; i++)
+        {
+            for (var j = 0; j < columnCount; j++)
+            {
+                yield return _bombMatrix[i, j];
+            }
+        }
+    }
+
+    IEnumerator IEnumerable.GetEnumerator()
+    {
+        return GetEnumerator();
+    }
 }

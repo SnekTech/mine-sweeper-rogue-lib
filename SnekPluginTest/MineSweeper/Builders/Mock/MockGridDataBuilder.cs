@@ -8,9 +8,9 @@ public class MockGridDataBuilder
     private GridSize _gridSize;
     private float _bombProbability;
 
-    public MockGridDataBuilder WithSize(GridSize gridSize)
+    public MockGridDataBuilder WithSize(int rowCount, int columnCount)
     {
-        _gridSize = gridSize;
+        _gridSize = new GridSize(rowCount, columnCount);
         return this;
     }
 

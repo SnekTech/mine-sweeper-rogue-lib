@@ -10,7 +10,7 @@ public class MockHumbleGridBuilder
 
     public MockHumbleGridBuilder WithGridSize(GridSize gridSize)
     {
-        _cellCount = gridSize.RowCount * gridSize.ColumnCount;
+        _cellCount = gridSize.TotalCount;
         return this;
     }
     

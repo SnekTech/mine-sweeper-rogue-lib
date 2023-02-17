@@ -8,6 +8,8 @@ public struct GridSize
     public readonly int RowCount;
     public readonly int ColumnCount;
 
+    public int TotalCount => RowCount * ColumnCount;
+
     public GridSize(int rowCount, int columnCount)
     {
         ColumnCount = columnCount;
