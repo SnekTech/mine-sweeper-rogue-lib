@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -24,6 +25,10 @@ public class BombMatrix : IEnumerable<bool>
     public BombMatrix(int[,] bombMatrix)
     {
         var size = bombMatrix.Size();
+        if (size.TotalCount == 0)
+        {
+            throw new ArgumentException("can't create bombMatrix object with an empty 2d array");
+        }
         var rowCount = size.RowCount;
         var columnCount = size.ColumnCount;
         _bombMatrix = new bool[rowCount, columnCount];

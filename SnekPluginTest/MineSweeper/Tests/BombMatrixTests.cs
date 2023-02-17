@@ -10,6 +10,8 @@ namespace SnekPluginTest.MineSweeper.Tests;
 [TestFixture]
 public class BombMatrixTests
 {
+    private static readonly int[,] empty = { };
+    
     private static readonly int[,] square1 =
     {
         {1, 0, 1},
@@ -33,6 +35,14 @@ public class BombMatrixTests
         .WithConstBool(false).Build();
     private static readonly IBombGenerator TrueBombGenerator = A.MockBombGeneratorBuilder
         .WithConstBool(true).Build();
+
+    [Test]
+    public void should_throw_give_empty_2d_array()
+    {
+        var bombMatrixBuilder = new BombMatrixBuilder().WithArray2D(empty);
+        bombMatrixBuilder.Invoking(builder => builder.Build())
+            .Should().Throw<ArgumentException>();
+    }
 
     [TestCaseSource(nameof(AllArrays))]
     public void size_should_match_the_origin_matrix(int[,] array2D)

@@ -27,7 +27,7 @@ public class BombMatrixBuilder
         return this;
     }
 
-    private BombMatrix Build()
+    public BombMatrix Build()
     {
         if (_bombMatrixInt != null)
         {
