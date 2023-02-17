@@ -37,9 +37,19 @@ public class BombMatrixTests
         .WithConstBool(true).Build();
 
     [Test]
-    public void should_throw_give_empty_2d_array()
+    public void should_throw_given_empty_2d_array()
     {
         var bombMatrixBuilder = new BombMatrixBuilder().WithArray2D(empty);
+        bombMatrixBuilder.Invoking(builder => builder.Build())
+            .Should().Throw<ArgumentException>();
+    }
+
+    [Test]
+    public void should_throw_given_empty_sized_gridData()
+    {
+        var emptySizedGridData = A.MockGridDataBuilder
+            .WithSize(0, 0).Build();
+        var bombMatrixBuilder = new BombMatrixBuilder().WithGridData(emptySizedGridData);
         bombMatrixBuilder.Invoking(builder => builder.Build())
             .Should().Throw<ArgumentException>();
     }

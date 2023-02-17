@@ -12,6 +12,11 @@ public class BombMatrix : IEnumerable<bool>
     public BombMatrix(IGridData gridData, IBombGenerator bombGenerator)
     {
         var size = gridData.GridSize;
+        if (size.TotalCount == 0)
+        {
+            throw new ArgumentException("can't create bombMatrix object with an empty 2d array");
+        }
+        
         _bombMatrix = new bool[size.RowCount, size.ColumnCount];
         for (var i = 0; i < size.RowCount; i++)
         {
@@ -29,6 +34,7 @@ public class BombMatrix : IEnumerable<bool>
         {
             throw new ArgumentException("can't create bombMatrix object with an empty 2d array");
         }
+        
         var rowCount = size.RowCount;
         var columnCount = size.ColumnCount;
         _bombMatrix = new bool[rowCount, columnCount];
