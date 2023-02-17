@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Cysharp.Threading.Tasks;
 using SnekPlugin.MineSweeper.Cell;
 
@@ -32,6 +33,10 @@ public class Grid : IGrid
     }
 
     public GridSize Size => _bombMatrix.Size;
+    public int CellCount => Size.RowCount * Size.ColumnCount;
+    public int BombCount => _cellMatrix.Count(cell => cell.HasBomb);
+    public int FlaggedCellCount => _cellMatrix.Count(cell => cell.IsFlagged);
+    public int RevealedCellCount => _cellMatrix.Count(cell => cell.IsRevealed);
 
     public bool IsValid(GridIndex gridIndex)
     {

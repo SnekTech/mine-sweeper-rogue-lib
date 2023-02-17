@@ -9,9 +9,9 @@ public class BombMatrixBuilder
     private IGridData? _gridData;
     private IBombGenerator? _bombGenerator;
 
-    public BombMatrixBuilder WithBombIntMatrix(int[,] matrix)
+    public BombMatrixBuilder WithArray2D(int[,] array2D)
     {
-        _bombMatrixInt = matrix;
+        _bombMatrixInt = array2D;
         return this;
     }
 

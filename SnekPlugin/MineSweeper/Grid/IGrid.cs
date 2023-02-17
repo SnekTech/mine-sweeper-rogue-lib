@@ -7,10 +7,15 @@ namespace SnekPlugin.MineSweeper.Grid;
 public interface IGrid
 {
     ICell GetCellAt(GridIndex gridIndex);
-    GridSize Size { get; }
     void InitCells(IGridData gridData);
     UniTask RevealCellAsync(GridIndex gridIndex);
 
     bool IsValid(GridIndex gridIndex);
     List<ICell> GetNeighborsOf(ICell cell);
+    
+    GridSize Size { get; }
+    int CellCount { get; }
+    int BombCount { get; }
+    int RevealedCellCount { get; }
+    int FlaggedCellCount { get; }
 }

@@ -1,6 +1,8 @@
 ﻿using FluentAssertions;
+using FluentAssertions.Execution;
 using SnekPlugin.MineSweeper;
 using SnekPlugin.MineSweeper.Grid;
+using SnekPluginTest.MineSweeper.AssertExtensions;
 using SnekPluginTest.MineSweeper.Builders;
 
 namespace SnekPluginTest.MineSweeper.Tests;
@@ -8,35 +10,39 @@ namespace SnekPluginTest.MineSweeper.Tests;
 [TestFixture]
 public class BombMatrixTests
 {
-    private static readonly int[,] arr1 =
+    private static readonly int[,] square1 =
     {
         {1, 0, 1},
         {1, 0, 1},
         {1, 1, 1},
     };
 
+    private static readonly int[,] rect1 =
+    {
+        {1, 1, 1},
+        {0, 1, 0},
+    };
+
+    private static readonly int[][,] AllArrays =
+    {
+        square1,
+        rect1,
+    };
+
     [Test]
     public void size_should_match_the_origin_matrix()
     {
-        BombMatrix bombMatrix = A.BombMatrix.WithBombIntMatrix(arr1);
-        
-        bombMatrix.Size.Should().BeEquivalentTo(arr1.Size());
+        BombMatrix bombMatrix = A.BombMatrix.WithArray2D(square1);
+
+        bombMatrix.Size.Should().BeEquivalentTo(square1.Size());
     }
 
-    [Test]
-    public void every_element_should_match_the_origin_matrix()
+    [TestCaseSource(nameof(AllArrays))]
+    public void every_element_should_match_the_origin_matrix(int[,] array2D)
     {
-        BombMatrix bombMatrix = A.BombMatrix.WithBombIntMatrix(arr1);
+        BombMatrix bombMatrix = A.BombMatrix.WithArray2D(array2D);
 
-        var size = bombMatrix.Size;
-        for (var i = 0; i < size.RowCount; i++)
-        {
-            for (var j = 0; j < size.ColumnCount; j++)
-            {
-                var hasBombOriginal = arr1[i, j] != 0;
-                bombMatrix[i, j].Should().Be(hasBombOriginal);
-            }
-        }
+        bombMatrix.Should().Match(array2D);
     }
 
     [Test]
@@ -52,12 +58,8 @@ public class BombMatrixTests
             .WithGridData(gridData)
             .WithBombGenerator(falseBombGenerator);
 
-        for (var i = 0; i < rowCount; i++)
-        {
-            for (var j = 0; j < columnCount; j++)
-            {
-                bombMatrix[i, j].Should().Be(false);
-            }
-        }
+        var bombCount = bombMatrix.Count(hasBomb => hasBomb);
+
+        bombCount.Should().Be(0);
     }
 }
