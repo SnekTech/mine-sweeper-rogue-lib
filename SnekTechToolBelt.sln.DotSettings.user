@@ -1,17 +1,15 @@
 ﻿<wpf:ResourceDictionary xml:space="preserve" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:ss="urn:shemas-jetbrains-com:settings-storage-xaml" xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
 	<s:Boolean x:Key="/Default/AddReferences/RecentPaths/=C_003A_005CProgram_0020Files_005CUnity_005CHub_005CEditor_005C2021_002E3_002E11f1_005CEditor_005CData_005CManaged_005CUnityEngine_002Edll/@EntryIndexedValue">True</s:Boolean>
-	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=20fc8f3c_002Df8a1_002D44a4_002Db20a_002D99b0098081ae/@EntryIndexedValue">&lt;SessionState ContinuousTestingIsOn="True" ContinuousTestingMode="1" IsActive="True" Name="grid_can_be_initiated" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
-  &lt;TestAncestor&gt;&#xD;
-    &lt;TestId&gt;NUnit3x::B788B98B-6672-4E6C-AF42-0BD6C85E5AFF::net6.0::SnekPluginTest.GridTests.grid_can_be_initiated&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;NUnit3x::B788B98B-6672-4E6C-AF42-0BD6C85E5AFF::net6.0::SnekPluginTest.List2DTests.can_Retrieve_AtIndex&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;NUnit3x::B788B98B-6672-4E6C-AF42-0BD6C85E5AFF::net6.0::SnekPluginTest.List2DTests.is_enumerable&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;NUnit3x::B788B98B-6672-4E6C-AF42-0BD6C85E5AFF::net6.0::SnekPluginTest.List2DTests.can_init_with_2d_array&lt;/TestId&gt;&#xD;
-  &lt;/TestAncestor&gt;&#xD;
-&lt;/SessionState&gt;</s:String>
+	<s:String x:Key="/Default/Environment/Highlighting/HighlightingSourceSnapshotLocation/@EntryValue">C:\Users\syf\AppData\Local\JetBrains\Rider2022.3\resharper-host\temp\Rider\vAny\CoverageData\_SnekTechToolBelt.-517936238\Snapshot\snapshot.utdcvr</s:String>
+	
+	
 	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=80049ead_002Dddfb_002D41a9_002Dbaaa_002De1e87dfdf9d7/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="GridTests" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
   &lt;TestAncestor&gt;&#xD;
     &lt;TestId&gt;NUnit3x::B788B98B-6672-4E6C-AF42-0BD6C85E5AFF::net6.0::SnekPluginTest.GridTests&lt;/TestId&gt;&#xD;
   &lt;/TestAncestor&gt;&#xD;
+&lt;/SessionState&gt;</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=e032f051_002D7d7a_002D47af_002D9001_002D6a556ce3c7f3/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="All tests from Solution" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+  &lt;Solution /&gt;&#xD;
 &lt;/SessionState&gt;</s:String>
 	
 	<s:Boolean x:Key="/Default/UserDictionary/Words/=Aseprite/@EntryIndexedValue">True</s:Boolean></wpf:ResourceDictionary>

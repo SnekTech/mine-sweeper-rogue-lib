@@ -1,8 +1,10 @@
 ﻿using FluentAssertions;
 using SnekPlugin.MineSweeper;
+using SnekPlugin.MineSweeper.Grid;
 
 namespace SnekPluginTest;
 
+[TestFixture]
 public class List2DTests
 {
     private readonly List2D<int> _list2D = new List2D<int>();
@@ -49,5 +51,12 @@ public class List2DTests
         });
 
         list2D[0][2].Should().Be(3);
+    }
+
+    [Test]
+    public void should_return_GridSize_through_extension_method()
+    {
+        var matrixSize = arr1.Size();
+        matrixSize.Should().BeEquivalentTo(new GridSize(2, 3));
     }
 }
