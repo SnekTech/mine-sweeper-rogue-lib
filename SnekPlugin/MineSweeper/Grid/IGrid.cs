@@ -14,7 +14,6 @@ public interface IGrid
     List<ICell> GetNeighborsOf(ICell cell);
     
     GridSize Size { get; }
-    int CellCount { get; }
     int BombCount { get; }
     int RevealedCellCount { get; }
     int FlaggedCellCount { get; }

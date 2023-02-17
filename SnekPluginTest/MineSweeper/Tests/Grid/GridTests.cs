@@ -3,7 +3,7 @@ using SnekPlugin.MineSweeper.Grid;
 using SnekPluginTest.MineSweeper.AssertExtensions;
 using SnekPluginTest.MineSweeper.Builders;
 
-namespace SnekPluginTest.MineSweeper.Tests;
+namespace SnekPluginTest.MineSweeper.Tests.Grid;
 
 [TestFixture]
 public class GridTests
