@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace SnekPlugin.MineSweeper.Grid;
+﻿namespace SnekPlugin.MineSweeper.Grid;
 
 public class BombMatrix
 {

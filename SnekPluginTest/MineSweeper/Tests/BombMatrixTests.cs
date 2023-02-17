@@ -38,4 +38,26 @@ public class BombMatrixTests
             }
         }
     }
+
+    [Test]
+    public void should_have_no_bomb_when_using_const_false_bomb_generator()
+    {
+        const int rowCount = 10;
+        const int columnCount = 10;
+        var gridData = A.MockGridDataBuilder
+            .WithSize(new GridSize(rowCount, columnCount)).Build();
+        var falseBombGenerator = A.MockBombGeneratorBuilder
+            .WithConstBool(false).Build();
+        BombMatrix bombMatrix = A.BombMatrix
+            .WithGridData(gridData)
+            .WithBombGenerator(falseBombGenerator);
+
+        for (var i = 0; i < rowCount; i++)
+        {
+            for (var j = 0; j < columnCount; j++)
+            {
+                bombMatrix[i, j].Should().Be(false);
+            }
+        }
+    }
 }
