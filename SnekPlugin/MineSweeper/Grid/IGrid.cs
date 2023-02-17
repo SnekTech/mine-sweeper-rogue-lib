@@ -7,7 +7,7 @@ namespace SnekPlugin.MineSweeper.Grid;
 public interface IGrid
 {
     ICell GetCellAt(GridIndex gridIndex);
-    void InitCells(IGridData gridData);
+    void InitCells(BombMatrix bombMatrix);
     UniTask RevealCellAsync(GridIndex gridIndex);
 
     bool IsValid(GridIndex gridIndex);

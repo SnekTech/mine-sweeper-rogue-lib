@@ -1,4 +1,5 @@
 ﻿using NSubstitute;
+using NSubstitute.Core;
 using SnekPlugin.MineSweeper.Cell;
 using SnekPlugin.MineSweeper.Grid;
 
@@ -6,27 +7,25 @@ namespace SnekPluginTest.MineSweeper.Builders.Mock;
 
 public class MockHumbleGridBuilder
 {
-    private int _cellCount;
-
-    public MockHumbleGridBuilder WithGridSize(GridSize gridSize)
+    private List<IHumbleCell> GetHumbleCells(int n)
     {
-        _cellCount = gridSize.TotalCount;
-        return this;
-    }
-    
-    public IHumbleGrid Build()
-    {
-        var mock = Substitute.For<IHumbleGrid>();
-
-        var humbleCells = new List<IHumbleCell>(_cellCount);
-        for (var i = 0; i < _cellCount; i++)
+        var humbleCells = new List<IHumbleCell>();
+        for (var i = 0; i < n; i++)
         {
             var mockHumbleCellBuilder = new MockHumbleCellBuilder();
             humbleCells.Add(mockHumbleCellBuilder.Build());
         }
 
-        mock.InstantiateHumbleCells(Arg.Any<int>()).Returns(humbleCells);
-        
+        return humbleCells;
+    }
+
+    public IHumbleGrid Build()
+    {
+        var mock = Substitute.For<IHumbleGrid>();
+
+
+        mock.InstantiateHumbleCells(Arg.Any<int>()).Returns(info => GetHumbleCells(info.Arg<int>()));
+
         return mock;
     }
 }

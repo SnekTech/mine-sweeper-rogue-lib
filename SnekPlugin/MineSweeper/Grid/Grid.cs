@@ -10,7 +10,7 @@ public class Grid : IGrid
 {
     private readonly IHumbleGrid _humbleGrid;
     private readonly List2D<ICell> _cellMatrix = new List2D<ICell>();
-    private readonly BombMatrix _bombMatrix;
+    private BombMatrix _bombMatrix;
 
     private static readonly GridIndex[] NeighborOffsets =
     {
@@ -57,11 +57,13 @@ public class Grid : IGrid
         return _cellMatrix[gridIndex.RowIndex][gridIndex.ColumnIndex];
     }
 
-    public void InitCells(IGridData gridData)
+    public void InitCells(BombMatrix bombMatrix)
     {
+        _bombMatrix = bombMatrix;
+        InitCells();
     }
 
-    public void InitCells()
+    private void InitCells()
     {
         var rowCount = Size.RowCount;
         var columnCount = Size.ColumnCount;
