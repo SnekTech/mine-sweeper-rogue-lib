@@ -2,7 +2,7 @@
 using SnekPlugin.MineSweeper.Grid;
 using SnekPluginTest.MineSweeper.Builders;
 
-namespace SnekPluginTest.MineSweeper.Tests.Grid;
+namespace SnekPluginTest.MineSweeper.Tests;
 
 public class NeighborTests
 {
@@ -13,7 +13,7 @@ public class NeighborTests
     {
         // Arrange
         BombMatrix oneBombCell = A.BombMatrix.WithArray2D(new[,]{{1}});
-        SnekPlugin.MineSweeper.Grid.Grid grid = A.Grid
+        Grid grid = A.Grid
             .WithBombMatrix(oneBombCell)
             .WithHumbleGrid(basicHumbleGrid);
 
@@ -35,7 +35,7 @@ public class NeighborTests
             {0, 0},
         };
         BombMatrix bombMatrix = A.BombMatrix.WithArray2D(array2D);
-        SnekPlugin.MineSweeper.Grid.Grid grid = A.Grid
+        Grid grid = A.Grid
             .WithHumbleGrid(basicHumbleGrid)
             .WithBombMatrix(bombMatrix);
 
@@ -57,7 +57,7 @@ public class NeighborTests
             {0, 0, 0},
         };
         BombMatrix bombMatrix = A.BombMatrix.WithArray2D(array2D);
-        SnekPlugin.MineSweeper.Grid.Grid grid = A.Grid
+        Grid grid = A.Grid
             .WithHumbleGrid(basicHumbleGrid)
             .WithBombMatrix(bombMatrix);
         var sideCell = grid.GetCellAt(new GridIndex(0, 1));
@@ -80,7 +80,7 @@ public class NeighborTests
             {0, 0, 0},
         };
         BombMatrix bombMatrix = A.BombMatrix.WithArray2D(array2D);
-        SnekPlugin.MineSweeper.Grid.Grid grid = A.Grid
+        Grid grid = A.Grid
             .WithHumbleGrid(basicHumbleGrid)
             .WithBombMatrix(bombMatrix);
         var centerCell = grid.GetCellAt(new GridIndex(1, 1));

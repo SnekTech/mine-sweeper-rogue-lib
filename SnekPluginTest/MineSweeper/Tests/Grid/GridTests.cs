@@ -3,7 +3,7 @@ using SnekPlugin.MineSweeper.Grid;
 using SnekPluginTest.MineSweeper.AssertExtensions;
 using SnekPluginTest.MineSweeper.Builders;
 
-namespace SnekPluginTest.MineSweeper.Tests.Grid;
+namespace SnekPluginTest.MineSweeper.Tests;
 
 [TestFixture]
 public class GridTests
@@ -43,7 +43,7 @@ public class GridTests
     public void should_match_bombCount_with_original_bombMatrix(BombMatrix bombMatrix)
     {
         // Arrange
-        SnekPlugin.MineSweeper.Grid.Grid grid = A.Grid
+        Grid grid = A.Grid
             .WithBombMatrix(bombMatrix)
             .WithHumbleGrid(basicHumbleGrid);
 
@@ -58,7 +58,7 @@ public class GridTests
         // Arrange
         var originalBombMatrix = bombMatrix1;
         
-        SnekPlugin.MineSweeper.Grid.Grid grid = A.Grid
+        Grid grid = A.Grid
             .WithBombMatrix(originalBombMatrix)
             .WithHumbleGrid(basicHumbleGrid);
 
@@ -77,7 +77,7 @@ public class GridTests
     {
         // Arrange
         var bombMatrix = bombMatrix1;
-        SnekPlugin.MineSweeper.Grid.Grid grid = A.Grid
+        Grid grid = A.Grid
             .WithBombMatrix(bombMatrix)
             .WithHumbleGrid(basicHumbleGrid);
         var badGridIndex = new GridIndex(-1, -1);
