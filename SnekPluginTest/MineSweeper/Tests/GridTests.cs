@@ -1,5 +1,6 @@
 ﻿using FluentAssertions;
 using SnekPlugin.MineSweeper.Grid;
+using SnekPluginTest.MineSweeper.AssertExtensions;
 using SnekPluginTest.MineSweeper.Builders;
 
 namespace SnekPluginTest.MineSweeper.Tests;
@@ -25,7 +26,8 @@ public class GridTests
         {1, 1, 1},
         {1, 1, 1},
     };
-    
+
+    private static readonly IHumbleGrid basicHumbleGrid = A.MockHumbleGridBuilder.Build();
 
     private static readonly BombMatrix bombMatrix1 = A.BombMatrix.WithArray2D(Zero1);
     private static readonly BombMatrix bombMatrix2 = A.BombMatrix.WithArray2D(One1);
@@ -41,10 +43,9 @@ public class GridTests
     public void should_match_bombCount_with_original_bombMatrix(BombMatrix bombMatrix)
     {
         // Arrange
-        var humbleGrid = A.MockHumbleGridBuilder.Build();
-        Grid grid = A.Grid
+        SnekPlugin.MineSweeper.Grid.Grid grid = A.Grid
             .WithBombMatrix(bombMatrix)
-            .WithHumbleGrid(humbleGrid);
+            .WithHumbleGrid(basicHumbleGrid);
 
         var expectedBombCount = bombMatrix.BombCount;
 
@@ -57,10 +58,9 @@ public class GridTests
         // Arrange
         var originalBombMatrix = bombMatrix1;
         
-        var humbleGrid = A.MockHumbleGridBuilder.Build();
-        Grid grid = A.Grid
+        SnekPlugin.MineSweeper.Grid.Grid grid = A.Grid
             .WithBombMatrix(originalBombMatrix)
-            .WithHumbleGrid(humbleGrid);
+            .WithHumbleGrid(basicHumbleGrid);
 
         // Act
         var anotherBombMatrix = bombMatrix3;
@@ -73,21 +73,27 @@ public class GridTests
     }
 
     [Test]
-    public void gridIndex_outOfRange_should_be_invalid()
+    public void can_validate_gridIndex()
     {
         // Arrange
         var bombMatrix = bombMatrix1;
-        var humbleGrid = A.MockHumbleGridBuilder.Build();
-        Grid grid = A.Grid
+        SnekPlugin.MineSweeper.Grid.Grid grid = A.Grid
             .WithBombMatrix(bombMatrix)
-            .WithHumbleGrid(humbleGrid);
+            .WithHumbleGrid(basicHumbleGrid);
         var badGridIndex = new GridIndex(-1, -1);
-        var goodGridIndex = new GridIndex(0, 0);
 
         // Act
 
         // Assert
-        grid.IsValid(badGridIndex).Should().BeFalse();
-        grid.IsValid(goodGridIndex).Should().BeTrue();
+        badGridIndex.Should().BeInvalidIndexOf(grid);
+        
+        for (var i = 0; i < grid.Size.RowCount; i++)
+        {
+            for (var j = 0; j < grid.Size.ColumnCount; j++)
+            {
+                var index = new GridIndex(i, j);
+                index.Should().BeValidIndexOf(grid);
+            }
+        }
     }
 }

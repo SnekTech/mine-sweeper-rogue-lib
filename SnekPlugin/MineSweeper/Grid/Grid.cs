@@ -44,7 +44,7 @@ public class Grid : IGrid
         var columnIndex = gridIndex.ColumnIndex;
         
         return rowIndex >= 0 && rowIndex < Size.RowCount &&
-               columnIndex >= 0 && columnIndex < Size.RowCount;
+               columnIndex >= 0 && columnIndex < Size.ColumnCount;
     }
 
     public ICell GetCellAt(GridIndex gridIndex)
