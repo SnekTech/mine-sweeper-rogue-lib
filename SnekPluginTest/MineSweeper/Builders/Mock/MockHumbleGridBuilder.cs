@@ -8,14 +8,6 @@ public class MockHumbleGridBuilder
 {
     private Func<IHumbleCell> _humbleCellProvider = () => A.MockHumbleCellBuilder.Build();
 
-    private BombMatrix _bombMatrix = A.BombMatrix;
-
-    public MockHumbleGridBuilder WithBombMatrix(BombMatrix bombMatrix)
-    {
-        _bombMatrix = bombMatrix;
-        return this;
-    }
-
     public MockHumbleGridBuilder WithHumbleCellProvider(Func<IHumbleCell> newHumbleCellProvider)
     {
         _humbleCellProvider = newHumbleCellProvider;

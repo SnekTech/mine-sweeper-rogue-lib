@@ -39,6 +39,6 @@ public class Cell : ICell
 
     public bool HasBomb { get; }
     public bool IsFlagged { get; }
-    public bool IsCovered { get; }
+    public bool IsCovered { get; } = true;
     public bool IsRevealed { get; }
 }

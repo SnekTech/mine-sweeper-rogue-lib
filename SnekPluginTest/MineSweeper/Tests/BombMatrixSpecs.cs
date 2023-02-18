@@ -38,8 +38,7 @@ public class BombMatrixSpecs
     [Test]
     public void should_throw_given_empty_2d_array()
     {
-        var bombMatrixBuilder = new BombMatrixBuilder().WithArray2D(empty);
-        bombMatrixBuilder.Invoking(builder => builder.Build())
+        1.Invoking(_ => (BombMatrix)A.BombMatrix.WithArray2D(empty))
             .Should().Throw<ArgumentException>();
     }
 
@@ -50,8 +49,11 @@ public class BombMatrixSpecs
             .WithSize(0, 0).Build();
         var bombMatrixBuilder = new BombMatrixBuilder()
             .WithGridData(emptySizedGridData);
-        
-        bombMatrixBuilder.Invoking(builder => builder.Build())
+
+        1.Invoking(_ => 
+                (BombMatrix) A.BombMatrix
+                    .WithGridData(emptySizedGridData)
+                    .WithBombGenerator(FalseBombGenerator))
             .Should().Throw<ArgumentException>();
     }
 

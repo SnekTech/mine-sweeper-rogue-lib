@@ -4,7 +4,7 @@ namespace SnekPluginTest.MineSweeper.Builders;
 
 public class GridBuilder
 {
-    private BombMatrix _bombMatrix = A.BombMatrix;
+    private BombMatrix _bombMatrix = A.BombMatrix.WithOnlyOneCellThat().HasBomb();
     private IHumbleGrid? _humbleGrid;
 
     public GridBuilder WithBombMatrix(BombMatrix bombMatrix)
@@ -22,8 +22,7 @@ public class GridBuilder
 
     private Grid Build()
     {
-        _humbleGrid ??= A.MockHumbleGridBuilder
-            .WithBombMatrix(_bombMatrix).Build();
+        _humbleGrid ??= A.MockHumbleGridBuilder.Build();
         
         return new Grid(_bombMatrix, _humbleGrid);
     }
