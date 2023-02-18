@@ -1,4 +1,5 @@
 ﻿using FluentAssertions;
+using SnekPlugin.MineSweeper.Cell;
 using SnekPlugin.MineSweeper.Grid;
 using SnekPluginTest.MineSweeper.Builders;
 
@@ -10,12 +11,15 @@ public class NeighborSpecs
     public void should_have_no_neighbor_when_it_is_the_only_1_cell_in_grid()
     {
         // Arrange
-        BombMatrix oneBombCell = A.BombMatrix.WithArray2D(new[,] {{1}});
-        Grid grid = A.Grid.WithBombMatrix(oneBombCell);
+        BombMatrix smallest = A.BombMatrix
+            .WithOnlyOneCellThat()
+            .HasBomb();
+        Cell cell = A.Cell
+            .WithParentMatrix(smallest)
+            .At(new GridIndex(0, 0));
 
         // Act
-        var cell = grid.GetCellAt(new GridIndex(0, 0));
-        var neighbors = grid.GetNeighborsOf(cell);
+        var neighbors = cell.Parent.GetNeighborsOf(cell);
 
         // Assert
         neighbors.Should().BeEmpty();
@@ -31,11 +35,12 @@ public class NeighborSpecs
             {0, 0},
         };
         BombMatrix bombMatrix = A.BombMatrix.WithArray2D(array2D);
-        Grid grid = A.Grid.WithBombMatrix(bombMatrix);
+        Cell cornerCell = A.Cell
+            .WithParentMatrix(bombMatrix)
+            .At(new GridIndex(0, 0));
 
         // Act
-        var cornerCell = grid.GetCellAt(new GridIndex(0, 0));
-        var neighbors = grid.GetNeighborsOf(cornerCell);
+        var neighbors = cornerCell.Parent.GetNeighborsOf(cornerCell);
 
         // Assert
         neighbors.Should().HaveCount(3);
@@ -52,12 +57,12 @@ public class NeighborSpecs
         };
         
         BombMatrix bombMatrix = A.BombMatrix.WithArray2D(array2D);
-        Grid grid = A.Grid.WithBombMatrix(bombMatrix);
-        
-        var sideCell = grid.GetCellAt(new GridIndex(0, 1));
+        Cell sideCell = A.Cell
+            .WithParentMatrix(bombMatrix)
+            .At(new GridIndex(0, 1));
 
         // Act
-        var neighbors = grid.GetNeighborsOf(sideCell);
+        var neighbors = sideCell.Parent.GetNeighborsOf(sideCell);
 
         // Assert
         neighbors.Should().HaveCount(5);
@@ -75,32 +80,34 @@ public class NeighborSpecs
         };
         
         BombMatrix bombMatrix = A.BombMatrix.WithArray2D(array2D);
-        Grid grid = A.Grid.WithBombMatrix(bombMatrix);
         
-        var centerCell = grid.GetCellAt(new GridIndex(1, 1));
+        Cell centerCell = A.Cell
+            .WithParentMatrix(bombMatrix)
+            .At(new GridIndex(1, 1));
 
         // Act
-        var neighbors = grid.GetNeighborsOf(centerCell);
+        var neighbors = centerCell.Parent.GetNeighborsOf(centerCell);
 
         // Assert
         neighbors.Should().HaveCount(8);
     }
 
     [Test]
-    public void can_calculate_neighbor_bombCount()
+    public void subject_center_cell_should_have_6_neighbor_bombs_when_grid_be_like_below()
     {
         // Arrange
         var arr = new[,]
         {
             {1, 0, 1},
-            {1, 0, 1},
+            {1, 0, 1}, // cell at (1, 1) has 6 neighborBombs, obviously
             {1, 0, 1},
         };
         BombMatrix bombMatrix = A.BombMatrix
             .WithArray2D(arr);
-        Grid grid = A.Grid.WithBombMatrix(bombMatrix);
-        
-        var centerCell = grid.GetCellAt(new GridIndex(1, 1));
+
+        Cell centerCell = A.Cell
+            .WithParentMatrix(bombMatrix)
+            .At(new GridIndex(1, 1));
 
         // Act
 
@@ -112,17 +119,12 @@ public class NeighborSpecs
     [Test]
     public void should_return_negative_when_calculating_neighborBombCount_on_a_bomb()
     {
-        // Arrange
-        var arr2D = new[,]
-        {
-            {1},
-        };
-
-        BombMatrix bombMatrix = A.BombMatrix.WithArray2D(arr2D);
-        Grid grid = A.Grid.WithBombMatrix(bombMatrix);
-        
-        var bombCell = grid.GetCellAt(new GridIndex(0, 0));
-
+        BombMatrix bombMatrix = A.BombMatrix
+            .WithOnlyOneCellThat()
+            .HasBomb();
+        Cell bombCell = A.Cell
+            .WithParentMatrix(bombMatrix)
+            .At(new GridIndex(0, 0));
 
         // Act
 

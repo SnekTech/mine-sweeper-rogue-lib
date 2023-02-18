@@ -36,7 +36,7 @@ public class GridIndexAssertions
     {
         Execute.Assertion
             .ForCondition(!grid.IsValid(Subject))
-            .FailWith("Expected {0} to an invalid index for {1}, but it's valid.", Subject, grid.Size);
+            .FailWith("Expected {0} to be an invalid index for {1}, but it's valid.", Subject, grid.Size);
 
         return new AndConstraint<GridIndexAssertions>(this);
     }

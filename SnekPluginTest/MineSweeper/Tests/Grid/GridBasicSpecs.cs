@@ -44,13 +44,15 @@ public class GridBasicSpecs
         Grid grid = A.Grid
             .WithBombMatrix(bombMatrix);
 
+        // Act
         var expectedBombCount = bombMatrix.BombCount;
 
-        grid.BombCount.Should().Be(expectedBombCount, because: $"{nameof(bombMatrix)} has {expectedBombCount} bombs");
+        // Assert
+        grid.BombCount.Should().Be(expectedBombCount);
     }
 
     [Test]
-    public void should_match_bombCount_after_initCells_with_another_bombMatrix()
+    public void should_match_bombCount_When_initCells_with_another_bombMatrix()
     {
         // Arrange
         var originalBombMatrix = bombMatrix1;
@@ -58,10 +60,10 @@ public class GridBasicSpecs
         Grid grid = A.Grid
             .WithBombMatrix(originalBombMatrix);
 
-        // Act
         var anotherBombMatrix = bombMatrix3;
         anotherBombMatrix.Size.Should().NotBeEquivalentTo(originalBombMatrix.Size);
         
+        // Act
         grid.InitCells(anotherBombMatrix);
 
         // Assert
@@ -69,7 +71,7 @@ public class GridBasicSpecs
     }
 
     [Test]
-    public void can_validate_gridIndex()
+    public void negative_gridIndex_shouldBe_invalid()
     {
         // Arrange
         var bombMatrix = bombMatrix1;
@@ -82,6 +84,44 @@ public class GridBasicSpecs
         // Assert
         badGridIndex.Should().BeInvalidIndexOf(grid);
         
+        for (var i = 0; i < grid.Size.RowCount; i++)
+        {
+            for (var j = 0; j < grid.Size.ColumnCount; j++)
+            {
+                var index = new GridIndex(i, j);
+                index.Should().BeValidIndexOf(grid);
+            }
+        }
+    }
+
+    [Test]
+    public void gridIndex_that_exceeds_boundary_shouldBe_invalid()
+    {
+        // Arrange
+        BombMatrix smallest = A.BombMatrix
+            .WithOnlyOneCellThat()
+            .HasBomb();
+        Grid grid = A.Grid
+            .WithBombMatrix(smallest);
+        var exceededGridIndex = new GridIndex(1, 2);
+
+        // Act
+        
+
+        // Assert
+        exceededGridIndex.Should().BeInvalidIndexOf(grid);
+    }
+
+    [TestCaseSource(nameof(AllBombMatrices))]
+    public void gridIndex_in_grid_shouldBe_valid(BombMatrix bombMatrix)
+    {
+        // Arrange
+        Grid grid = A.Grid
+            .WithBombMatrix(bombMatrix);
+
+        // Act
+
+        // Assert
         for (var i = 0; i < grid.Size.RowCount; i++)
         {
             for (var j = 0; j < grid.Size.ColumnCount; j++)

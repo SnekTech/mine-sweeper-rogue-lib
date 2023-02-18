@@ -46,9 +46,7 @@ public class BombMatrixSpecs
     public void should_throw_When_given_empty_sized_gridData()
     {
         var emptySizedGridData = A.MockGridDataBuilder
-            .WithSize(0, 0).Build();
-        var bombMatrixBuilder = new BombMatrixBuilder()
-            .WithGridData(emptySizedGridData);
+            .WithSize(new GridSize(0, 0)).Build();
 
         1.Invoking(_ => 
                 (BombMatrix) A.BombMatrix
@@ -60,9 +58,11 @@ public class BombMatrixSpecs
     [TestCaseSource(nameof(AllArrays))]
     public void size_should_match_the_origin_matrix(int[,] array2D)
     {
+        // Arrange
         var originalSize = array2D.Size();
         BombMatrix bombMatrix = A.BombMatrix.WithArray2D(array2D);
 
+        // Assert
         bombMatrix.Size.Should().BeEquivalentTo(originalSize);
     }
 
@@ -78,10 +78,8 @@ public class BombMatrixSpecs
     public void should_have_no_bomb_when_using_const_false_bomb_generator()
     {
         // Arrange
-        const int rowCount = 10;
-        const int columnCount = 10;
         var gridData = A.MockGridDataBuilder
-            .WithSize(rowCount, columnCount).Build();
+            .WithSize(new GridSize(10, 10)).Build();
         
         BombMatrix bombMatrix = A.BombMatrix
             .WithGridData(gridData)
@@ -96,11 +94,19 @@ public class BombMatrixSpecs
     }
 
     [Test]
+    public void should_have_4_bomb_when_created_from_rect1()
+    {
+        BombMatrix matrixWith4Bombs = A.BombMatrix.WithArray2D(rect1);
+
+        matrixWith4Bombs.BombCount.Should().Be(4);
+    }
+
+    [Test]
     public void should_all_have_bomb_whenUsing_constTrueBombGenerator()
     {
         // Arrange
         var gridData = A.MockGridDataBuilder
-            .WithSize(10, 10).Build();
+            .WithSize(new GridSize(10, 10)).Build();
         BombMatrix bombMatrix = A.BombMatrix
             .WithGridData(gridData)
             .WithBombGenerator(TrueBombGenerator);
