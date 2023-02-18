@@ -6,16 +6,12 @@ namespace SnekPluginTest.MineSweeper.Tests;
 
 public class NeighborTests
 {
-    private static readonly IHumbleGrid SimpleHumbleGrid = A.MockHumbleGridBuilder.Build();
-
     [Test]
-    public void grid_with_1_cell_with_1_bomb_should_have_zero_neighbor()
+    public void should_have_no_neighbor_when_it_is_the_only_1_cell_in_grid()
     {
         // Arrange
-        BombMatrix oneBombCell = A.BombMatrix.WithArray2D(new[,]{{1}});
-        Grid grid = A.Grid
-            .WithBombMatrix(oneBombCell)
-            .WithHumbleGrid(SimpleHumbleGrid);
+        BombMatrix oneBombCell = A.BombMatrix.WithArray2D(new[,] {{1}});
+        Grid grid = A.Grid.WithBombMatrix(oneBombCell);
 
         // Act
         var cell = grid.GetCellAt(new GridIndex(0, 0));
@@ -35,9 +31,7 @@ public class NeighborTests
             {0, 0},
         };
         BombMatrix bombMatrix = A.BombMatrix.WithArray2D(array2D);
-        Grid grid = A.Grid
-            .WithHumbleGrid(SimpleHumbleGrid)
-            .WithBombMatrix(bombMatrix);
+        Grid grid = A.Grid.WithBombMatrix(bombMatrix);
 
         // Act
         var cornerCell = grid.GetCellAt(new GridIndex(0, 0));
@@ -56,10 +50,10 @@ public class NeighborTests
             {0, 1, 0},
             {0, 0, 0},
         };
+        
         BombMatrix bombMatrix = A.BombMatrix.WithArray2D(array2D);
-        Grid grid = A.Grid
-            .WithHumbleGrid(SimpleHumbleGrid)
-            .WithBombMatrix(bombMatrix);
+        Grid grid = A.Grid.WithBombMatrix(bombMatrix);
+        
         var sideCell = grid.GetCellAt(new GridIndex(0, 1));
 
         // Act
@@ -79,10 +73,10 @@ public class NeighborTests
             {0, 1, 0},
             {0, 0, 0},
         };
+        
         BombMatrix bombMatrix = A.BombMatrix.WithArray2D(array2D);
-        Grid grid = A.Grid
-            .WithHumbleGrid(SimpleHumbleGrid)
-            .WithBombMatrix(bombMatrix);
+        Grid grid = A.Grid.WithBombMatrix(bombMatrix);
+        
         var centerCell = grid.GetCellAt(new GridIndex(1, 1));
 
         // Act
@@ -98,19 +92,18 @@ public class NeighborTests
         // Arrange
         var arr = new[,]
         {
-            {1,0,1},
-            {1,0,1},
-            {1,0,1},
+            {1, 0, 1},
+            {1, 0, 1},
+            {1, 0, 1},
         };
         BombMatrix bombMatrix = A.BombMatrix
             .WithArray2D(arr);
-        Grid grid = A.Grid
-            .WithBombMatrix(bombMatrix)
-            .WithHumbleGrid(SimpleHumbleGrid);
+        Grid grid = A.Grid.WithBombMatrix(bombMatrix);
+        
         var centerCell = grid.GetCellAt(new GridIndex(1, 1));
 
         // Act
-        
+
 
         // Assert
         centerCell.NeighborBombCount.Should().Be(6);
@@ -124,10 +117,10 @@ public class NeighborTests
         {
             {1},
         };
+
         BombMatrix bombMatrix = A.BombMatrix.WithArray2D(arr2D);
-        Grid grid = A.Grid
-            .WithBombMatrix(bombMatrix)
-            .WithHumbleGrid(SimpleHumbleGrid);
+        Grid grid = A.Grid.WithBombMatrix(bombMatrix);
+        
         var bombCell = grid.GetCellAt(new GridIndex(0, 0));
 
 

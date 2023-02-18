@@ -1,5 +1,4 @@
 ﻿using FluentAssertions;
-using FluentAssertions.Execution;
 using SnekPlugin.MineSweeper;
 using SnekPlugin.MineSweeper.Grid;
 using SnekPluginTest.MineSweeper.AssertExtensions;
@@ -45,11 +44,13 @@ public class BombMatrixTests
     }
 
     [Test]
-    public void should_throw_given_empty_sized_gridData()
+    public void should_throw_When_given_empty_sized_gridData()
     {
         var emptySizedGridData = A.MockGridDataBuilder
             .WithSize(0, 0).Build();
-        var bombMatrixBuilder = new BombMatrixBuilder().WithGridData(emptySizedGridData);
+        var bombMatrixBuilder = new BombMatrixBuilder()
+            .WithGridData(emptySizedGridData);
+        
         bombMatrixBuilder.Invoking(builder => builder.Build())
             .Should().Throw<ArgumentException>();
     }

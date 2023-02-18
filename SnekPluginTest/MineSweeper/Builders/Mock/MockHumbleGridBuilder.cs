@@ -1,5 +1,4 @@
 ﻿using NSubstitute;
-using NSubstitute.Core;
 using SnekPlugin.MineSweeper.Cell;
 using SnekPlugin.MineSweeper.Grid;
 
@@ -7,16 +6,20 @@ namespace SnekPluginTest.MineSweeper.Builders.Mock;
 
 public class MockHumbleGridBuilder
 {
-    private List<IHumbleCell> GetHumbleCells(int n)
-    {
-        var humbleCells = new List<IHumbleCell>();
-        for (var i = 0; i < n; i++)
-        {
-            var mockHumbleCellBuilder = new MockHumbleCellBuilder();
-            humbleCells.Add(mockHumbleCellBuilder.Build());
-        }
+    private Func<IHumbleCell> _humbleCellProvider = () => A.MockHumbleCellBuilder.Build();
 
-        return humbleCells;
+    private BombMatrix _bombMatrix = A.BombMatrix;
+
+    public MockHumbleGridBuilder WithBombMatrix(BombMatrix bombMatrix)
+    {
+        _bombMatrix = bombMatrix;
+        return this;
+    }
+
+    public MockHumbleGridBuilder WithHumbleCellProvider(Func<IHumbleCell> newHumbleCellProvider)
+    {
+        _humbleCellProvider = newHumbleCellProvider;
+        return this;
     }
 
     public IHumbleGrid Build()
@@ -24,8 +27,22 @@ public class MockHumbleGridBuilder
         var mock = Substitute.For<IHumbleGrid>();
 
 
-        mock.InstantiateHumbleCells(Arg.Any<int>()).Returns(info => GetHumbleCells(info.Arg<int>()));
+        mock.InstantiateHumbleCells(Arg.Any<int>()).Returns(info => CreateHumbleCellsOfNumber(info.Arg<int>()));
 
         return mock;
+    }
+
+    private List<IHumbleCell> CreateHumbleCellsOfNumber(int n)
+    {
+        var humbleCells = new List<IHumbleCell>();
+        humbleCells.Clear();
+
+        for (var i = 0; i < n; i++)
+        {
+            var mockHumbleCell = _humbleCellProvider();
+            humbleCells.Add(mockHumbleCell);
+        }
+
+        return humbleCells;
     }
 }

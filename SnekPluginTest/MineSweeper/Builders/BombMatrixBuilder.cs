@@ -5,9 +5,9 @@ namespace SnekPluginTest.MineSweeper.Builders;
 
 public class BombMatrixBuilder
 {
-    private int[,]? _bombMatrixInt;
+    private int[,] _bombMatrixInt = Constants.DefaultArray2D;
     private IGridData? _gridData;
-    private IBombGenerator? _bombGenerator;
+    private IBombGenerator _bombGenerator = A.MockBombGeneratorBuilder.WithConstBool(true).Build();
 
     public BombMatrixBuilder WithArray2D(int[,] array2D)
     {
@@ -29,12 +29,12 @@ public class BombMatrixBuilder
 
     public BombMatrix Build()
     {
-        if (_bombMatrixInt != null)
+        if (_gridData != null)
         {
-            return new BombMatrix(_bombMatrixInt);
+            return new BombMatrix(_gridData, _bombGenerator);
         }
 
-        return new BombMatrix(_gridData!, _bombGenerator!);
+        return new BombMatrix(_bombMatrixInt);
     }
 
     public static implicit operator BombMatrix(BombMatrixBuilder builder)

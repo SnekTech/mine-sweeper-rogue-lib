@@ -27,8 +27,6 @@ public class GridBasicTests
         {1, 1, 1},
     };
 
-    private static readonly IHumbleGrid basicHumbleGrid = A.MockHumbleGridBuilder.Build();
-
     private static readonly BombMatrix bombMatrix1 = A.BombMatrix.WithArray2D(Zero1);
     private static readonly BombMatrix bombMatrix2 = A.BombMatrix.WithArray2D(One1);
     private static readonly BombMatrix bombMatrix3 = A.BombMatrix.WithArray2D(m1);
@@ -44,8 +42,7 @@ public class GridBasicTests
     {
         // Arrange
         Grid grid = A.Grid
-            .WithBombMatrix(bombMatrix)
-            .WithHumbleGrid(basicHumbleGrid);
+            .WithBombMatrix(bombMatrix);
 
         var expectedBombCount = bombMatrix.BombCount;
 
@@ -59,8 +56,7 @@ public class GridBasicTests
         var originalBombMatrix = bombMatrix1;
         
         Grid grid = A.Grid
-            .WithBombMatrix(originalBombMatrix)
-            .WithHumbleGrid(basicHumbleGrid);
+            .WithBombMatrix(originalBombMatrix);
 
         // Act
         var anotherBombMatrix = bombMatrix3;
@@ -78,8 +74,7 @@ public class GridBasicTests
         // Arrange
         var bombMatrix = bombMatrix1;
         Grid grid = A.Grid
-            .WithBombMatrix(bombMatrix)
-            .WithHumbleGrid(basicHumbleGrid);
+            .WithBombMatrix(bombMatrix);
         var badGridIndex = new GridIndex(-1, -1);
 
         // Act
