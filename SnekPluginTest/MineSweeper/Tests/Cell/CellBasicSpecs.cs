@@ -4,7 +4,7 @@ using SnekPluginTest.MineSweeper.Builders;
 
 namespace SnekPluginTest.MineSweeper.Tests;
 
-public class CellBasicTests
+public class CellBasicSpecs
 {
     [Test]
     public void should_init_humble_cell_when_parent_grid_finish_cells_generation()

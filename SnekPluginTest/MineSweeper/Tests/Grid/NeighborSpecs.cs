@@ -4,7 +4,7 @@ using SnekPluginTest.MineSweeper.Builders;
 
 namespace SnekPluginTest.MineSweeper.Tests;
 
-public class NeighborTests
+public class NeighborSpecs
 {
     [Test]
     public void should_have_no_neighbor_when_it_is_the_only_1_cell_in_grid()

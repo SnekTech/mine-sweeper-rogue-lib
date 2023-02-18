@@ -6,7 +6,7 @@ using SnekPluginTest.MineSweeper.Builders;
 namespace SnekPluginTest.MineSweeper.Tests;
 
 [TestFixture]
-public class GridBasicTests
+public class GridBasicSpecs
 {
     private static readonly int[,] Zero1 =
     {

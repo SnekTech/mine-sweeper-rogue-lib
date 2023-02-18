@@ -5,7 +5,7 @@ using SnekPlugin.MineSweeper.Grid;
 namespace SnekPluginTest.MineSweeper.Tests;
 
 [TestFixture]
-public class List2DTests
+public class List2DSpecs
 {
     private readonly List2D<int> _list2D = new List2D<int>();
 

@@ -7,7 +7,7 @@ using SnekPluginTest.MineSweeper.Builders;
 namespace SnekPluginTest.MineSweeper.Tests;
 
 [TestFixture]
-public class BombMatrixTests
+public class BombMatrixSpecs
 {
     private static readonly int[,] empty = { };
     
