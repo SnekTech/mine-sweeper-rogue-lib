@@ -84,6 +84,11 @@ public class Grid : IGrid
 
             _cellMatrix.AddRow(aRowOfCells);
         }
+        
+        foreach (var cell in _cellMatrix)
+        {
+            cell.Init();
+        }
     }
 
     public List<ICell> GetNeighborsOf(ICell cell)

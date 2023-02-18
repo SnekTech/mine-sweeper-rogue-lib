@@ -1,17 +1,15 @@
-﻿using NSubstitute;
-using SnekPlugin.MineSweeper.Grid;
+﻿using SnekPlugin.MineSweeper.Grid;
 
 namespace SnekPluginTest.MineSweeper.Builders;
 
 public class GridBuilder
 {
     private BombMatrix _bombMatrix = A.BombMatrix;
-    private IHumbleGrid _humbleGrid = A.MockHumbleGridBuilder.Build();
+    private IHumbleGrid? _humbleGrid;
 
     public GridBuilder WithBombMatrix(BombMatrix bombMatrix)
     {
         _bombMatrix = bombMatrix;
-        _humbleGrid = A.MockHumbleGridBuilder.WithBombMatrix(_bombMatrix).Build();
         
         return this;
     }
@@ -24,6 +22,9 @@ public class GridBuilder
 
     private Grid Build()
     {
+        _humbleGrid ??= A.MockHumbleGridBuilder
+            .WithBombMatrix(_bombMatrix).Build();
+        
         return new Grid(_bombMatrix, _humbleGrid);
     }
 
