@@ -9,16 +9,16 @@ namespace SnekPluginTest.MineSweeper.Tests;
 public class CellStateTransitionSpecs
 {
     [Test]
-    public void should_be_covered_when_created()
+    public async Task should_be_covered_when_created()
     {
         // Arrange
 
         BombMatrix parentMatrix = A.BombMatrix
             .WithOnlyOneCellThat(true);
 
-        Cell cell = A.Cell
+        var cell = await A.CellBuilder
             .WithParentMatrix(parentMatrix)
-            .At(GridIndex.First);
+            .At(GridIndex.First).Build();
 
         // Act
 
@@ -33,8 +33,8 @@ public class CellStateTransitionSpecs
         // Arrange
         BombMatrix parentMatrix = A.BombMatrix
             .WithOnlyOneCellThat(true);
-        Cell cell = A.Cell.WithParentMatrix(parentMatrix)
-            .At(GridIndex.First);
+        var cell = await A.CellBuilder.WithParentMatrix(parentMatrix)
+            .At(GridIndex.First).Build();
 
         // Act
         await cell.SwitchFlagAsync();
@@ -48,7 +48,7 @@ public class CellStateTransitionSpecs
     {
         // Arrange
         BombMatrix parent = A.BombMatrix.WithOnlyOneCellThat(true);
-        Cell cell = A.Cell.WithParentMatrix(parent).At(GridIndex.First);
+        var cell = await A.CellBuilder.WithParentMatrix(parent).At(GridIndex.First).Build();
         
         // Act
         await cell.SwitchFlagAsync();
@@ -63,7 +63,7 @@ public class CellStateTransitionSpecs
     {
         // Arrange
         BombMatrix parent = A.BombMatrix.WithOnlyOneCellThat(true);
-        Cell cell = A.Cell.WithParentMatrix(parent).At(GridIndex.First);
+        var cell = await A.CellBuilder.WithParentMatrix(parent).At(GridIndex.First).Build();
         
         // Act
         await cell.RevealAsync();

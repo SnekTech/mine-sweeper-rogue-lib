@@ -1,4 +1,5 @@
-﻿using SnekPlugin.MineSweeper.Grid;
+﻿using Cysharp.Threading.Tasks;
+using SnekPlugin.MineSweeper.Grid;
 
 namespace SnekPluginTest.MineSweeper.Builders;
 
@@ -20,15 +21,13 @@ public class GridBuilder
         return this;
     }
 
-    private Grid Build()
+    public async UniTask<Grid> Build()
     {
         _humbleGrid ??= A.MockHumbleGridBuilder.Build();
-        
-        return new Grid(_bombMatrix, _humbleGrid);
-    }
 
-    public static implicit operator Grid(GridBuilder builder)
-    {
-        return builder.Build();
+        var grid = new Grid(_bombMatrix, _humbleGrid);
+        await grid.InitCells(_bombMatrix);
+        
+        return grid;
     }
 }

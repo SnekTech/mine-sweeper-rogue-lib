@@ -1,4 +1,5 @@
-﻿using SnekPlugin.MineSweeper.Cell;
+﻿using Cysharp.Threading.Tasks;
+using SnekPlugin.MineSweeper.Cell;
 using SnekPlugin.MineSweeper.Grid;
 
 namespace SnekPluginTest.MineSweeper.Builders;
@@ -30,17 +31,12 @@ public class CellBuilder
         return this;
     }
 
-    public Cell Build()
+    public async UniTask<Cell> Build()
     {
-        Grid parent = A.Grid.WithBombMatrix(_bombMatrix);
+        var parent = await A.GridBuilder.WithBombMatrix(_bombMatrix).Build();
         var cell = parent.GetCellAt(_gridIndex);
 
         return (Cell) cell;
-    }
-
-    public static implicit operator Cell(CellBuilder builder)
-    {
-        return builder.Build();
     }
 }
 

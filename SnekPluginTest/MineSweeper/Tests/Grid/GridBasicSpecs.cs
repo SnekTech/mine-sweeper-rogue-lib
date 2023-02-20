@@ -38,11 +38,11 @@ public class GridBasicSpecs
     };
 
     [TestCaseSource(nameof(AllBombMatrices))]
-    public void should_match_bombCount_with_original_bombMatrix(BombMatrix bombMatrix)
+    public async Task should_match_bombCount_with_original_bombMatrix(BombMatrix bombMatrix)
     {
         // Arrange
-        Grid grid = A.Grid
-            .WithBombMatrix(bombMatrix);
+        var grid = await A.GridBuilder
+            .WithBombMatrix(bombMatrix).Build();
 
         // Act
         var expectedBombCount = bombMatrix.BombCount;
@@ -57,8 +57,8 @@ public class GridBasicSpecs
         // Arrange
         var originalBombMatrix = bombMatrix1;
         
-        Grid grid = A.Grid
-            .WithBombMatrix(originalBombMatrix);
+        var grid = await A.GridBuilder
+            .WithBombMatrix(originalBombMatrix).Build();
 
         var anotherBombMatrix = bombMatrix3;
         anotherBombMatrix.Size.Should().NotBeEquivalentTo(originalBombMatrix.Size);
@@ -71,12 +71,12 @@ public class GridBasicSpecs
     }
 
     [Test]
-    public void negative_gridIndex_shouldBe_invalid()
+    public async Task negative_gridIndex_shouldBe_invalid()
     {
         // Arrange
         var bombMatrix = bombMatrix1;
-        Grid grid = A.Grid
-            .WithBombMatrix(bombMatrix);
+        var grid = await A.GridBuilder
+            .WithBombMatrix(bombMatrix).Build();
         var badGridIndex = new GridIndex(-1, -1);
 
         // Act
@@ -95,13 +95,13 @@ public class GridBasicSpecs
     }
 
     [Test]
-    public void gridIndex_that_exceeds_boundary_shouldBe_invalid()
+    public async Task gridIndex_that_exceeds_boundary_shouldBe_invalid()
     {
         // Arrange
         BombMatrix smallest = A.BombMatrix
             .WithOnlyOneCellThat(true);
-        Grid grid = A.Grid
-            .WithBombMatrix(smallest);
+        var grid = await A.GridBuilder
+            .WithBombMatrix(smallest).Build();
         var exceededGridIndex = new GridIndex(1, 2);
 
         // Act
@@ -112,11 +112,11 @@ public class GridBasicSpecs
     }
 
     [TestCaseSource(nameof(AllBombMatrices))]
-    public void gridIndex_in_grid_shouldBe_valid(BombMatrix bombMatrix)
+    public async Task gridIndex_in_grid_shouldBe_valid(BombMatrix bombMatrix)
     {
         // Arrange
-        Grid grid = A.Grid
-            .WithBombMatrix(bombMatrix);
+        var grid = await A.GridBuilder
+            .WithBombMatrix(bombMatrix).Build();
 
         // Act
 

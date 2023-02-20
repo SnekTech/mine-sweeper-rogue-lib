@@ -29,8 +29,6 @@ public class Grid : IGrid
     {
         _bombMatrix = bombMatrix;
         _humbleGrid = humbleGrid;
-
-        InitCells();
     }
 
     public GridSize Size => _bombMatrix.Size;
