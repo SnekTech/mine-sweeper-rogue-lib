@@ -12,8 +12,7 @@ public class NeighborSpecs
     {
         // Arrange
         BombMatrix smallest = A.BombMatrix
-            .WithOnlyOneCellThat()
-            .HasBomb();
+            .WithOnlyOneCellThat(true);
         Cell cell = A.Cell
             .WithParentMatrix(smallest)
             .At(new GridIndex(0, 0));
@@ -120,8 +119,7 @@ public class NeighborSpecs
     public void should_return_negative_when_calculating_neighborBombCount_on_a_bomb()
     {
         BombMatrix bombMatrix = A.BombMatrix
-            .WithOnlyOneCellThat()
-            .HasBomb();
+            .WithOnlyOneCellThat(true);
         Cell bombCell = A.Cell
             .WithParentMatrix(bombMatrix)
             .At(GridIndex.First);

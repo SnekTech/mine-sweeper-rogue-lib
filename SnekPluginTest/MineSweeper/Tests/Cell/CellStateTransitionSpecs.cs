@@ -14,8 +14,7 @@ public class CellStateTransitionSpecs
         // Arrange
 
         BombMatrix parentMatrix = A.BombMatrix
-            .WithOnlyOneCellThat()
-            .HasBomb();
+            .WithOnlyOneCellThat(true);
 
         Cell cell = A.Cell
             .WithParentMatrix(parentMatrix)
@@ -33,8 +32,7 @@ public class CellStateTransitionSpecs
     {
         // Arrange
         BombMatrix parentMatrix = A.BombMatrix
-            .WithOnlyOneCellThat()
-            .HasBomb();
+            .WithOnlyOneCellThat(true);
         Cell cell = A.Cell.WithParentMatrix(parentMatrix)
             .At(GridIndex.First);
 
@@ -49,7 +47,7 @@ public class CellStateTransitionSpecs
     public async Task flaggedCell_should_be_covered_When_switchFlag_complete()
     {
         // Arrange
-        BombMatrix parent = A.BombMatrix.WithOnlyOneCellThat().HasBomb();
+        BombMatrix parent = A.BombMatrix.WithOnlyOneCellThat(true);
         Cell cell = A.Cell.WithParentMatrix(parent).At(GridIndex.First);
         
         // Act
@@ -64,7 +62,7 @@ public class CellStateTransitionSpecs
     public async Task coveredCell_should_be_revealed_when_reveal_completed()
     {
         // Arrange
-        BombMatrix parent = A.BombMatrix.WithOnlyOneCellThat().HasBomb();
+        BombMatrix parent = A.BombMatrix.WithOnlyOneCellThat(true);
         Cell cell = A.Cell.WithParentMatrix(parent).At(GridIndex.First);
         
         // Act
@@ -72,5 +70,11 @@ public class CellStateTransitionSpecs
 
         // Assert
         cell.CurrentState.Should().Be(CellStateValue.Revealed);
+    }
+
+    [Test]
+    public async Task revealedCell_should_Not_change_when_call_reveal()
+    {
+        
     }
 }

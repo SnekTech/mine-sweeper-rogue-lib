@@ -13,7 +13,7 @@ public interface ICell
     ICover Cover { get; }
     IFlag Flag { get; }
     
-    void Init();
+    UniTask Init();
 
     UniTask RevealAsync();
     UniTask SwitchFlagAsync();

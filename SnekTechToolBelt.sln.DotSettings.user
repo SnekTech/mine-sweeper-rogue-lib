@@ -7,15 +7,17 @@
   &lt;Assembly Path="D:\MyLibs\UniRx.dll" /&gt;&#xD;
 &lt;/AssemblyExplorer&gt;</s:String>
 	<s:String x:Key="/Default/Environment/Highlighting/HighlightingSourceSnapshotLocation/@EntryValue">C:\Users\syf\AppData\Local\JetBrains\Rider2022.3\resharper-host\temp\Rider\vAny\CoverageData\_SnekTechToolBelt.-517936238\Snapshot\snapshot.utdcvr</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=a0a0b402_002Df631_002D443f_002D888d_002Dfa4111fe05e8/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="All tests from &amp;lt;SnekPluginTest&amp;gt;" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+  &lt;Project Location="D:\AsgardProjects\SnekTechToolBelt\SnekPluginTest" Presentation="&amp;lt;SnekPluginTest&amp;gt;" /&gt;&#xD;
+&lt;/SessionState&gt;</s:String>
 	
 	
-	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=80049ead_002Dddfb_002D41a9_002Dbaaa_002De1e87dfdf9d7/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="GridTests" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
-  &lt;TestAncestor&gt;&#xD;
-    &lt;TestId&gt;NUnit3x::B788B98B-6672-4E6C-AF42-0BD6C85E5AFF::net6.0::SnekPluginTest.GridTests&lt;/TestId&gt;&#xD;
-  &lt;/TestAncestor&gt;&#xD;
-&lt;/SessionState&gt;</s:String>
-	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=e032f051_002D7d7a_002D47af_002D9001_002D6a556ce3c7f3/@EntryIndexedValue">&lt;SessionState ContinuousTestingIsOn="True" ContinuousTestingMode="1" IsActive="True" Name="All tests from Solution" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
-  &lt;Solution /&gt;&#xD;
-&lt;/SessionState&gt;</s:String>
+	
+	
+	
+	
+	
+	
+	
 	
 	<s:Boolean x:Key="/Default/UserDictionary/Words/=Aseprite/@EntryIndexedValue">True</s:Boolean></wpf:ResourceDictionary>

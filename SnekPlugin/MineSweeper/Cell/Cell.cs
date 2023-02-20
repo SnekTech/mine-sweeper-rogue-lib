@@ -35,17 +35,18 @@ public class Cell : ICell
     public int NeighborBombCount => HasBomb ? -1 :
         Parent.GetNeighborsOf(this).Count(neighbor => neighbor.HasBomb);
 
-    public void Init()
+    public async UniTask Init()
     {
+        await _stateMachine.SetInitState(_stateMachine.CachedCoveredState);
         _humbleCell.Init(Index, NeighborBombCount);
     }
 
     public UniTask RevealAsync()
     {
-        return _stateMachine.Current.OnReveal();
+        return _stateMachine.CurrentState.OnReveal();
     }
 
-    public UniTask SwitchFlagAsync() => _stateMachine.Current.OnSwitchFlag();
+    public UniTask SwitchFlagAsync() => _stateMachine.CurrentState.OnSwitchFlag();
 
     public bool HasBomb { get; }
 }

@@ -52,7 +52,7 @@ public class GridBasicSpecs
     }
 
     [Test]
-    public void should_match_bombCount_When_initCells_with_another_bombMatrix()
+    public async Task should_match_bombCount_When_initCells_with_another_bombMatrix()
     {
         // Arrange
         var originalBombMatrix = bombMatrix1;
@@ -64,7 +64,7 @@ public class GridBasicSpecs
         anotherBombMatrix.Size.Should().NotBeEquivalentTo(originalBombMatrix.Size);
         
         // Act
-        grid.InitCells(anotherBombMatrix);
+        await grid.InitCells(anotherBombMatrix);
 
         // Assert
         grid.BombCount.Should().Be(anotherBombMatrix.BombCount);
@@ -99,8 +99,7 @@ public class GridBasicSpecs
     {
         // Arrange
         BombMatrix smallest = A.BombMatrix
-            .WithOnlyOneCellThat()
-            .HasBomb();
+            .WithOnlyOneCellThat(true);
         Grid grid = A.Grid
             .WithBombMatrix(smallest);
         var exceededGridIndex = new GridIndex(1, 2);

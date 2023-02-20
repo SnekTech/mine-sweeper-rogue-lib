@@ -3,7 +3,7 @@
     <PropertyGroup>
         <Nullable>enable</Nullable>
         <LangVersion>10</LangVersion>
-        <TargetFrameworks>net48;netstandard2.1</TargetFrameworks>
+        <TargetFramework>netstandard2.1</TargetFramework>
 <!--        <_PluginDestination>D:\AsgardProjects\mine-sweeper-rogue\Assets\Plugins\$(MSBuildProjectName)</_PluginDestination>-->
 <!--        <_P>D:\AsgardProjects\mine-sweeper-rogue\Assets\Plugins\$(MSBuildProjectName)</_P>-->
     </PropertyGroup>

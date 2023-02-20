@@ -57,13 +57,13 @@ public class Grid : IGrid
         return _cellMatrix[gridIndex.RowIndex][gridIndex.ColumnIndex];
     }
 
-    public void InitCells(BombMatrix bombMatrix)
+    public async UniTask InitCells(BombMatrix bombMatrix)
     {
         _bombMatrix = bombMatrix;
-        InitCells();
+        await InitCells();
     }
 
-    private void InitCells()
+    private async UniTask InitCells()
     {
         var rowCount = Size.RowCount;
         var columnCount = Size.ColumnCount;
@@ -86,10 +86,8 @@ public class Grid : IGrid
             _cellMatrix.AddRow(aRowOfCells);
         }
         
-        foreach (var cell in _cellMatrix)
-        {
-            cell.Init();
-        }
+        var initTasks = _cellMatrix.Select(cell => cell.Init());
+        await UniTask.WhenAll(initTasks);
     }
 
     public List<ICell> GetNeighborsOf(ICell cell)

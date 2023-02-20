@@ -5,11 +5,18 @@ namespace SnekPluginTest.MineSweeper.Builders;
 
 public class CellBuilder
     :
-        ISetParentMatrixStage,
+        ISetCellBuilderFirstStage,
         ISetGridIndexStage
 {
-    private BombMatrix _bombMatrix = A.BombMatrix.WithArray2D(new[,] {{1}});
+    private BombMatrix _bombMatrix = A.BombMatrix.WithOnlyOneCellThat(true);
     private GridIndex _gridIndex = new GridIndex(0, 0);
+
+    public CellBuilder WithOneCellParentGridThat(bool hasBomb)
+    {
+        _bombMatrix = A.BombMatrix.WithOnlyOneCellThat(hasBomb);
+        
+        return this;
+    }
 
     public ISetGridIndexStage WithParentMatrix(BombMatrix bombMatrix)
     {
@@ -37,8 +44,9 @@ public class CellBuilder
     }
 }
 
-public interface ISetParentMatrixStage
+public interface ISetCellBuilderFirstStage
 {
+    CellBuilder WithOneCellParentGridThat(bool hasBomb);
     ISetGridIndexStage WithParentMatrix(BombMatrix bombMatrix);
 }
 

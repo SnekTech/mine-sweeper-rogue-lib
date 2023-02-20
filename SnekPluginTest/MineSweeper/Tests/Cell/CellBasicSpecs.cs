@@ -11,7 +11,7 @@ public class CellBasicSpecs
     {
         // Arrange
         var mockCell = A.MockHumbleCellBuilder.Build();
-        BombMatrix bombMatrixOne = A.BombMatrix.WithOnlyOneCellThat().HasBomb();
+        BombMatrix bombMatrixOne = A.BombMatrix.WithOnlyOneCellThat(true);
         var humbleGrid = A.MockHumbleGridBuilder
             .WithHumbleCellProvider(() => mockCell).Build();
         Grid grid = A.Grid

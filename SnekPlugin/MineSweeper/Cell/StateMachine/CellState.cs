@@ -7,7 +7,7 @@ namespace SnekPlugin.MineSweeper.Cell.StateMachine
     public abstract class CellState : IAsyncState
     {
         protected readonly CellStateMachine StateMachine;
-        protected ICell Cell => StateMachine.Cell;
+        protected ICell Cell => StateMachine.Context;
 
         protected CellState(CellStateMachine stateMachine)
         {
