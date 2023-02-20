@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using Cysharp.Threading.Tasks;
 using SnekPlugin.MineSweeper.Cell.Components;
+using SnekPlugin.MineSweeper.Cell.StateMachine;
 using SnekPlugin.MineSweeper.Grid;
 
 namespace SnekPlugin.MineSweeper.Cell;
@@ -8,6 +9,8 @@ namespace SnekPlugin.MineSweeper.Cell;
 public class Cell : ICell
 {
     private readonly IHumbleCell _humbleCell;
+    
+    private readonly CellStateMachine _stateMachine;
 
     public Cell(GridIndex index, IGrid parent, bool hasBomb, IHumbleCell humbleCell)
     {
@@ -18,12 +21,16 @@ public class Cell : ICell
 
         Cover = _humbleCell.Cover;
         Flag = _humbleCell.Flag;
+
+        _stateMachine = new CellStateMachine(this);
     }
 
     public GridIndex Index { get; }
     public IGrid Parent { get; }
     public ICover Cover { get; }
     public IFlag Flag { get; }
+
+    public CellStateValue CurrentState => _stateMachine.CurrentStateValue;
 
     public int NeighborBombCount => HasBomb ? -1 :
         Parent.GetNeighborsOf(this).Count(neighbor => neighbor.HasBomb);
@@ -33,12 +40,12 @@ public class Cell : ICell
         _humbleCell.Init(Index, NeighborBombCount);
     }
 
-    public UniTask<bool> Reveal() => _humbleCell.Reveal();
+    public UniTask RevealAsync()
+    {
+        return _stateMachine.Current.OnReveal();
+    }
 
-    public UniTask<bool> SwitchFlag() => _humbleCell.SwitchFlag();
+    public UniTask SwitchFlagAsync() => _stateMachine.Current.OnSwitchFlag();
 
     public bool HasBomb { get; }
-    public bool IsFlagged { get; }
-    public bool IsCovered { get; } = true;
-    public bool IsRevealed { get; }
 }

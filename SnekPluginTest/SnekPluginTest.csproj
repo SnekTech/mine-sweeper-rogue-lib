@@ -22,4 +22,10 @@
       <ProjectReference Include="..\SnekPlugin\SnekPlugin.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Reference Include="UniRx">
+        <HintPath>..\..\..\MyLibs\UniRx.dll</HintPath>
+      </Reference>
+    </ItemGroup>
+
 </Project>

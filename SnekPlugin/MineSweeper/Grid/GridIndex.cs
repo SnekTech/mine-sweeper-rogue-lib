@@ -18,6 +18,8 @@
             ColumnIndex = columnIndex;
         }
 
+        public static GridIndex First => new GridIndex(0, 0);
+
         public static GridIndex operator +(GridIndex a, GridIndex b)
         {
             return new GridIndex(rowIndex: a.RowIndex + b.RowIndex, columnIndex: a.ColumnIndex + b.ColumnIndex);

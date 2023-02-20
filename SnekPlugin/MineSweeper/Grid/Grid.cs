@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Cysharp.Threading.Tasks;
 using SnekPlugin.MineSweeper.Cell;
+using SnekPlugin.MineSweeper.Cell.StateMachine;
 
 namespace SnekPlugin.MineSweeper.Grid;
 
@@ -34,8 +35,8 @@ public class Grid : IGrid
 
     public GridSize Size => _bombMatrix.Size;
     public int BombCount => _cellMatrix.Count(cell => cell.HasBomb);
-    public int FlaggedCellCount => _cellMatrix.Count(cell => cell.IsFlagged);
-    public int RevealedCellCount => _cellMatrix.Count(cell => cell.IsRevealed);
+    public int FlaggedCellCount => _cellMatrix.Count(cell => cell.CurrentState == CellStateValue.Flagged);
+    public int RevealedCellCount => _cellMatrix.Count(cell => cell.CurrentState == CellStateValue.Revealed);
 
     public bool IsValid(GridIndex gridIndex)
     {

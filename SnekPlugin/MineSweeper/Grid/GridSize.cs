@@ -28,7 +28,10 @@ public struct GridSize
 
     public override int GetHashCode()
     {
-        return HashCode.Combine(RowCount, ColumnCount);
+        unchecked
+        {
+            return (RowCount * 397) ^ ColumnCount;
+        }
     }
 
     public static bool operator != (GridSize a, GridSize b)

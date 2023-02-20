@@ -124,7 +124,7 @@ public class NeighborSpecs
             .HasBomb();
         Cell bombCell = A.Cell
             .WithParentMatrix(bombMatrix)
-            .At(new GridIndex(0, 0));
+            .At(GridIndex.First);
 
         // Act
 

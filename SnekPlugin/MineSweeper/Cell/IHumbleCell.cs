@@ -9,8 +9,8 @@ public interface IHumbleCell
     IFlag Flag { get; }
     ICover Cover { get; }
     
-    UniTask<bool> Reveal();
-    UniTask<bool> SwitchFlag();
+    UniTask<bool> RevealAsync();
+    UniTask<bool> SwitchFlagAsync();
 
     void SetHighlight(bool isHighlight);
     void Init(GridIndex gridIndex, int neighborBombCount);

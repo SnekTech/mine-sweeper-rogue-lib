@@ -1,6 +1,4 @@
-﻿using FluentAssertions;
-using NSubstitute;
-using SnekPlugin.MineSweeper.Cell;
+﻿using NSubstitute;
 using SnekPlugin.MineSweeper.Grid;
 using SnekPluginTest.MineSweeper.Builders;
 
@@ -25,36 +23,5 @@ public class CellBasicSpecs
 
         // Assert
         mockCell.Received().Init(Arg.Any<GridIndex>(), Arg.Any<int>());
-    }
-
-    [Test]
-    public void should_be_covered_when_created()
-    {
-        // Arrange
-        BombMatrix parentMatrix = A.BombMatrix
-            .WithOnlyOneCellThat()
-            .HasBomb();
-        
-        Cell cell = A.Cell
-            .WithParentMatrix(parentMatrix)
-            .At(new GridIndex(0, 0));
-
-        // Act
-
-
-        // Assert
-        cell.IsCovered.Should().BeTrue();
-    }
-
-    [Test]
-    public void covered_cell_should_be_flagged_when_switchFlag_completed()
-    {
-        BombMatrix parentMatrix = A.BombMatrix
-            .WithOnlyOneCellThat()
-            .HasBomb();
-        Cell cell = A.Cell.WithParentMatrix(parentMatrix)
-            .At(new GridIndex(0, 0));
-
-        throw new NotImplementedException();
     }
 }
