@@ -11,7 +11,7 @@ public interface IGrid
     UniTask RevealCellAsync(GridIndex gridIndex);
 
     bool IsValid(GridIndex gridIndex);
-    List<ICell> GetNeighborsOf(ICell cell);
+    IEnumerable<ICell> GetNeighborsOf(ICell cell);
     
     GridSize Size { get; }
     int BombCount { get; }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Cysharp.Threading.Tasks;
+using SnekPlugin.Core.CustomExtensions;
 using SnekPlugin.MineSweeper.Cell;
 using SnekPlugin.MineSweeper.Cell.StateMachine;
 
@@ -10,7 +11,7 @@ namespace SnekPlugin.MineSweeper.Grid;
 public class Grid : IGrid
 {
     private readonly IHumbleGrid _humbleGrid;
-    private readonly List2D<ICell> _cellMatrix = new List2D<ICell>();
+    private ICell[,] _cellMatrix;
     private BombMatrix _bombMatrix;
 
     private static readonly GridIndex[] NeighborOffsets =
@@ -29,18 +30,20 @@ public class Grid : IGrid
     {
         _bombMatrix = bombMatrix;
         _humbleGrid = humbleGrid;
+
+        _cellMatrix = new ICell[Size.RowCount, Size.ColumnCount];
     }
 
     public GridSize Size => _bombMatrix.GridSize;
-    public int BombCount => _cellMatrix.Count(cell => cell.HasBomb);
-    public int FlaggedCellCount => _cellMatrix.Count(cell => cell.CurrentState == CellStateValue.Flagged);
-    public int RevealedCellCount => _cellMatrix.Count(cell => cell.CurrentState == CellStateValue.Revealed);
+    public int BombCount => _cellMatrix.Values().Count(cell => cell.HasBomb);
+    public int FlaggedCellCount => _cellMatrix.Values().Count(cell => cell.CurrentState == CellStateValue.Flagged);
+    public int RevealedCellCount => _cellMatrix.Values().Count(cell => cell.CurrentState == CellStateValue.Revealed);
 
     public bool IsValid(GridIndex gridIndex)
     {
         var rowIndex = gridIndex.RowIndex;
         var columnIndex = gridIndex.ColumnIndex;
-        
+
         return rowIndex >= 0 && rowIndex < Size.RowCount &&
                columnIndex >= 0 && columnIndex < Size.ColumnCount;
     }
@@ -51,57 +54,35 @@ public class Grid : IGrid
         {
             throw new ArgumentOutOfRangeException(nameof(gridIndex));
         }
-        
-        return _cellMatrix[gridIndex.RowIndex][gridIndex.ColumnIndex];
+
+        return _cellMatrix[gridIndex.RowIndex, gridIndex.ColumnIndex];
     }
 
     public async UniTask InitCells(BombMatrix bombMatrix)
     {
         _bombMatrix = bombMatrix;
-        await InitCells();
-    }
+        var (rowCount, columnCount) = Size.Tuple;
+        _cellMatrix = new ICell[rowCount, columnCount];
 
-    private async UniTask InitCells()
-    {
-        var rowCount = Size.RowCount;
-        var columnCount = Size.ColumnCount;
         var humbleCells = _humbleGrid.InstantiateHumbleCells(rowCount * columnCount);
 
-        for (var i = 0; i < rowCount; i++)
+        foreach (var (i, j) in _cellMatrix.Indices())
         {
-            var aRowOfCells = new List<ICell>();
+            var humbleCell = humbleCells[i * columnCount + j];
+            var hasBomb = _bombMatrix[i, j];
 
-            for (var j = 0; j < columnCount; j++)
-            {
-                var humbleCell = humbleCells[i * columnCount + j];
-                var cellIndex = new GridIndex(i, j);
-                var hasBomb = _bombMatrix[i, j];
-
-                var cell = new Cell.Cell(cellIndex, this, hasBomb, humbleCell);
-                aRowOfCells.Add(cell);
-            }
-
-            _cellMatrix.AddRow(aRowOfCells);
+            var cellIndex = new GridIndex(i, j);
+            var cell = new Cell.Cell(cellIndex, this, hasBomb, humbleCell);
+            _cellMatrix[i, j] = cell;
         }
-        
-        var initTasks = _cellMatrix.Select(cell => cell.Init());
+
+        var initTasks = _cellMatrix.Values().Select(cell => cell.Init());
         await UniTask.WhenAll(initTasks);
     }
 
-    public List<ICell> GetNeighborsOf(ICell cell)
+    public IEnumerable<ICell> GetNeighborsOf(ICell cell)
     {
-        var neighbors = new List<ICell>();
-        
-        foreach (var offset in NeighborOffsets)
-        {
-            var cellIndex = cell.Index + offset;
-            if (IsValid(cellIndex))
-            {
-                neighbors.Add(GetCellAt(cellIndex));
-            }
-        }
-
-        return neighbors;
+        return from offset in NeighborOffsets select cell.Index + offset into cellIndex where IsValid(cellIndex) select GetCellAt(cellIndex);
     }
 
     public UniTask RevealCellAsync(GridIndex gridIndex)

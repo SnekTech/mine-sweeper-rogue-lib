@@ -19,6 +19,10 @@ public struct GridSize
     public GridSize((int rows, int columns) pair) : this(pair.rows, pair.columns)
     {}
     
+    public (int rowCount, int columnCount) Tuple => (RowCount, ColumnCount);
+    
+    #region equalty stuff
+    
     public bool Equals(GridSize other)
     {
         return RowCount == other.RowCount && ColumnCount == other.ColumnCount;
@@ -46,4 +50,6 @@ public struct GridSize
     {
         return !(a != b);
     }
+    
+    #endregion
 }

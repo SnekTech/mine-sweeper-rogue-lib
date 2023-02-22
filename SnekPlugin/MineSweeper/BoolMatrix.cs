@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using SnekPlugin.Core.CustomExtensions;
 
 namespace SnekPlugin.MineSweeper;
@@ -21,6 +22,8 @@ public class BoolMatrix
     {
         return new BoolMatrix(source);
     }
+
+    public int TrueCount => Matrix.Values().Count(isTrue => isTrue);
     
     public bool this[int i, int j] => Matrix[i, j];
 
