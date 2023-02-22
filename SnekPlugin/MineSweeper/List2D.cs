@@ -29,13 +29,12 @@ public class List2D<T> : IEnumerable<T>
     {
         Clear();
 
-        var rowCount = array2D.GetLength(0);
-        var columnCount = array2D.GetLength(1);
+        var (rows, columns) = (array2D.GetLength(0), array2D.GetLength(1));
 
-        for (var i = 0; i < rowCount; i++)
+        for (var i = 0; i < rows; i++)
         {
             var elementRow = new List<T>();
-            for (var j = 0; j < columnCount; j++)
+            for (var j = 0; j < columns; j++)
             {
                 elementRow.Add(array2D[i, j]);
             }

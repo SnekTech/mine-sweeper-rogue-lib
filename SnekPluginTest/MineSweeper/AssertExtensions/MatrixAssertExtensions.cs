@@ -27,12 +27,12 @@ public class MatrixAssertions<T> where T : IComparable<T>
     public AndConstraint<MatrixAssertions<T>> BeEquivalentTo(T[,] expected, string because = "", params object[] becauseArgs)
     {
         Execute.Assertion
-            .ForCondition(_subjectMatrix.Size() == expected.Size())
-            .FailWith("matrix size mismatch, subject has size {0}, but expects size {1}", _subjectMatrix.Size(),
-                expected.Size())
+            .ForCondition(_subjectMatrix.GridSize() == expected.GridSize())
+            .FailWith("matrix size mismatch, subject has size {0}, but expects size {1}", _subjectMatrix.GridSize(),
+                expected.GridSize())
             .Then
             .Given(() => _subjectMatrix.FindMissMatch(expected))
-            .ForCondition(missMatchIndex => missMatchIndex == GridIndex.Invalid)
+            .ForCondition(missMatchIndex => missMatchIndex == (-1, -1))
             .FailWith(
                 "Expect {context} matrix {0} to match matrix {1}, but found element miss match at : {2}",
                 _ => _subjectMatrix, _ => expected, missMatchIndex => missMatchIndex);

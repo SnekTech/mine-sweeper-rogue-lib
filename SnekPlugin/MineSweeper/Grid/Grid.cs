@@ -31,7 +31,7 @@ public class Grid : IGrid
         _humbleGrid = humbleGrid;
     }
 
-    public GridSize Size => _bombMatrix.Size;
+    public GridSize Size => _bombMatrix.GridSize;
     public int BombCount => _cellMatrix.Count(cell => cell.HasBomb);
     public int FlaggedCellCount => _cellMatrix.Count(cell => cell.CurrentState == CellStateValue.Flagged);
     public int RevealedCellCount => _cellMatrix.Count(cell => cell.CurrentState == CellStateValue.Revealed);

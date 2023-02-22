@@ -4,34 +4,29 @@ using SnekPlugin.MineSweeper.Grid;
 namespace SnekPluginTest.MineSweeper.Builders;
 
 public class BombMatrixBuilder
-    : 
-        IChooseBetweenArrayOrGridDataStage, 
+    :
+        IChooseBetweenArrayOrGridDataStage,
         ISetBombGeneratorStage
 {
-    private int[,] _bombMatrixInt = Constants.DefaultArray2D;
+    private bool[,] _bombMatrix = BoolMatrix.From(new[] {"1"});
     private IGridData? _gridData;
     private IBombGenerator _bombGenerator = A.MockBombGeneratorBuilder.WithConstBool(true).Build();
 
-    public BombMatrixBuilder WithArray2D(int[,] array2D)
+    public BombMatrixBuilder WithBombRows(string[] bombRows)
     {
-        _bombMatrixInt = array2D;
+        _bombMatrix = BoolMatrix.From(bombRows);
+        return this;
+    }
+
+    public BombMatrixBuilder WithBoolMatrix(bool[,] bombRows)
+    {
+        _bombMatrix = bombRows;
         return this;
     }
 
     public BombMatrixBuilder WithOnlyOneCellThat(bool hasBomb)
     {
-        return this;
-    }
-
-    public BombMatrixBuilder HasBomb()
-    {
-        _bombMatrixInt = new[,] {{1}};
-        return this;
-    }
-
-    public BombMatrixBuilder IsEmpty()
-    {
-        _bombMatrixInt = new[,] {{1}};
+        _bombMatrix = BoolMatrix.From(new[] {hasBomb ? "1" : "0"});
         return this;
     }
 
@@ -54,7 +49,7 @@ public class BombMatrixBuilder
             return new BombMatrix(_gridData, _bombGenerator);
         }
 
-        return new BombMatrix(_bombMatrixInt);
+        return new BombMatrix(_bombMatrix);
     }
 
     public static implicit operator BombMatrix(BombMatrixBuilder builder)
@@ -65,7 +60,8 @@ public class BombMatrixBuilder
 
 public interface IChooseBetweenArrayOrGridDataStage
 {
-    BombMatrixBuilder WithArray2D(int[,] array2D);
+    BombMatrixBuilder WithBombRows(string[] bombRows);
+    BombMatrixBuilder WithBoolMatrix(bool[,] bombRows);
     ISetBombGeneratorStage WithGridData(IGridData gridData);
 
     BombMatrixBuilder WithOnlyOneCellThat(bool hasBomb);

@@ -5,7 +5,7 @@ namespace SnekPlugin.MineSweeper;
 
 public static class Extensions
 {
-    public static GridSize Size<T>(this T[,] matrix)
+    public static GridSize GridSize<T>(this T[,] matrix)
     {
         return new GridSize(matrix.GetLength(0), matrix.GetLength(1));
     }
@@ -24,7 +24,7 @@ public static class Extensions
 
     public static IEnumerable<GridIndex> GridIndices<T>(this T[,] matrix)
     {
-        var size = matrix.Size();
+        var size = matrix.GridSize();
         for (var i = 0; i < size.RowCount; i++)
         {
             for (var j = 0; j < size.ColumnCount; j++)

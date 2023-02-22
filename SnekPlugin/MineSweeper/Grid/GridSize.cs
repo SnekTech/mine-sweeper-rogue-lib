@@ -16,6 +16,9 @@ public struct GridSize
         RowCount = rowCount;
     }
     
+    public GridSize((int rows, int columns) pair) : this(pair.rows, pair.columns)
+    {}
+    
     public bool Equals(GridSize other)
     {
         return RowCount == other.RowCount && ColumnCount == other.ColumnCount;

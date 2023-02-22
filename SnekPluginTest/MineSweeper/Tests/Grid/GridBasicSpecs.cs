@@ -8,28 +8,28 @@ namespace SnekPluginTest.MineSweeper.Tests;
 [TestFixture]
 public class GridBasicSpecs
 {
-    private static readonly int[,] Zero1 =
+    private static readonly string[] Zero1 =
     {
-        {0, 0, 0},
-        {0, 0, 0},
+        "000",
+        "000",
     };
 
-    private static readonly int[,] One1 =
+    private static readonly string[] One1 =
     {
-        {1, 1, 1},
-        {1, 1, 1},
+        "111",
+        "111",
     };
 
-    private static readonly int[,] m1 =
+    private static readonly string[] m1 =
     {
-        {1, 1, 1},
-        {1, 1, 1},
-        {1, 1, 1},
+        "111",
+        "111",
+        "111",
     };
 
-    private static readonly BombMatrix bombMatrix1 = A.BombMatrix.WithArray2D(Zero1);
-    private static readonly BombMatrix bombMatrix2 = A.BombMatrix.WithArray2D(One1);
-    private static readonly BombMatrix bombMatrix3 = A.BombMatrix.WithArray2D(m1);
+    private static readonly BombMatrix bombMatrix1 = A.BombMatrix.WithBombRows(Zero1);
+    private static readonly BombMatrix bombMatrix2 = A.BombMatrix.WithBombRows(One1);
+    private static readonly BombMatrix bombMatrix3 = A.BombMatrix.WithBombRows(m1);
 
     private static readonly BombMatrix[] AllBombMatrices =
     {
@@ -61,7 +61,7 @@ public class GridBasicSpecs
             .WithBombMatrix(originalBombMatrix).Build();
 
         var anotherBombMatrix = bombMatrix3;
-        anotherBombMatrix.Size.Should().NotBeEquivalentTo(originalBombMatrix.Size);
+        anotherBombMatrix.GridSize.Should().NotBeEquivalentTo(originalBombMatrix.GridSize);
         
         // Act
         await grid.InitCells(anotherBombMatrix);

@@ -6,25 +6,24 @@ using SnekPluginTest.MineSweeper.Builders;
 
 namespace SnekPluginTest.MineSweeper.Tests;
 
-[TestFixture]
 public class BombMatrixSpecs
 {
-    private static readonly int[,] empty = { };
+    private static readonly string[] empty = Array.Empty<string>();
     
-    private static readonly int[,] square1 =
+    private static readonly string[] square1 =
     {
-        {1, 0, 1},
-        {1, 0, 1},
-        {1, 1, 1},
+        "101",
+        "101",
+        "111",
     };
 
-    private static readonly int[,] rect1 =
+    private static readonly string[] rect1 =
     {
-        {1, 1, 1},
-        {0, 1, 0},
+        "111",
+        "010",
     };
 
-    private static readonly int[][,] AllArrays =
+    private static readonly string[][] AllBombMatrices =
     {
         square1,
         rect1,
@@ -38,7 +37,7 @@ public class BombMatrixSpecs
     [Test]
     public void should_throw_given_empty_2d_array()
     {
-        1.Invoking(_ => (BombMatrix)A.BombMatrix.WithArray2D(empty))
+        1.Invoking(_ => (BombMatrix)A.BombMatrix.WithBombRows(empty))
             .Should().Throw<ArgumentException>();
     }
 
@@ -55,23 +54,23 @@ public class BombMatrixSpecs
             .Should().Throw<ArgumentException>();
     }
 
-    [TestCaseSource(nameof(AllArrays))]
-    public void size_should_match_the_origin_matrix(int[,] array2D)
+    [TestCaseSource(nameof(AllBombMatrices))]
+    public void size_should_match_the_origin_matrix(string[] bombRows)
     {
         // Arrange
-        var originalSize = array2D.Size();
-        BombMatrix bombMatrix = A.BombMatrix.WithArray2D(array2D);
+        var (rows, columns) = (bombRows.Length, bombRows[0].Length);
+        BombMatrix bombMatrix = A.BombMatrix.WithBombRows(bombRows);
 
         // Assert
-        bombMatrix.Size.Should().BeEquivalentTo(originalSize);
+        bombMatrix.GridSize.Should().BeEquivalentTo(new GridSize(rows, columns));
     }
 
-    [TestCaseSource(nameof(AllArrays))]
-    public void every_element_should_match_the_origin_matrix(int[,] array2D)
+    [TestCaseSource(nameof(AllBombMatrices))]
+    public void every_element_should_match_the_origin_matrix(string[] bombRows)
     {
-        BombMatrix bombMatrix = A.BombMatrix.WithArray2D(array2D);
+        BombMatrix bombMatrix = A.BombMatrix.WithBombRows(bombRows);
 
-        bombMatrix.Should().Match(array2D);
+        bombMatrix.Should().Match(bombRows);
     }
 
     [Test]
@@ -86,17 +85,15 @@ public class BombMatrixSpecs
             .WithBombGenerator(FalseBombGenerator);
         
         // Act
-        var bombCount = bombMatrix.Count(hasBomb => hasBomb);
-        
 
         // Assert
-        bombCount.Should().Be(0);
+        bombMatrix.BombCount.Should().Be(0);
     }
 
     [Test]
     public void should_have_4_bomb_when_created_from_rect1()
     {
-        BombMatrix matrixWith4Bombs = A.BombMatrix.WithArray2D(rect1);
+        BombMatrix matrixWith4Bombs = A.BombMatrix.WithBombRows(rect1);
 
         matrixWith4Bombs.BombCount.Should().Be(4);
     }
@@ -115,6 +112,6 @@ public class BombMatrixSpecs
         var bombCount = bombMatrix.BombCount;
 
         // Assert
-        bombCount.Should().Be(bombMatrix.Size.TotalCount);
+        bombCount.Should().Be(bombMatrix.GridSize.TotalCount);
     }
 }

@@ -28,12 +28,12 @@ public class NeighborSpecs
     public async Task corner_cell_should_have_3_neighbors()
     {
         // Arrange
-        var array2D = new[,]
+        var bombRows = new[]
         {
-            {1, 0},
-            {0, 0},
+            "10",
+            "00",
         };
-        BombMatrix bombMatrix = A.BombMatrix.WithArray2D(array2D);
+        BombMatrix bombMatrix = A.BombMatrix.WithBombRows(bombRows);
         var cornerCell = await A.CellBuilder
             .WithParentMatrix(bombMatrix)
             .At(new GridIndex(0, 0)).Build();
@@ -49,13 +49,13 @@ public class NeighborSpecs
     public async Task side_cell_should_have_5_neighbors()
     {
         // Arrange
-        var array2D = new[,]
+        var bombRows = new[]
         {
-            {0, 1, 0},
-            {0, 0, 0},
+            "010",
+            "000",
         };
         
-        BombMatrix bombMatrix = A.BombMatrix.WithArray2D(array2D);
+        BombMatrix bombMatrix = A.BombMatrix.WithBombRows(bombRows);
         var sideCell = await A.CellBuilder
             .WithParentMatrix(bombMatrix)
             .At(new GridIndex(0, 1)).Build();
@@ -71,14 +71,14 @@ public class NeighborSpecs
     public async Task center_cell_should_have_8_neighbors()
     {
         // Arrange
-        var array2D = new[,]
+        var bombRows = new[]
         {
-            {0, 0, 0},
-            {0, 1, 0},
-            {0, 0, 0},
+            "000",
+            "010",
+            "000",
         };
         
-        BombMatrix bombMatrix = A.BombMatrix.WithArray2D(array2D);
+        BombMatrix bombMatrix = A.BombMatrix.WithBombRows(bombRows);
         
         var centerCell = await A.CellBuilder
             .WithParentMatrix(bombMatrix)
@@ -92,17 +92,17 @@ public class NeighborSpecs
     }
 
     [Test]
-    public async Task subject_center_cell_should_have_6_neighbor_bombs_when_grid_be_like_below()
+    public async Task subject_center_cell_should_have_6_neighbor_bombs()
     {
         // Arrange
-        var arr = new[,]
+        var bombRows = new[]
         {
-            {1, 0, 1},
-            {1, 0, 1}, // cell at (1, 1) has 6 neighborBombs, obviously
-            {1, 0, 1},
+            "101",
+            "101", // cell at (1, 1) has 6 neighborBombs, obviously
+            "101",
         };
         BombMatrix bombMatrix = A.BombMatrix
-            .WithArray2D(arr);
+            .WithBombRows(bombRows);
 
         var centerCell = await A.CellBuilder
             .WithParentMatrix(bombMatrix)

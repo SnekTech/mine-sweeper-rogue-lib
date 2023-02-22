@@ -1,7 +1,5 @@
 ﻿using Cysharp.Threading.Tasks;
-using FluentAssertions;
 using SnekPlugin.MineSweeper;
-using SnekPlugin.MineSweeper.Cell.StateMachine;
 using SnekPlugin.MineSweeper.Grid;
 using SnekPluginTest.MineSweeper.AssertExtensions;
 using SnekPluginTest.MineSweeper.Builders;
@@ -13,30 +11,30 @@ public class GridRevealMechanismSpecs
     private static GridRevealTestCase[] s_matricesToRevealWithoutRecursion =
         {
             new GridRevealTestCase(
-                new[,]
+                new[]
                 {
-                    {1, 1, 1},
-                    {1, 0, 1},
-                    {1, 1, 1},
+                    "111",
+                    "101",
+                    "111",
                 },
-                new[,]
+                new[]
                 {
-                    {1, 1, 1},
-                    {1, 1, 1},
-                    {1, 1, 1},
+                    "111",
+                    "111",
+                    "111",
                 },
-                new[,]
+                new[]
                 {
-                    {1, 1, 1},
-                    {1, 0, 1},
-                    {1, 1, 1},
+                    "111",
+                    "101",
+                    "111",
                 },
                 new GridIndex(1, 1)
             ),
         };
 
     [TestCaseSource(nameof(s_matricesToRevealWithoutRecursion))]
-    public async Task reveal_Without_Recursion(GridRevealTestCase testCase)
+    public async Task reveal_With_Recursion(GridRevealTestCase testCase)
     {
         // Arrange
         var grid = await A.GridBuilder.WithBombMatrix(testCase.BombMatrix).Build();
@@ -46,8 +44,8 @@ public class GridRevealMechanismSpecs
             .Select(gridIndex =>
             {
                 var cell = grid.GetCellAt(gridIndex);
-                var shouldBeCovered = testCase.IsCoveredBefore[gridIndex.I, gridIndex.J] != 0;
-                return shouldBeCovered ? UniTask.CompletedTask : cell.RevealAsync();
+                var shouldBeRevealed = ! testCase.IsCoveredBefore[gridIndex.I, gridIndex.J];
+                return shouldBeRevealed ? cell.RevealAsync() : UniTask.CompletedTask;
             });
         
         await UniTask.WhenAll(restoreRevealedCellTasks);

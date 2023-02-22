@@ -64,7 +64,7 @@ public class List2DSpecs
     [Test]
     public void should_return_GridSize_through_extension_method()
     {
-        var matrixSize = arr1.Size();
+        var matrixSize = arr1.GridSize();
         matrixSize.Should().BeEquivalentTo(new GridSize(2, 3));
     }
 }
