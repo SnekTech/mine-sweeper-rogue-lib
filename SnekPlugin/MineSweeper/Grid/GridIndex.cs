@@ -23,6 +23,11 @@ namespace SnekPlugin.MineSweeper.Grid
 
         public (int i, int j) Tuple => (RowIndex, ColumnIndex);
 
+        public static implicit operator GridIndex((int i, int j) tuple)
+        {
+            return new GridIndex(tuple);
+        }
+
         public static GridIndex operator +(GridIndex a, GridIndex b)
         {
             return new GridIndex(rowIndex: a.RowIndex + b.RowIndex, columnIndex: a.ColumnIndex + b.ColumnIndex);
