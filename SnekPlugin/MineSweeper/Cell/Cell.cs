@@ -30,7 +30,7 @@ public class Cell : ICell
     public ICover Cover { get; }
     public IFlag Flag { get; }
 
-    public CellStateValue CurrentState => _stateMachine.CurrentStateValue;
+    public CellStateValue State => _stateMachine.CurrentStateValue;
 
     public int NeighborBombCount => HasBomb ? -1 :
         Parent.GetNeighborsOf(this).Count(neighbor => neighbor.HasBomb);

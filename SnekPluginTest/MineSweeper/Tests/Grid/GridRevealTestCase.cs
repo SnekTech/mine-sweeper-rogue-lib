@@ -14,7 +14,6 @@ public struct GridRevealTestCase
     public GridRevealTestCase(BoolMatrix hasBomb, BoolMatrix isCoveredBefore, BoolMatrix isCoveredAfter,
         GridIndex cellIndex)
     {
-        
         HasBombMatrix = A.BombMatrix.WithBoolMatrix(hasBomb);
         IsCoveredBefore = isCoveredBefore;
         IsCoveredAfter = isCoveredAfter;

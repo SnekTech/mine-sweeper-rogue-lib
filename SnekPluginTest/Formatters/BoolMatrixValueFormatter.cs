@@ -27,26 +27,18 @@ public class BoolMatrixValueFormatter : IValueFormatter
         }
     }
 
-    public static string ToStringBinary(BoolMatrix matrix, char nonZero = 'x', char zero = 'o')
+    public static string ToStringBinary(BoolMatrix matrix, char truthyChar = '✅', char falsyChar = '❌')
     {
         var sBuilder = new StringBuilder("\n");
         var (rows, columns) = matrix.Matrix.Size();
-
-        sBuilder.Append("  ");
-        
-        for (var i = 0; i < columns; i++)
-        {
-            sBuilder.Append(i);
-        }
-        sBuilder.Append('\n');
         
         
         for (var i = 0; i < rows; i++)
         {
-            sBuilder.Append($"{i} ");
+            sBuilder.Append($"{i}");
             for (var j = 0; j < columns; j++)
             {
-                sBuilder.Append(matrix[i, j] ? zero : nonZero);
+                sBuilder.Append(matrix[i, j] ? truthyChar : falsyChar);
             }
 
             sBuilder.Append('\n');

@@ -8,7 +8,7 @@ namespace SnekPluginTest.MineSweeper.Tests;
 
 public class GridRevealMechanismSpecs
 {
-    private static GridRevealTestCase[] s_matricesToRevealWithoutRecursion =
+    private static GridRevealTestCase[] s_cases =
         {
             new GridRevealTestCase(
                 new[]
@@ -31,9 +31,84 @@ public class GridRevealMechanismSpecs
                 },
                 new GridIndex(1, 1)
             ),
+            new GridRevealTestCase(
+                new[]
+                {
+                    "000",
+                    "000",
+                    "000",
+                },
+                new[]
+                {
+                    "111",
+                    "111",
+                    "111",
+                },
+                new[]
+                {
+                    "000",
+                    "000",
+                    "000",
+                },
+                new GridIndex(1, 1)
+            ),
+            new GridRevealTestCase(
+                new[]
+                {
+                    "10000",
+                    "10000",
+                    "10000",
+                    "11111",
+                    "11111",
+                },
+                new[]
+                {
+                    "11111",
+                    "11111",
+                    "11111",
+                    "11111",
+                    "11111",
+                },
+                new[]
+                {
+                    "10000",
+                    "10000",
+                    "10000",
+                    "11111",
+                    "11111",
+                },
+                new GridIndex(1, 3)
+            ),
+            new GridRevealTestCase(
+                new[]
+                {
+                    "00000",
+                    "00000",
+                    "00100",
+                    "00000",
+                    "00000",
+                },
+                new[]
+                {
+                    "11111",
+                    "11111",
+                    "11111",
+                    "11111",
+                    "11111",
+                },
+                new[]
+                {
+                    "00000",
+                    "00000",
+                    "00100",
+                    "00000",
+                    "00000",
+                },
+                new GridIndex(0, 0)
+            ),
         };
 
-    [TestCaseSource(nameof(s_matricesToRevealWithoutRecursion))]
+    [TestCaseSource(nameof(s_cases))]
     public async Task reveal_With_Recursion(GridRevealTestCase testCase)
     {
         // Arrange
@@ -51,11 +126,11 @@ public class GridRevealMechanismSpecs
         
         await UniTask.WhenAll(restoreRevealedCellTasks);
         
-        await grid.RevealCellAsync(testCase.CellIndex);
+        await grid.RevealAtAsync(testCase.CellIndex);
 
 
         // Assert
         var actualIsCoveredAfter = grid.GetIsCoveredMatrix();
-        actualIsCoveredAfter.Should().BeEquivalentTo(testCase.IsCoveredAfter, $"the grid expects to be like this after revealed cell at{testCase.CellIndex.Tuple}");
+        actualIsCoveredAfter.Should().BeEquivalentTo(testCase.IsCoveredAfter, $"the cell at{testCase.CellIndex.Tuple} should be revealed");
     }
 }

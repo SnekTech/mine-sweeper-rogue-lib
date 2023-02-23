@@ -37,7 +37,7 @@ public class BoolMatrixAssertions
             .Given(() => subjectMatrix.FindMissMatch(expectedMatrix))
             .ForCondition(missMatchIndex => missMatchIndex == (-1, -1))
             .FailWith(
-                "Expect matrix {context} {0} to match matrix {1} {reason}, but found element miss match at : {2}",
+                "matrix {context} {0} should match matrix {1} {reason}, but found element miss match at : {2}",
                 _ => _subject, _ => expected, missMatchIndex => missMatchIndex);
 
         return new AndConstraint<BoolMatrixAssertions>(this);

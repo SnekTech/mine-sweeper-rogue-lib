@@ -1,4 +1,5 @@
-﻿using SnekPlugin.MineSweeper;
+﻿using SnekPlugin.Core.CustomExtensions;
+using SnekPlugin.MineSweeper;
 using SnekPlugin.MineSweeper.Cell.StateMachine;
 using SnekPlugin.MineSweeper.Grid;
 
@@ -12,13 +13,10 @@ public static class GridTestExtensions
 
         var isCoveredMatrix = new bool[rowCount, columnCount];
 
-        for (var i = 0; i < rowCount; i++)
+        foreach (var (i, j) in isCoveredMatrix.Indices())
         {
-            for (var j = 0; j < columnCount; j++)
-            {
-                var cell = grid.GetCellAt(new GridIndex(i, j));
-                isCoveredMatrix[i, j] = cell.CurrentState == CellStateValue.Covered;
-            }
+            var cell = grid.GetCellAt(new GridIndex(i, j));
+            isCoveredMatrix[i, j] = cell.State == CellStateValue.Covered;
         }
 
         return new BoolMatrix(isCoveredMatrix);

@@ -22,5 +22,5 @@ public interface ICell
     
     int NeighborBombCount { get; }
     
-    CellStateValue CurrentState { get; }
+    CellStateValue State { get; }
 }

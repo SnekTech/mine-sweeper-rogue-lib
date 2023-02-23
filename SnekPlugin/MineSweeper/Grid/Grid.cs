@@ -35,9 +35,9 @@ public class Grid : IGrid
     }
 
     public GridSize Size => _bombMatrix.GridSize;
-    public int BombCount => _cellMatrix.Values().Count(cell => cell.HasBomb);
-    public int FlaggedCellCount => _cellMatrix.Values().Count(cell => cell.CurrentState == CellStateValue.Flagged);
-    public int RevealedCellCount => _cellMatrix.Values().Count(cell => cell.CurrentState == CellStateValue.Revealed);
+    public int BombCount => _bombMatrix.BombCount;
+    public int FlaggedCellCount => _cellMatrix.Values().Count(cell => cell.State == CellStateValue.Flagged);
+    public int RevealedCellCount => _cellMatrix.Values().Count(cell => cell.State == CellStateValue.Revealed);
 
     public bool IsValid(GridIndex gridIndex)
     {
@@ -85,8 +85,30 @@ public class Grid : IGrid
         return from offset in NeighborOffsets select cell.Index + offset into cellIndex where IsValid(cellIndex) select GetCellAt(cellIndex);
     }
 
-    public UniTask RevealCellAsync(GridIndex gridIndex)
+    public async UniTask RevealAtAsync(GridIndex gridIndex)
     {
-        return UniTask.FromResult(true);
+        var cellsToReveal = new List<ICell>();
+        FindCellsToReveal(gridIndex, cellsToReveal);
+
+        var revealTasks = cellsToReveal.Select(cell => cell.RevealAsync());
+        await UniTask.WhenAll(revealTasks);
+    }
+    
+    private void FindCellsToReveal(GridIndex gridIndex, ICollection<ICell> cellsToReveal)
+    {
+        if (!IsValid(gridIndex)) return;
+
+        var cell = GetCellAt(gridIndex);
+        if (cellsToReveal.Contains(cell)) return;
+        
+        if (cell.State != CellStateValue.Covered) return;
+        cellsToReveal.Add(cell);
+
+        if (cell.NeighborBombCount > 0) return;
+
+        foreach (var neighborCell in GetNeighborsOf(cell))
+        {
+            FindCellsToReveal(neighborCell.Index, cellsToReveal);
+        }
     }
 }
