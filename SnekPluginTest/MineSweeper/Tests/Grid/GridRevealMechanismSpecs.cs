@@ -56,6 +56,6 @@ public class GridRevealMechanismSpecs
 
         // Assert
         var actualIsCoveredAfter = grid.GetIsCoveredMatrix();
-        actualIsCoveredAfter.Should().BeEquivalentTo(testCase.IsCoveredAfter);
+        actualIsCoveredAfter.Should().BeEquivalentTo(testCase.IsCoveredAfter, $"the grid expects to be like this after revealed cell at{testCase.CellIndex.Tuple}");
     }
 }

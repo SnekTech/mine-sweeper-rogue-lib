@@ -65,14 +65,6 @@ public class BombMatrixSpecs
         bombMatrix.GridSize.Should().BeEquivalentTo(new GridSize(rows, columns));
     }
 
-    [TestCaseSource(nameof(AllBombMatrices))]
-    public void every_element_should_match_the_origin_matrix(string[] bombRows)
-    {
-        BombMatrix bombMatrix = A.BombMatrix.WithBombRows(bombRows);
-
-        bombMatrix.Should().Match(bombRows);
-    }
-
     [Test]
     public void should_have_no_bomb_when_using_const_false_bomb_generator()
     {

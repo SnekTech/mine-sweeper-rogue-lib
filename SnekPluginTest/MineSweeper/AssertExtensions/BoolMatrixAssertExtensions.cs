@@ -29,6 +29,7 @@ public class BoolMatrixAssertions
         var expectedMatrix = expected.Matrix;
         
         Execute.Assertion
+            .BecauseOf(because, becauseArgs)
             .ForCondition(subjectMatrix.Size() == expectedMatrix.Size())
             .FailWith("BoolMatrix size mismatch, subject has size {0}, but expects size {1}", subjectMatrix.Size(),
                 expectedMatrix.Size())
@@ -36,8 +37,8 @@ public class BoolMatrixAssertions
             .Given(() => subjectMatrix.FindMissMatch(expectedMatrix))
             .ForCondition(missMatchIndex => missMatchIndex == (-1, -1))
             .FailWith(
-                "Expect {context} matrix {0} to match matrix {1}, but found element miss match at : {2}",
-                _ => subjectMatrix, _ => expected, missMatchIndex => missMatchIndex);
+                "Expect matrix {context} {0} to match matrix {1} {reason}, but found element miss match at : {2}",
+                _ => _subject, _ => expected, missMatchIndex => missMatchIndex);
 
         return new AndConstraint<BoolMatrixAssertions>(this);
     }

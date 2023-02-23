@@ -4,7 +4,7 @@ using SnekPlugin.MineSweeper.Grid;
 
 namespace SnekPluginTest.MineSweeper.AssertExtensions;
 
-public static class GridIndexExtensions
+public static class GridIndexAssertExtensions
 {
     public static GridIndexAssertions Should(this GridIndex gridIndex)
     {
@@ -26,7 +26,7 @@ public class GridIndexAssertions
     {
         Execute.Assertion
             .ForCondition(grid.IsValid(Subject))
-            .FailWith("Expected {0} to be a valid index for {1}, but it's invalid.", Subject, grid.Size);
+            .FailWith("Expected {0} to be a valid index for {1}, but it's invalid.", Subject.Tuple, grid.Size.Tuple);
 
         return new AndConstraint<GridIndexAssertions>(this);
     }
@@ -36,7 +36,7 @@ public class GridIndexAssertions
     {
         Execute.Assertion
             .ForCondition(!grid.IsValid(Subject))
-            .FailWith("Expected {0} to be an invalid index for {1}, but it's valid.", Subject, grid.Size);
+            .FailWith("Expected {0} to be an invalid index for {1}, but it's valid.", Subject.Tuple, grid.Size.Tuple);
 
         return new AndConstraint<GridIndexAssertions>(this);
     }
