@@ -1,5 +1,4 @@
-﻿using Cysharp.Threading.Tasks;
-using SnekPlugin.Core.FSM;
+﻿using SnekPlugin.Core.FSM;
 
 namespace SnekPlugin.MineSweeper.Cell.StateMachine
 {

@@ -8,16 +8,14 @@ namespace SnekPlugin.MineSweeper.Grid
 
         public readonly int ColumnIndex;
 
-        public GridIndex(GridIndex other)
-        {
-            RowIndex = other.RowIndex;
-            ColumnIndex = other.ColumnIndex;
-        }
-
         public GridIndex(int rowIndex, int columnIndex)
         {
             RowIndex = rowIndex;
             ColumnIndex = columnIndex;
+        }
+
+        public GridIndex((int i, int j) tuple) : this(tuple.i, tuple.j)
+        {
         }
 
         public static GridIndex First => new GridIndex(0, 0);
