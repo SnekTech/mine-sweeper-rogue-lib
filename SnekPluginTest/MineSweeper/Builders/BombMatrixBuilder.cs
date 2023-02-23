@@ -18,9 +18,9 @@ public class BombMatrixBuilder
         return this;
     }
 
-    public BombMatrixBuilder WithBoolMatrix(bool[,] bombRows)
+    public BombMatrixBuilder WithBoolMatrix(BoolMatrix hasBombMatrix)
     {
-        _bombMatrix = bombRows;
+        _bombMatrix = hasBombMatrix.Matrix;
         return this;
     }
 
@@ -61,7 +61,7 @@ public class BombMatrixBuilder
 public interface IChooseBetweenArrayOrGridDataStage
 {
     BombMatrixBuilder WithBombRows(string[] bombRows);
-    BombMatrixBuilder WithBoolMatrix(bool[,] bombRows);
+    BombMatrixBuilder WithBoolMatrix(BoolMatrix hasBombMatrix);
     ISetBombGeneratorStage WithGridData(IGridData gridData);
 
     BombMatrixBuilder WithOnlyOneCellThat(bool hasBomb);

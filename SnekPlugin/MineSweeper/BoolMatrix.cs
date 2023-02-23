@@ -23,7 +23,7 @@ public class BoolMatrix
         return new BoolMatrix(source);
     }
 
-    public int TrueCount => Matrix.Values().Count(isTrue => isTrue);
+    public int TrueValueCount => Matrix.Values().Count(isTrue => isTrue);
     
     public bool this[int i, int j] => Matrix[i, j];
 

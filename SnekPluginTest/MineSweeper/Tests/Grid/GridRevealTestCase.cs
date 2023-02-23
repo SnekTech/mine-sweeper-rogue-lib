@@ -6,17 +6,18 @@ namespace SnekPluginTest.MineSweeper.Tests;
 
 public struct GridRevealTestCase
 {
-    public readonly BombMatrix BombMatrix;
-    public readonly bool[,] IsCoveredBefore;
-    public readonly bool[,] IsCoveredAfter;
+    public readonly BombMatrix HasBombMatrix;
+    public readonly BoolMatrix IsCoveredBefore;
+    public readonly BoolMatrix IsCoveredAfter;
     public readonly GridIndex CellIndex;
 
-    public GridRevealTestCase(BoolMatrix bomb, BoolMatrix isCoveredBefore, BoolMatrix isCoveredAfter,
+    public GridRevealTestCase(BoolMatrix hasBomb, BoolMatrix isCoveredBefore, BoolMatrix isCoveredAfter,
         GridIndex cellIndex)
     {
-        BombMatrix = A.BombMatrix.WithBoolMatrix(bomb.Matrix);
-        IsCoveredBefore = isCoveredBefore.Matrix;
-        IsCoveredAfter = isCoveredAfter.Matrix;
+        
+        HasBombMatrix = A.BombMatrix.WithBoolMatrix(hasBomb);
+        IsCoveredBefore = isCoveredBefore;
+        IsCoveredAfter = isCoveredAfter;
         CellIndex = cellIndex;
     }
 }

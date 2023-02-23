@@ -27,9 +27,21 @@ public static class MatrixExtensions
         }
     }
 
+    public static IEnumerable<T> Values<T>(this T[,] matrix)
+    {
+        if (matrix.Length == 0) yield break;
+        
+        var enumerator = matrix.GetEnumerator();
+
+        while (enumerator.MoveNext())
+        {
+            yield return ((T) enumerator.Current)!;
+        }
+    }
+
     public static (int i, int j) FindMissMatch<T>(this T[,] self, T[,] target) where T : IComparable<T>
     {
-        var (sizeA, sizeB) = (self.GridSize(), target.GridSize());
+        var (sizeA, sizeB) = (self.Size(), target.Size());
         if (sizeA != sizeB)
         {
             throw new InvalidOperationException("can't find miss match between matrices with different sizes");
@@ -46,31 +58,4 @@ public static class MatrixExtensions
         return (-1, -1);
     }
 
-    public static string ToStringBinary(this int[,] matrix, char nonZero = 'x', char zero = 'o')
-    {
-        var sBuilder = new StringBuilder("\n");
-        var (rows, columns) = matrix.Size();
-
-        sBuilder.Append("  ");
-        
-        for (var i = 0; i < columns; i++)
-        {
-            sBuilder.Append(i);
-        }
-        sBuilder.Append("\n");
-        
-        
-        for (var i = 0; i < rows; i++)
-        {
-            sBuilder.Append($"{i} ");
-            for (var j = 0; j < columns; j++)
-            {
-                sBuilder.Append(matrix[i, j] == 0 ? zero : nonZero);
-            }
-
-            sBuilder.Append('\n');
-        }
-
-        return sBuilder.ToString();
-    }
 }

@@ -23,8 +23,7 @@ namespace SnekPlugin.MineSweeper.Grid
         public static GridIndex First => new GridIndex(0, 0);
         public static GridIndex Invalid => new GridIndex(-1, -1);
 
-        public int I => RowIndex;
-        public int J => ColumnIndex;
+        public (int i, int j) Tuple => (RowIndex, ColumnIndex);
 
         public static GridIndex operator +(GridIndex a, GridIndex b)
         {
@@ -48,7 +47,7 @@ namespace SnekPlugin.MineSweeper.Grid
 
         public static bool operator !=(GridIndex a, GridIndex b)
         {
-            return a.I != b.I || a.J != b.J;
+            return a.Tuple == b.Tuple;
         }
 
         public static bool operator ==(GridIndex a, GridIndex b)

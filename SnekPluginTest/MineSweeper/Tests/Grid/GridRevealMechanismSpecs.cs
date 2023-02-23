@@ -1,5 +1,5 @@
 ﻿using Cysharp.Threading.Tasks;
-using SnekPlugin.MineSweeper;
+using SnekPlugin.Core.CustomExtensions;
 using SnekPlugin.MineSweeper.Grid;
 using SnekPluginTest.MineSweeper.AssertExtensions;
 using SnekPluginTest.MineSweeper.Builders;
@@ -37,14 +37,15 @@ public class GridRevealMechanismSpecs
     public async Task reveal_With_Recursion(GridRevealTestCase testCase)
     {
         // Arrange
-        var grid = await A.GridBuilder.WithBombMatrix(testCase.BombMatrix).Build();
+        var grid = await A.GridBuilder.WithBombMatrix(testCase.HasBombMatrix).Build();
 
         // Act
-        var restoreRevealedCellTasks = testCase.IsCoveredBefore.GridIndices()
+        var restoreRevealedCellTasks = testCase.IsCoveredBefore.Matrix.Indices()
             .Select(gridIndex =>
             {
-                var cell = grid.GetCellAt(gridIndex);
-                var shouldBeRevealed = ! testCase.IsCoveredBefore[gridIndex.I, gridIndex.J];
+                var (i, j) = gridIndex;
+                var cell = grid.GetCellAt(new GridIndex(i, j));
+                var shouldBeRevealed = ! testCase.IsCoveredBefore[i, j];
                 return shouldBeRevealed ? cell.RevealAsync() : UniTask.CompletedTask;
             });
         

@@ -10,6 +10,6 @@ public static class Initializer
     {
         FluentAssertions.Formatting.Formatter.AddFormatter(new GridIndexValueFormatter());
         FluentAssertions.Formatting.Formatter.AddFormatter(new GridSizeValueFormatter());
-        FluentAssertions.Formatting.Formatter.AddFormatter(new IntMatrixValueFormatter());
+        FluentAssertions.Formatting.Formatter.AddFormatter(new BoolMatrixValueFormatter());
     }
 }

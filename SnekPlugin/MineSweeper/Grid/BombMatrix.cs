@@ -19,7 +19,7 @@ public class BombMatrix : BoolMatrix
     }
 
     public GridSize GridSize => new GridSize(Matrix.Size());
-    public int BombCount => TrueCount; // t.element -> hasBomb
+    public int BombCount => TrueValueCount; // t.element -> hasBomb
 
     private static bool[,] From(IGridData gridData, IBombGenerator bombGenerator)
     {
