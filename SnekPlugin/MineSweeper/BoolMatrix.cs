@@ -15,11 +15,6 @@ public class BoolMatrix
     {
         Matrix = matrix;
     }
-    
-    public static implicit operator BoolMatrix(string[] source)
-    {
-        return new BombMatrix(CreateBoolMatrix(source));
-    }
 
     public int TrueValueCount => Matrix.Values().Count(isTrue => isTrue);
     

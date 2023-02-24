@@ -13,14 +13,14 @@ public struct GridRevealTestCase
     public readonly string Because;
 
     public GridRevealTestCase(
-        BoolMatrix hasBomb,
+        string[] hasBomb,
         CellStateMatrix originalStateMatrix,
         CellStateMatrix expectedStateMatrix,
         GridIndex targetCellIndex,
         string because = ""
     )
     {
-        HasBombMatrix = A.BombMatrix.WithBoolMatrix(hasBomb);
+        HasBombMatrix = A.BombMatrix.WithBombRows(hasBomb);
         OriginalStateMatrix = originalStateMatrix;
         ExpectedStateMatrix = expectedStateMatrix;
         TargetCellIndex = targetCellIndex;

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 using SnekPlugin.Core.CustomExtensions;
 
 namespace SnekPlugin.MineSweeper.Grid;
