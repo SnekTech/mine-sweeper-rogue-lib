@@ -1,4 +1,6 @@
-﻿using SnekPlugin.MineSweeper;
+﻿using SnekPlugin.Core.CustomExtensions;
+using SnekPlugin.MineSweeper;
+using SnekPlugin.MineSweeper.Cell.StateMachine;
 using SnekPlugin.MineSweeper.Grid;
 
 namespace SnekPluginTest.MineSweeper.Builders;
@@ -8,13 +10,13 @@ public class BombMatrixBuilder
         IChooseBetweenArrayOrGridDataStage,
         ISetBombGeneratorStage
 {
-    private bool[,] _bombMatrix = BoolMatrix.From(new[] {"1"});
+    private bool[,] _bombMatrix = BoolMatrix.CreateBoolMatrix(new[] {"1"});
     private IGridData? _gridData;
     private IBombGenerator _bombGenerator = A.MockBombGeneratorBuilder.WithConstBool(true).Build();
 
     public BombMatrixBuilder WithBombRows(string[] bombRows)
     {
-        _bombMatrix = BoolMatrix.From(bombRows);
+        _bombMatrix = BoolMatrix.CreateBoolMatrix(bombRows);
         return this;
     }
 
@@ -26,7 +28,7 @@ public class BombMatrixBuilder
 
     public BombMatrixBuilder WithOnlyOneCellThat(bool hasBomb)
     {
-        _bombMatrix = BoolMatrix.From(new[] {hasBomb ? "1" : "0"});
+        _bombMatrix = BoolMatrix.CreateBoolMatrix(new[] {hasBomb ? "1" : "0"});
         return this;
     }
 

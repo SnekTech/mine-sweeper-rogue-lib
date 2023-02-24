@@ -4,7 +4,6 @@ using System.Linq;
 using Cysharp.Threading.Tasks;
 using SnekPlugin.Core.CustomExtensions;
 using SnekPlugin.MineSweeper.Cell;
-using SnekPlugin.MineSweeper.Cell.StateMachine;
 
 namespace SnekPlugin.MineSweeper.Grid;
 
@@ -36,8 +35,8 @@ public class Grid : IGrid
 
     public GridSize Size => _bombMatrix.GridSize;
     public int BombCount => _bombMatrix.BombCount;
-    public int FlaggedCellCount => _cellMatrix.Values().Count(cell => cell.State == CellStateValue.Flagged);
-    public int RevealedCellCount => _cellMatrix.Values().Count(cell => cell.State == CellStateValue.Revealed);
+    public int FlaggedCellCount => _cellMatrix.Values().Count(cell => cell.IsFlagged);
+    public int RevealedCellCount => _cellMatrix.Values().Count(cell => cell.IsRevealed);
 
     public bool IsValid(GridIndex gridIndex)
     {
@@ -93,15 +92,23 @@ public class Grid : IGrid
         var revealTasks = cellsToReveal.Select(cell => cell.RevealAsync());
         await UniTask.WhenAll(revealTasks);
     }
-    
+
+    public async UniTask RevealAroundAsync(GridIndex gridIndex)
+    {
+        
+    }
+
     private void FindCellsToReveal(GridIndex gridIndex, ICollection<ICell> cellsToReveal)
     {
         if (!IsValid(gridIndex)) return;
 
         var cell = GetCellAt(gridIndex);
-        if (cellsToReveal.Contains(cell)) return;
         
-        if (cell.State != CellStateValue.Covered) return;
+        var visited = cellsToReveal.Contains(cell);
+        if (visited) return;
+        
+        if (!cell.IsCovered) return;
+        
         cellsToReveal.Add(cell);
 
         if (cell.NeighborBombCount > 0) return;

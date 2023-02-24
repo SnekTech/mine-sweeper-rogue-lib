@@ -15,7 +15,7 @@ public class BoolMatrixValueFormatter : IValueFormatter
     public void Format(object value, FormattedObjectGraph formattedGraph, FormattingContext context, FormatChild formatChild)
     {
         var boolMatrix = (BoolMatrix) value;
-        var matrixString = ToStringBinary(boolMatrix);
+        var matrixString = boolMatrix.ToString();
 
         if (context.UseLineBreaks)
         {
@@ -27,23 +27,4 @@ public class BoolMatrixValueFormatter : IValueFormatter
         }
     }
 
-    public static string ToStringBinary(BoolMatrix matrix, char truthyChar = '✅', char falsyChar = '❌')
-    {
-        var sBuilder = new StringBuilder("\n");
-        var (rows, columns) = matrix.Matrix.Size();
-        
-        
-        for (var i = 0; i < rows; i++)
-        {
-            sBuilder.Append($"{i}");
-            for (var j = 0; j < columns; j++)
-            {
-                sBuilder.Append(matrix[i, j] ? truthyChar : falsyChar);
-            }
-
-            sBuilder.Append('\n');
-        }
-
-        return sBuilder.ToString();
-    }
 }

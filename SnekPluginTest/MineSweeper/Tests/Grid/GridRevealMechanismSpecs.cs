@@ -1,136 +1,245 @@
-﻿using Cysharp.Threading.Tasks;
-using SnekPlugin.Core.CustomExtensions;
+﻿using FluentAssertions;
 using SnekPlugin.MineSweeper.Grid;
-using SnekPluginTest.MineSweeper.AssertExtensions;
 using SnekPluginTest.MineSweeper.Builders;
 
 namespace SnekPluginTest.MineSweeper.Tests;
 
 public class GridRevealMechanismSpecs
 {
-    private static GridRevealTestCase[] s_cases =
-        {
-            new GridRevealTestCase(
-                new[]
-                {
-                    "111",
-                    "101",
-                    "111",
-                },
-                new[]
-                {
-                    "111",
-                    "111",
-                    "111",
-                },
-                new[]
-                {
-                    "111",
-                    "101",
-                    "111",
-                },
-                new GridIndex(1, 1)
-            ),
-            new GridRevealTestCase(
-                new[]
-                {
-                    "000",
-                    "000",
-                    "000",
-                },
-                new[]
-                {
-                    "111",
-                    "111",
-                    "111",
-                },
-                new[]
-                {
-                    "000",
-                    "000",
-                    "000",
-                },
-                new GridIndex(1, 1)
-            ),
-            new GridRevealTestCase(
-                new[]
-                {
-                    "10000",
-                    "10000",
-                    "10000",
-                    "11111",
-                    "11111",
-                },
-                new[]
-                {
-                    "11111",
-                    "11111",
-                    "11111",
-                    "11111",
-                    "11111",
-                },
-                new[]
-                {
-                    "10000",
-                    "10000",
-                    "10000",
-                    "11111",
-                    "11111",
-                },
-                new GridIndex(1, 3)
-            ),
-            new GridRevealTestCase(
-                new[]
-                {
-                    "00000",
-                    "00000",
-                    "00100",
-                    "00000",
-                    "00000",
-                },
-                new[]
-                {
-                    "11111",
-                    "11111",
-                    "11111",
-                    "11111",
-                    "11111",
-                },
-                new[]
-                {
-                    "00000",
-                    "00000",
-                    "00100",
-                    "00000",
-                    "00000",
-                },
-                new GridIndex(0, 0)
-            ),
-        };
+    public static readonly GridRevealTestCase[] RevealAtCases =
+    {
+        new GridRevealTestCase(
+            new[]
+            {
+                // 🔳, ⛳, 💢, 💣,
+                "💣💣💣",
+                "💣💢💣",
+                "💣💣💣",
+            },
+            new[]
+            {
+                // 🔳, ⛳, 💢, 💣,
+                "🔳🔳🔳",
+                "🔳🔳🔳",
+                "🔳🔳🔳",
+            },
+            new[]
+            {
+                // 🔳, ⛳, 💢, 💣,
+                "🔳🔳🔳",
+                "🔳💢🔳",
+                "🔳🔳🔳",
+            },
+            new GridIndex(1, 1)
+        ),
+        new GridRevealTestCase(
+            new[]
+            {
+                // 🔳, ⛳, 💢, 💣,
+                "💢💢💢",
+                "💢💢💢",
+                "💢💢💢",
+            },
+            new[]
+            {
+                "🔳🔳🔳",
+                "🔳🔳🔳",
+                "🔳🔳🔳",
+            },
+            new[]
+            {
+                "💢💢💢",
+                "💢💢💢",
+                "💢💢💢",
+            },
+            new GridIndex(1, 1)
+        ),
+        new GridRevealTestCase(
+            new[]
+            {
+                // 🔳, ⛳, 💢, 💣,
+                "💣💢💢💢💢",
+                "💣💢💢💢💢",
+                "💣💢💢💢💢",
+                "💣💣💣💣💣",
+                "💣💣💣💣💣",
+            },
+            new[]
+            {
+                // 🔳, ⛳, 💢, 💣,
+                "🔳🔳🔳🔳🔳",
+                "🔳🔳🔳🔳🔳",
+                "🔳🔳🔳🔳🔳",
+                "🔳🔳🔳🔳🔳",
+                "🔳🔳🔳🔳🔳",
+            },
+            new[]
+            {
+                // 🔳, ⛳, 💢, 💣,
+                "🔳💢💢💢💢",
+                "🔳💢💢💢💢",
+                "🔳💢💢💢💢",
+                "🔳🔳🔳🔳🔳",
+                "🔳🔳🔳🔳🔳",
+            },
+            new GridIndex(1, 3)
+        ),
+        new GridRevealTestCase(
+            new[]
+            {
+                // 🔳, ⛳, 💢, 💣,
+                "💢💢💢💢💢",
+                "💢💢💢💢💢",
+                "💢💢💣💢💢",
+                "💢💢💢💢💢",
+                "💢💢💢💢💢",
+            },
+            new[]
+            {
+                // 🔳, ⛳, 💢, 💣,
+                "🔳🔳🔳🔳🔳",
+                "🔳🔳🔳🔳🔳",
+                "🔳🔳🔳🔳🔳",
+                "🔳🔳🔳🔳🔳",
+                "🔳🔳🔳🔳🔳",
+            },
+            new[]
+            {
+                // 🔳, ⛳, 💢, 💣,
+                "💢💢💢💢💢",
+                "💢💢💢💢💢",
+                "💢💢🔳💢💢",
+                "💢💢💢💢💢",
+                "💢💢💢💢💢",
+            },
+            new GridIndex(0, 0)
+        ),
+    };
 
-    [TestCaseSource(nameof(s_cases))]
-    public async Task reveal_With_Recursion(GridRevealTestCase testCase)
+    public static readonly GridRevealTestCase[] RevealAroundCases =
+    {
+        new GridRevealTestCase(
+            // 🔳, ⛳, 💢, 💣,
+            new[]
+            {
+                "💣💣💣",
+                "💣💢💣",
+                "💣💣💣",
+            },
+            new[]
+            {
+                "🔳🔳🔳",
+                "🔳💢🔳",
+                "🔳🔳🔳",
+            },
+            new[]
+            {
+                "🔳🔳🔳",
+                "🔳💢🔳",
+                "🔳🔳🔳",
+            },
+            new GridIndex(1, 1),
+            "no flag, no effect"
+        ),
+        new GridRevealTestCase(
+            new[]
+            {
+                "💢💢💢",
+                "💣💢💢",
+                "💣💢💢",
+            },
+            new[]
+            {
+                "🔳🔳🔳",
+                "⛳💢🔳",
+                "⛳🔳🔳",
+            },
+            new[]
+            {
+                "💢💢💢",
+                "⛳💢💢",
+                "⛳💢💢",
+            },
+            new GridIndex(1, 1),
+            "flag count matches unrevealed bomb count(2), can reveal around target, leave the 2 flagged untouched"
+        ),
+    };
+
+    [Test]
+    public async Task revealAtCall_shouldNot_TakeEffect_on_revealed_cell()
+    {
+        // Arrange
+        var testCase = new GridRevealTestCase(
+            // 🔳, ⛳, 💢, 💣,
+            new[]
+            {
+                "💣💣💣",
+                "💣💢💣",
+                "💣💣💣",
+            },
+            new[]
+            {
+                "🔳🔳🔳",
+                "🔳💢🔳",
+                "🔳🔳🔳",
+            },
+            new[]
+            {
+                "🔳🔳🔳",
+                "🔳💢🔳",
+                "🔳🔳🔳",
+            },
+            new GridIndex(1, 1),
+            "no flag, no effect"
+        );
+        
+        var grid = await A.GridBuilder.WithBombMatrix(testCase.HasBombMatrix).Build();
+
+        await grid.ResetStateAsync(testCase.OriginalStateMatrix);
+        var targetCell = grid.GetCellAt(new GridIndex(1, 1));
+
+        // Act
+        await grid.RevealAtAsync(targetCell.Index);
+
+        // Assert
+        targetCell.IsRevealed.Should().BeTrue();
+        var actualStateMatrix = grid.GridStateMatrix();
+        actualStateMatrix.Should().BeEquivalentTo(testCase.ExpectedStateMatrix, "the grid state should not change");
+    }
+
+    [TestCaseSource(nameof(RevealAtCases))]
+    public async Task reveal_at_recursively(GridRevealTestCase testCase)
     {
         // Arrange
         var grid = await A.GridBuilder.WithBombMatrix(testCase.HasBombMatrix).Build();
+        await grid.ResetStateAsync(testCase.OriginalStateMatrix);
 
         // Act
-        var restoreRevealedCellTasks = testCase.IsCoveredBefore.Matrix.Indices()
-            .Select(gridIndex =>
-            {
-                var (i, j) = gridIndex;
-                var cell = grid.GetCellAt(new GridIndex(i, j));
-                var shouldBeRevealed = ! testCase.IsCoveredBefore[i, j];
-                return shouldBeRevealed ? cell.RevealAsync() : UniTask.CompletedTask;
-            });
-        
-        await UniTask.WhenAll(restoreRevealedCellTasks);
-        
-        await grid.RevealAtAsync(testCase.CellIndex);
-
+        await grid.RevealAtAsync(testCase.TargetCellIndex);
 
         // Assert
-        var actualIsCoveredAfter = grid.GetIsCoveredMatrix();
-        actualIsCoveredAfter.Should().BeEquivalentTo(testCase.IsCoveredAfter, $"the cell at{testCase.CellIndex.Tuple} should be revealed");
+        var actualStateMatrix = grid.GridStateMatrix();
+        actualStateMatrix.Should().BeEquivalentTo(testCase.ExpectedStateMatrix,
+            $"the cell at{testCase.TargetCellIndex.Tuple} should be revealed");
+    }
+
+    [Test]
+    public async Task reveal_around_should_not_affect_covered_cell()
+    {
+    }
+
+    [TestCaseSource(nameof(RevealAroundCases))]
+    public async Task reveal_around_recursively(GridRevealTestCase testCase)
+    {
+        // Arrange
+        var grid = await A.GridBuilder.WithBombMatrix(testCase.HasBombMatrix).Build();
+        await grid.ResetStateAsync(testCase.OriginalStateMatrix);
+
+        // Act
+        await grid.RevealAroundAsync(testCase.TargetCellIndex);
+
+        // Assert
+        var actualStateMatrix = grid.GridStateMatrix();
+        actualStateMatrix.Should().BeEquivalentTo(testCase.ExpectedStateMatrix, testCase.Because);
     }
 }

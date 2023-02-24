@@ -24,7 +24,7 @@ public class CellStateTransitionSpecs
 
 
         // Assert
-        cell.State.Should().Be(CellStateValue.Covered);
+        cell.IsCovered.Should().BeTrue();
     }
 
     [Test]
@@ -40,7 +40,7 @@ public class CellStateTransitionSpecs
         await cell.SwitchFlagAsync();
 
         // Assert
-        cell.State.Should().Be(CellStateValue.Flagged);
+        cell.IsFlagged.Should().BeTrue();
     }
 
     [Test]
@@ -55,7 +55,7 @@ public class CellStateTransitionSpecs
         await cell.SwitchFlagAsync();
 
         // Assert
-        cell.State.Should().Be(CellStateValue.Covered);
+        cell.IsCovered.Should().BeTrue();
     }
 
     [Test]
@@ -69,7 +69,7 @@ public class CellStateTransitionSpecs
         await cell.RevealAsync();
 
         // Assert
-        cell.State.Should().Be(CellStateValue.Revealed);
+        cell.IsRevealed.Should().BeTrue();
     }
 
     [Test]

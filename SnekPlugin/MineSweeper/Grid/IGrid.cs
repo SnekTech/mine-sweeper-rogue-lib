@@ -9,6 +9,7 @@ public interface IGrid
     ICell GetCellAt(GridIndex gridIndex);
     UniTask InitCells(BombMatrix bombMatrix);
     UniTask RevealAtAsync(GridIndex gridIndex);
+    UniTask RevealAroundAsync(GridIndex gridIndex);
 
     bool IsValid(GridIndex gridIndex);
     IEnumerable<ICell> GetNeighborsOf(ICell cell);

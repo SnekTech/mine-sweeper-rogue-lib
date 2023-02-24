@@ -23,4 +23,7 @@ public interface ICell
     int NeighborBombCount { get; }
     
     CellStateValue State { get; }
+    bool IsFlagged { get; }
+    bool IsCovered { get; }
+    bool IsRevealed { get; }
 }

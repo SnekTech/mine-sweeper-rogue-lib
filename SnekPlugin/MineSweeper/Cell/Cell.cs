@@ -31,6 +31,9 @@ public class Cell : ICell
     public IFlag Flag { get; }
 
     public CellStateValue State => _stateMachine.CurrentStateValue;
+    public bool IsFlagged => State == CellStateValue.Flagged;
+    public bool IsCovered => State == CellStateValue.Covered;
+    public bool IsRevealed => State == CellStateValue.Revealed;
 
     public int NeighborBombCount => HasBomb ? -1 :
         Parent.GetNeighborsOf(this).Count(neighbor => neighbor.HasBomb);

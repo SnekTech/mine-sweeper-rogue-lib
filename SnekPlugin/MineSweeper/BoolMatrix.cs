@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Linq;
+using System.Text;
 using SnekPlugin.Core.CustomExtensions;
+using SnekPlugin.MineSweeper.Cell.StateMachine;
+using SnekPlugin.MineSweeper.Grid;
 
 namespace SnekPlugin.MineSweeper;
 
@@ -13,36 +16,57 @@ public class BoolMatrix
         Matrix = matrix;
     }
     
-    public BoolMatrix(string[] source)
-    {
-        Matrix = From(source);
-    }
-    
     public static implicit operator BoolMatrix(string[] source)
     {
-        return new BoolMatrix(source);
+        return new BombMatrix(CreateBoolMatrix(source));
     }
 
     public int TrueValueCount => Matrix.Values().Count(isTrue => isTrue);
     
     public bool this[int i, int j] => Matrix[i, j];
 
-    public static bool[,] From(string[] bombRows, char zeroChar = '0')
+    public override string ToString()
     {
-        if (bombRows.Length == 0)
+        return ToStringBinary(this);
+    }
+
+    private static string ToStringBinary(BoolMatrix matrix, char truthyChar = '✅', char falsyChar = '❌')
+    {
+        var sBuilder = new StringBuilder("\n");
+        var (rows, columns) = matrix.Matrix.Size();
+        
+        for (var i = 0; i < rows; i++)
         {
-            throw new ArgumentException("can't create matrix from empty source");
+            sBuilder.Append($"{i}");
+            for (var j = 0; j < columns; j++)
+            {
+                sBuilder.Append(matrix[i, j] ? truthyChar : falsyChar);
+            }
+
+            sBuilder.Append('\n');
         }
-        var rows = bombRows.Length;
-        var columns = bombRows[0].Length;
+
+        return sBuilder.ToString();
+    }
+
+    public static bool[,] CreateBoolMatrix(string[] bombRows, string trueUnit = "💣")
+    {
+        var (rows, columns) = GridExtensions.GetDimension(bombRows);
+        if (rows == 0 || columns == 0)
+        {
+            throw new ArgumentException("cant generate boolMatrix from empty string[]");
+        }
+        
         var result = new bool[rows, columns];
 
         for (var i = 0; i < rows; i++)
         {
             var bombRow = bombRows[i];
+            var bombEmojis = GridExtensions.SplitEmojiRow(bombRow);
             for (var j = 0; j < columns; j++)
             {
-                result[i, j] = bombRow[j] != zeroChar;
+                var hasBomb = bombEmojis[j] == trueUnit;
+                result[i, j] = hasBomb;
             }
         }
 
