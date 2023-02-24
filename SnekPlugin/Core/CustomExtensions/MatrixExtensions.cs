@@ -39,23 +39,5 @@ public static class MatrixExtensions
         }
     }
 
-    public static (int i, int j) FindMissMatch<T>(this T[,] self, T[,] target) where T : IComparable<T>
-    {
-        var (sizeA, sizeB) = (self.Size(), target.Size());
-        if (sizeA != sizeB)
-        {
-            throw new InvalidOperationException("can't find miss match between matrices with different sizes");
-        }
-
-        foreach (var (i, j) in self.Indices())
-        {
-            if (!self[i, j].Equals(target[i, j]))
-            {
-                return (i, j);
-            }
-        }
-
-        return (-1, -1);
-    }
 
 }

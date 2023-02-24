@@ -35,7 +35,7 @@ public class BombMatrix
     public int BombCount => _matrix.Values().Count(hasBomb => hasBomb);
     public bool this[int i, int j] => _matrix[i, j];
 
-    public string PrettyPrint()
+    public string Format()
     {
         var sBuilder = new StringBuilder("\n");
         var (rows, columns) = _matrix.Size();

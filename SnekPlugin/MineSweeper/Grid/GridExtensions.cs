@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using SnekPlugin.MineSweeper.Cell;
 using SnekPlugin.MineSweeper.Cell.StateMachine;
 
 namespace SnekPlugin.MineSweeper.Grid;
@@ -41,7 +42,7 @@ public static class GridExtensions
             for (var j = 0; j < columns; j++)
             {
                 var emoji = emojiRow[j];
-                result[i, j] = CellStateExtensions.ToCellState(emoji);
+                result[i, j] = CellExtensions.ToCellState(emoji);
             }
         }
 

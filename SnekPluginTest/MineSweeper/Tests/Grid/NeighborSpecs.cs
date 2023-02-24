@@ -92,7 +92,7 @@ public class NeighborSpecs
     }
 
     [Test]
-    public async Task center_cell_should_have_6_neighbor_bombs()
+    public async Task should_have_6_neighbor_bombs()
     {
         // Arrange
         var bombRows = new[]

@@ -1,6 +1,6 @@
-﻿using System.Globalization;
-using Cysharp.Threading.Tasks;
+﻿using Cysharp.Threading.Tasks;
 using SnekPlugin.Core.CustomExtensions;
+using SnekPlugin.MineSweeper.Cell;
 using SnekPlugin.MineSweeper.Cell.StateMachine;
 using SnekPlugin.MineSweeper.Grid;
 
@@ -43,7 +43,7 @@ public static class GridTestExtensions
             {
                 var emoji = emojiRow[j];
                 
-                result[i, j] = CellStateExtensions.ToCellState(emoji);
+                result[i, j] = CellExtensions.ToCellState(emoji);
             }
         }
 

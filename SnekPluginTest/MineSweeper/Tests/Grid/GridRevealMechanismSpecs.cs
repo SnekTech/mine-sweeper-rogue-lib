@@ -1,6 +1,7 @@
 ﻿using FluentAssertions;
 using SnekPlugin.MineSweeper.Grid;
 using SnekPluginTest.MineSweeper.Builders;
+using SnekPluginTest.MineSweeper.AssertExtensions;
 
 namespace SnekPluginTest.MineSweeper.Tests;
 
@@ -204,7 +205,7 @@ public class GridRevealMechanismSpecs
         // Assert
         targetCell.IsRevealed.Should().BeTrue();
         var actualStateMatrix = grid.GridStateMatrix();
-        actualStateMatrix.Should().BeEquivalentTo(testCase.ExpectedStateMatrix, "the grid state should not change");
+        actualStateMatrix.Should().BeEqualTo(testCase.ExpectedStateMatrix, "the grid state should not change");
     }
 
     [TestCaseSource(nameof(RevealAtCases))]
@@ -219,7 +220,7 @@ public class GridRevealMechanismSpecs
 
         // Assert
         var actualStateMatrix = grid.GridStateMatrix();
-        actualStateMatrix.Should().BeEquivalentTo(testCase.ExpectedStateMatrix,
+        actualStateMatrix.Should().BeEqualTo(testCase.ExpectedStateMatrix,
             $"the cell at{testCase.TargetCellIndex.Tuple} should be revealed");
     }
 
@@ -240,6 +241,6 @@ public class GridRevealMechanismSpecs
 
         // Assert
         var actualStateMatrix = grid.GridStateMatrix();
-        actualStateMatrix.Should().BeEquivalentTo(testCase.ExpectedStateMatrix, testCase.Because);
+        actualStateMatrix.Should().BeEqualTo(testCase.ExpectedStateMatrix);
     }
 }
