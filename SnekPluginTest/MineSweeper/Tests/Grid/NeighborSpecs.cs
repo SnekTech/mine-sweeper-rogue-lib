@@ -92,14 +92,15 @@ public class NeighborSpecs
     }
 
     [Test]
-    public async Task subject_center_cell_should_have_6_neighbor_bombs()
+    public async Task center_cell_should_have_6_neighbor_bombs()
     {
         // Arrange
         var bombRows = new[]
         {
-            "101",
-            "101", // cell at (1, 1) has 6 neighborBombs, obviously
-            "101",
+            // 🔳, ⛳, 💢, 💣,
+            "💣💢💣",
+            "💣💢💣",
+            "💣💢💣",
         };
         BombMatrix bombMatrix = A.BombMatrix
             .WithBombRows(bombRows);
@@ -130,6 +131,6 @@ public class NeighborSpecs
         // Assert
         var cellIndex = bombCell.Index;
         bombCell.NeighborBombCount.Should()
-            .BeNegative(because: "cell at ({0}, {1}) has a bomb", cellIndex.RowIndex, cellIndex.ColumnIndex);
+            .BeNegative(because: $"cell at {cellIndex.Tuple} has a bomb");
     }
 }
