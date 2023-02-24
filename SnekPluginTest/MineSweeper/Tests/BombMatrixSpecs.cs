@@ -12,15 +12,15 @@ public class BombMatrixSpecs
     
     private static readonly string[] square1 =
     {
-        "101",
-        "101",
-        "111",
+        "💣💢💣",
+        "💣💢💣",
+        "💣💣💣",
     };
 
     private static readonly string[] rect1 =
     {
-        "111",
-        "010",
+        "💣💣💣",
+        "💢💣💢",
     };
 
     private static readonly string[][] AllBombMatrices =
@@ -58,11 +58,10 @@ public class BombMatrixSpecs
     public void size_should_match_the_origin_matrix(string[] bombRows)
     {
         // Arrange
-        var (rows, columns) = (bombRows.Length, bombRows[0].Length);
         BombMatrix bombMatrix = A.BombMatrix.WithBombRows(bombRows);
 
         // Assert
-        bombMatrix.GridSize.Should().BeEquivalentTo(new GridSize(rows, columns));
+        bombMatrix.GridSize.Tuple.Should().BeEquivalentTo(GridExtensions.GetDimension(bombRows));
     }
 
     [Test]
