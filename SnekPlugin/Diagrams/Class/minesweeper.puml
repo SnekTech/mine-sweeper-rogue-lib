@@ -1,0 +1,66 @@
+﻿@startuml
+'https://plantuml.com/class-diagram
+
+hide empty members
+
+interface IGrid
+{
+    ICell GetCellAt(GridIndex index)
+    Task InitAsync()
+    Task RevealAtAsync(GridIndex index)
+    Task RevealAroundAsync(GridIndex index)
+}
+
+IGrid <|- Grid
+
+struct GridIndex
+{
+    int i
+    int j
+}
+
+IGrid o-- GridIndex
+
+interface ICell
+{
+    GridIndex Index
+    IGrid Parent
+    ICover Cover
+    IFlag Flag
+    bool HasBomb
+    CellState State
+    Task Init()
+    Task RevealAsync()
+    Task SwitchFlagAsync()
+}
+
+ICell o-- GridIndex
+ICell <|- Cell
+ICell .-- CellState
+
+enum CellState
+{
+    Covered
+    Flagged
+    Revealed
+}
+
+interface IFlag
+{
+    Task LiftFlagAsync()
+    Task PutDownFlagAsync()
+}
+
+interface ICover
+{
+    Task PutCoverAsync()
+    Task RevealAsync()
+}
+
+IGrid *-- ICell
+
+ICell *-- IFlag
+ICell *-- ICover
+
+
+@enduml
