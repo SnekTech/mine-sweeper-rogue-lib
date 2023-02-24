@@ -1,6 +1,4 @@
 ﻿using FluentAssertions;
-using SnekPlugin.MineSweeper.Cell;
-using SnekPlugin.MineSweeper.Cell.StateMachine;
 using SnekPlugin.MineSweeper.Grid;
 using SnekPluginTest.MineSweeper.Builders;
 
@@ -84,6 +82,6 @@ public class CellStateTransitionSpecs
         await cell.RevealAsync();
 
         // Assert
-        cell.State.Should().Be(CellStateValue.Revealed);
+        cell.IsRevealed.Should().BeTrue();
     }
 }

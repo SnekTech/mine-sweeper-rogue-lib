@@ -193,7 +193,7 @@ public class GridRevealMechanismSpecs
             new GridIndex(1, 1),
             "no flag, no effect"
         );
-        
+
         var grid = await A.GridBuilder.WithBombMatrix(testCase.HasBombMatrix).Build();
 
         await grid.ResetStateAsync(testCase.OriginalStateMatrix);
@@ -225,8 +225,47 @@ public class GridRevealMechanismSpecs
     }
 
     [Test]
+    public async Task reveal_around_should_not_affect_revealed_cell_with_a_bomb()
+    {
+        // Arrange
+        BombMatrix parent = A.BombMatrix.WithOnlyOneCellThat(true);
+        var cell = await A.CellBuilder.WithParentMatrix(parent).At(GridIndex.First).Build();
+        await cell.RevealAsync();
+
+        // Act
+        await cell.Parent.RevealAroundAsync(cell.Index);
+
+        // Assert
+        cell.IsRevealed.Should().BeTrue();
+    }
+
+    [Test]
     public async Task reveal_around_should_not_affect_covered_cell()
     {
+        // Arrange
+        BombMatrix parent = A.BombMatrix.WithOnlyOneCellThat(true);
+        var cell = await A.CellBuilder.WithParentMatrix(parent).At(GridIndex.First).Build();
+
+        // Act
+        await cell.Parent.RevealAroundAsync(cell.Index);
+
+        // Assert
+        cell.IsCovered.Should().BeTrue();
+    }
+
+    [Test]
+    public async Task reveal_around_should_not_affect_flagged_cell()
+    {
+        // Arrange
+        BombMatrix parent = A.BombMatrix.WithOnlyOneCellThat(true);
+        var cell = await A.CellBuilder.WithParentMatrix(parent).At(GridIndex.First).Build();
+        await cell.SwitchFlagAsync();
+
+        // Act
+        await cell.Parent.RevealAroundAsync(cell.Index);
+
+        // Assert
+        cell.IsFlagged.Should().BeTrue();
     }
 
     [TestCaseSource(nameof(RevealAroundCases))]
@@ -242,5 +281,42 @@ public class GridRevealMechanismSpecs
         // Assert
         var actualStateMatrix = grid.GridStateMatrix();
         actualStateMatrix.Should().BeEqualTo(testCase.ExpectedStateMatrix);
+    }
+
+    [Test]
+    public async Task reveal_around_should_not_happen_when_flagCount_and_unrevealedBombCount_not_match()
+    {
+        var testCase = new GridRevealTestCase(
+            new[]
+            {
+                "💢💢💢",
+                "💣💢💢",
+                "💣💢💢",
+            },
+            new[]
+            {
+                "🔳🔳🔳",
+                "🔳💢🔳",
+                "⛳🔳🔳",
+            },
+            new[]
+            {
+                "🔳🔳🔳",
+                "🔳💢🔳",
+                "⛳🔳🔳",
+            },
+            new GridIndex(1, 1),
+            "flag count(1) not matching unrevealed bomb count(2), can't reveal around target"
+        );
+
+        // Arrange
+        var grid = await A.GridBuilder.WithBombMatrix(testCase.HasBombMatrix).Build();
+        await grid.ResetStateAsync(testCase.OriginalStateMatrix);
+        
+        // Act
+        await grid.RevealAroundAsync(testCase.TargetCellIndex);
+
+        // Assert
+        grid.GridStateMatrix().Should().BeEqualTo(testCase.ExpectedStateMatrix);
     }
 }

@@ -95,7 +95,24 @@ public class Grid : IGrid
 
     public async UniTask RevealAroundAsync(GridIndex gridIndex)
     {
-        
+        var cell = GetCellAt(gridIndex);
+        if (cell.IsCovered || cell.IsFlagged || cell.HasBomb) return;
+
+        var neighbors = GetNeighborsOf(cell).ToList();
+        var flaggedNeighborCount = neighbors.Count(neighbor => neighbor.IsFlagged);
+        if (flaggedNeighborCount != cell.NeighborBombCount)
+        {
+            return;
+        }
+
+        var cellsToReveal = new HashSet<ICell>();
+        foreach (var neighbor in neighbors)
+        {
+            FindCellsToReveal(neighbor.Index, cellsToReveal);
+        }
+
+        var revealTasks = cellsToReveal.Select(c => c.RevealAsync());
+        await UniTask.WhenAll(revealTasks);
     }
 
     private void FindCellsToReveal(GridIndex gridIndex, ICollection<ICell> cellsToReveal)
