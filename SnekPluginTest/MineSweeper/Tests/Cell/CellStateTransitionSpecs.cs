@@ -75,6 +75,15 @@ public class CellStateTransitionSpecs
     [Test]
     public async Task revealedCell_should_Not_change_when_call_reveal()
     {
-        
+        // Arrange
+        BombMatrix parent = A.BombMatrix.WithOnlyOneCellThat(false);
+        var cell = await A.CellBuilder.WithParentMatrix(parent).At(GridIndex.First).Build();
+        await cell.RevealAsync();
+
+        // Act
+        await cell.RevealAsync();
+
+        // Assert
+        cell.State.Should().Be(CellStateValue.Revealed);
     }
 }
