@@ -1,6 +1,5 @@
-﻿using SnekPlugin.Core.CustomExtensions;
-using SnekPlugin.MineSweeper;
-using SnekPlugin.MineSweeper.Cell.StateMachine;
+﻿using SnekPlugin.MineSweeper;
+using SnekPlugin.MineSweeper.Cell;
 using SnekPlugin.MineSweeper.Grid;
 
 namespace SnekPluginTest.MineSweeper.Builders;
@@ -28,7 +27,7 @@ public class BombMatrixBuilder
 
     public BombMatrixBuilder WithOnlyOneCellThat(bool hasBomb)
     {
-        _bombMatrix = BoolMatrix.CreateBoolMatrix(new[] {hasBomb ? "1" : "0"});
+        _bombMatrix = BoolMatrix.CreateBoolMatrix(new[] {hasBomb ? CellExtensions.BombEmoji : "0"});
         return this;
     }
 

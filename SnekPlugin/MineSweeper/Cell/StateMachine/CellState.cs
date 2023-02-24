@@ -33,8 +33,8 @@ namespace SnekPlugin.MineSweeper.Cell.StateMachine
 
     public static class CellStateExtensions
     {
-        public static readonly (string covered, string flagged, string revealed, string bomb) CellEmojis
-            = ("🔳", "⛳", "💢", "💣");
+        public static readonly (string covered, string flagged, string revealed) CellEmojis
+            = ("🔳", "⛳", "💢");
         
         public static CellStateValue ToCellState(string cellEmoji)
         {

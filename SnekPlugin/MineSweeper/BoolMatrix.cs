@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Text;
 using SnekPlugin.Core.CustomExtensions;
-using SnekPlugin.MineSweeper.Cell.StateMachine;
+using SnekPlugin.MineSweeper.Cell;
 using SnekPlugin.MineSweeper.Grid;
 
 namespace SnekPlugin.MineSweeper;
@@ -49,7 +49,7 @@ public class BoolMatrix
         return sBuilder.ToString();
     }
 
-    public static bool[,] CreateBoolMatrix(string[] bombRows, string trueUnit = "💣")
+    public static bool[,] CreateBoolMatrix(string[] bombRows, string trueUnit = CellExtensions.BombEmoji)
     {
         var (rows, columns) = GridExtensions.GetDimension(bombRows);
         if (rows == 0 || columns == 0)
