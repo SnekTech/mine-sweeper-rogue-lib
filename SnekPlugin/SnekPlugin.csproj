@@ -17,6 +17,11 @@
       <PackageReference Include="UniTask" Version="2.3.3" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="Diagrams" />
+      <Folder Include="Src" />
+    </ItemGroup>
+
 
 <!--    <Target Name="CopyPlugin" AfterTargets="Build">-->
 <!--        <Message Text="_FilesToCopy @(_BuildResult), to $(_P)" Importance="high"/>-->
