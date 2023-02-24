@@ -4,7 +4,7 @@ namespace SnekPluginTest.MineSweeper.Builders;
 
 public static class A
 {
-    public static IChooseBetweenArrayOrGridDataStage BombMatrix => new BombMatrixBuilder();
+    public static IChooseBetweenBoolArrayOrGridDataStage BombMatrix => new BombMatrixBuilder();
     public static GridBuilder GridBuilder => new GridBuilder();
     public static ISetCellBuilderFirstStage CellBuilder => new CellBuilder();
     
