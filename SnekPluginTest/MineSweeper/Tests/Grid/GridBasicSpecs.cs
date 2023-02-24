@@ -1,4 +1,5 @@
 ﻿using FluentAssertions;
+using FluentAssertions.Execution;
 using SnekPlugin.MineSweeper.Grid;
 using SnekPluginTest.MineSweeper.AssertExtensions;
 using SnekPluginTest.MineSweeper.Builders;
@@ -82,14 +83,16 @@ public class GridBasicSpecs
         // Act
 
         // Assert
-        badGridIndex.Should().BeInvalidIndexOf(grid);
+        1.Invoking(_ => grid.GetCellAt(badGridIndex))
+            .Should().Throw<ArgumentOutOfRangeException>();
         
         for (var i = 0; i < grid.Size.RowCount; i++)
         {
             for (var j = 0; j < grid.Size.ColumnCount; j++)
             {
                 var index = new GridIndex(i, j);
-                index.Should().BeValidIndexOf(grid);
+                1.Invoking(_ => grid.GetCellAt(index))
+                    .Should().NotThrow();
             }
         }
     }
@@ -108,7 +111,9 @@ public class GridBasicSpecs
         
 
         // Assert
-        exceededGridIndex.Should().BeInvalidIndexOf(grid);
+        Execute.Assertion
+            .Invoking(_ => grid.GetCellAt(exceededGridIndex))
+            .Should().Throw<ArgumentOutOfRangeException>();
     }
 
     [TestCaseSource(nameof(AllBombMatrices))]
@@ -126,7 +131,9 @@ public class GridBasicSpecs
             for (var j = 0; j < grid.Size.ColumnCount; j++)
             {
                 var index = new GridIndex(i, j);
-                index.Should().BeValidIndexOf(grid);
+                Execute.Assertion
+                    .Invoking(_ => grid.GetCellAt(index))
+                    .Should().NotThrow();
             }
         }
     }

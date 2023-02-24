@@ -38,7 +38,7 @@ public class Grid : IGrid
     public int FlaggedCellCount => _cellMatrix.Values().Count(cell => cell.IsFlagged);
     public int RevealedCellCount => _cellMatrix.Values().Count(cell => cell.IsRevealed);
 
-    public bool IsValid(GridIndex gridIndex)
+    private bool IsValid(GridIndex gridIndex)
     {
         var rowIndex = gridIndex.RowIndex;
         var columnIndex = gridIndex.ColumnIndex;

@@ -11,7 +11,6 @@ public interface IGrid
     UniTask RevealAtAsync(GridIndex gridIndex);
     UniTask RevealAroundAsync(GridIndex gridIndex);
 
-    bool IsValid(GridIndex gridIndex);
     IEnumerable<ICell> GetNeighborsOf(ICell cell);
     
     GridSize Size { get; }
