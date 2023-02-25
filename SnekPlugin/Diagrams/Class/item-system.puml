@@ -1,0 +1,68 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+hide empty members
+
+interface Item
+{
+    PlayerEffect? playerEffectOnAdd
+    PlayerEffect? playerEffectOnRemove
+    GridEffect? gridEffectOnAdd
+    GridEffect? gridEffectOnRemove
+    void OnAdd()
+    void OnRemove()
+}
+
+note left of Item : T? 表示类型为 T \n的字段是可选的
+
+interface CompositeItem implements Item
+{
+    -List<Item> components
+    void OnAdd()
+    void OnRemove()
+}
+CompositeItem *- Item
+
+'Inventory o- Item
+'
+'class Inventory
+'{
+'    List<Item> items
+'}
+
+interface PlayerEffect
+{
+    void TakeOn(Player target)
+}
+Item o-- PlayerEffect
+
+class Player
+PlayerEffect -> Player
+
+class Heal 
+class SwitchWeapon
+class Damage
+class ChangeAbility
+PlayerEffect <|.. Heal
+PlayerEffect <|.. Damage
+PlayerEffect <|... SwitchWeapon
+PlayerEffect <|... ChangeAbility
+
+interface GridEffect
+{
+    void Take(Grid target)
+}
+Item o-- GridEffect
+class Grid
+GridEffect -> Grid
+
+class ChangeBombDamage
+class RevealRandom
+class ChangeGridColor
+GridEffect <|.. ChangeBombDamage
+GridEffect <|... RevealRandom
+GridEffect <|.. ChangeGridColor
+
+
+
+@enduml
