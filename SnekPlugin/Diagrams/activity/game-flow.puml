@@ -1,0 +1,23 @@
+﻿@startuml
+'https://plantuml.com/activity-diagram-beta
+
+start
+
+repeat
+:加载关卡对应的雷区;
+:选择游戏模式（经典、计时）;
+:尝试清理雷区;
+
+if (生命值或时间耗尽前清理完成?) is (是) then
+    :弹出选择道具对话框，
+    玩家可以选择其中一个加入玩家资源;
+else (否)
+    :当前游戏流程失败;
+    end
+endif
+
+repeat while (还有未完成的关卡？) is (是) not (否)
+
+stop
+
+@enduml
