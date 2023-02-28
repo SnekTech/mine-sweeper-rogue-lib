@@ -34,7 +34,7 @@ rectangle 关卡界面 {
     manipulate_grid <.. reveal_cell : <<extend>>
     manipulate_grid <.. flag_cell : <<extend>>
     
-    usecase trigger_event as "触发事件"
+    usecase trigger_event as "触发游戏效果"
     usecase get_item as "获得道具"
     manipulate_grid <.. trigger_event : <<extend>>
     manipulate_grid <.. get_item : <<extend>>
