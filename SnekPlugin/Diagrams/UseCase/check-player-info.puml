@@ -1,0 +1,21 @@
+﻿@startuml check-player-info
+
+left to right direction
+
+actor "玩家" as p1
+
+rectangle 玩家信息区域 {
+    usecase check_player_info as "查看玩家信息"
+    usecase check_life as "查看生命值与护甲值"
+    usecase check_items as "查看已获得的道具"
+    usecase check_abilities as "查看当前能力"
+    usecase check_weapon as "查看当前武器"
+    check_player_info ..> check_life : <<include>>
+    check_player_info ..> check_items : <<include>>
+    check_player_info ..> check_abilities : <<include>>
+    check_player_info ..> check_weapon : <<include>>
+}
+
+p1 -- check_player_info
+
+@enduml
