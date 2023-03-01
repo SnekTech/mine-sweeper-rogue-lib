@@ -10,8 +10,6 @@ rectangle 关卡界面 {
 
     usecase check_level_info as "查看关卡信息"
 
-    usecase check_grid_info as "查看雷区信息"
-  
     usecase manipulate_grid as "操作雷区"
     
     usecase complete_level as "完成关卡"
@@ -21,7 +19,6 @@ rectangle 关卡界面 {
 
 p1 -- check_player_info
 p1 -- check_level_info
-p1 -- check_grid_info
 p1 -- manipulate_grid
 p1 -- complete_level
 p1 -- return_to_main_menu

@@ -6,11 +6,11 @@ actor "玩家" as p1
 
 rectangle 雷区 {
 
-    usecase check_grid_info as "查看雷区信息"
-    usecase check_bomb_remain as "查看剩余地雷数目"
-    usecase check_bomb_damage as "查看地雷伤害值"
+    usecase check_grid_info as "查看雷区"
+    usecase check_bomb_remain as "单元格动画"
+'    usecase check_bomb_damage as "查看地雷伤害值"
     check_grid_info ..> check_bomb_remain : <<include>>
-    check_grid_info ..> check_bomb_damage : <<include>>
+'    check_grid_info ..> check_bomb_damage : <<include>>
     
     usecase manipulate_grid as "操作雷区"
     usecase reveal_cell as "揭开单元格"
@@ -18,10 +18,8 @@ rectangle 雷区 {
     manipulate_grid <.. reveal_cell : <<extend>>
     manipulate_grid <.. flag_cell : <<extend>>
     
-    usecase trigger_event as "触发游戏效果"
-    usecase get_item as "获得道具"
+    usecase trigger_event as "触发单元格事件"
     manipulate_grid <.. trigger_event : <<extend>>
-    manipulate_grid <.. get_item : <<extend>>
     
 }
 
