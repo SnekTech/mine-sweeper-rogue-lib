@@ -1,0 +1,22 @@
+@startuml
+'https://plantuml.com/deployment-diagram
+
+node 可执行游戏程序 {
+    component gameplay as "游戏玩法逻辑"
+    node Unity as "Unity 引擎"
+}
+
+node 玩家PC {
+    node input as "输入设备"
+    node screen as "显示设备"
+    node save_file as "文件系统"
+}
+    
+gameplay <-- Unity : 采集用户输入
+gameplay --> Unity : 提交渲染内容
+
+Unity <-- input : 提交用户输入
+Unity -> screen : 显示渲染结果
+Unity <-> save_file : 存档文件读写
+
+@enduml
