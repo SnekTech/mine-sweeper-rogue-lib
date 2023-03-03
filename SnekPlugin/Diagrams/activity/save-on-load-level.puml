@@ -1,0 +1,21 @@
+@startuml
+'https://plantuml.com/activity-diagram-beta
+
+start
+
+if (开始新游戏？) is (是) then
+  #LightBlue:创建一个初始游戏流程并写入存档文件;
+else (继续上次游戏)
+endif
+
+#LightBlue:从存档中读取最新游戏状态;
+
+repeat
+:加载关卡对应的雷区;
+#LightBlue:保存游戏状态至存档文件;
+
+repeat while (还有未完成的关卡？) is (是) not (否)
+
+stop
+
+@enduml
