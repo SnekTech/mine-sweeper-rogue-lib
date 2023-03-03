@@ -22,10 +22,10 @@ component grid as "雷区"
 manipulate_grid - grid
 
 component cell_event as "单元格事件"
-grid *-- cell_event
+grid --> cell_event : 触发
 
 component judge as "关卡管理"
-grid *-- judge
+grid -- judge : 协作
 
 effect ..> grid : 影响
 weapon ..> manipulate_grid
