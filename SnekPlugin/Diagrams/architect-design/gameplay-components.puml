@@ -1,0 +1,39 @@
+@startuml
+'https://plantuml.com/component-diagram
+
+component effect as "游戏效果"
+() trigger_effect as "触发游戏效果"
+trigger_effect - effect
+
+component p1 as "玩家"
+component ability as "能力"
+component weapon as "武器"
+component item as "道具"
+
+p1 *-- ability
+p1 *-- weapon
+p1 *-- item
+
+p1 <.. effect : 影响
+
+
+component grid as "雷区"
+() manipulate_grid as "操作雷区"
+manipulate_grid - grid
+
+component cell_event as "单元格事件"
+grid *-- cell_event
+
+component judge as "关卡管理"
+grid *-- judge
+
+effect ..> grid : 影响
+weapon ..> manipulate_grid
+    
+
+item ..> trigger_effect
+weapon ..> trigger_effect
+ability ..> trigger_effect
+cell_event ..> trigger_effect
+
+@enduml

@@ -1,0 +1,29 @@
+﻿@startuml
+'https://plantuml.com/component-diagram
+
+component gameplay as "扫雷游戏玩法机制"
+
+component animation as "动画"
+() play_animation as "播放动画"
+play_animation - animation
+
+component random as "随机数"
+() random_number as "随机数生成"
+
+random_number - random
+
+component save as "存档管理"
+() save_data as "数据保存与读取"
+save - save_data
+
+component scene_manager as "场景管理"
+scene_manager ..> save_data
+
+random ..> save_data
+
+gameplay ..> random_number
+gameplay ..> save_data
+gameplay ..> play_animation
+
+
+@enduml
