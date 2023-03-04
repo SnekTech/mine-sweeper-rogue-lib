@@ -1,0 +1,26 @@
+﻿@startuml
+'https://plantuml.com/component-diagram
+
+node 根场景 {
+'    package 用户可见场景 {
+'        [主菜单场景]
+'        [关卡场景]
+'        [历史记录场景]
+'        [胜利或失败场景]
+'    }
+    
+    agent 当前场景 as current
+    note bottom of current : 从用户可见场景中，\n选择一个成为当前场景
+'    用户可见场景 --> 当前场景 : 选择一个
+
+    collections "用户可见场景集合" as normal_scenes
+    normal_scenes -> current
+    
+    package 跨场景复用资源 {
+        agent 输入监听
+        agent 对话框等UI组件
+        agent 场景管理器
+    }
+}
+
+@enduml

@@ -1,0 +1,14 @@
+﻿@startuml
+'https://plantuml.com/activity-diagram-beta
+
+start
+
+:在 Aseprite 应用中制作逐帧动画;
+:将动画资源打包为一个纹理图片;
+:将纹理图片以及动画资源的元数据导入 Unity 引擎;
+:动画功能模块使用元数据将纹理图片中的不同动画
+分发至对应的游戏对象，等待运行时使用;
+
+stop
+
+@enduml
