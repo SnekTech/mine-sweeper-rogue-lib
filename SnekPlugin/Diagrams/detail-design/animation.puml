@@ -1,0 +1,45 @@
+﻿@startuml
+'https://plantuml.com/class-diagram
+
+hide empty members
+
+namespace Unity {
+    class MonoBehaviour
+    class Sprite
+    
+    note bottom of Sprite : 表示动画中的一帧画面
+}
+
+class Animator extends Unity.MonoBehaviour {
+    event Action completed
+    int frameIndex
+
+    void Play(Clip clip)
+    void UpdateSprite(Sprite sprite)
+}
+
+class Clip {
+    List<Sprite> sprites
+    List<int> frameDurations
+    ClipPlayer clipPlayer
+}
+
+abstract class ClipPlayer {
+    abstract void Play(Animator animator, Clip clip)
+}
+
+class LoopPlayer extends ClipPlayer
+class NonLoopPlayer extends ClipPlayer
+class RandomLoopPlayer extends ClipPlayer
+
+
+Animator ..> Clip
+
+Clip --> ClipPlayer
+Clip -> Unity.Sprite
+
+ClipPlayer ..> Animator
+ClipPlayer ..> Clip
+
+
+@enduml

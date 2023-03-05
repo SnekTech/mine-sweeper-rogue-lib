@@ -1,0 +1,19 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+'autonumber
+actor 开发者 as developer
+
+participant "Aseprite 应用程序" as aseprite
+participant 动画资源处理工具 as animation_tool
+participant Clip
+
+developer -> aseprite : 制作逐帧动画并导出
+aseprite --> developer : 返回 spritesheet 及其元数据 json
+
+developer -> animation_tool : 输入 spritesheet 和元数据json
+animation_tool -> Clip : 创建出对应的序列帧 Clip
+activate Clip
+Clip --> developer : 序列帧 Clip 对象在项目中持久化，等待被调用
+
+@enduml
