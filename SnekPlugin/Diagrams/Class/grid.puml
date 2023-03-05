@@ -3,15 +3,13 @@
 
 hide empty members
 
-interface IGrid
+class Grid
 {
-    ICell GetCellAt(GridIndex index)
+    Cell GetCellAt(GridIndex index)
     Task InitAsync()
     Task RevealAtAsync(GridIndex index)
     Task RevealAroundAsync(GridIndex index)
 }
-
-IGrid <|- Grid
 
 struct GridIndex
 {
@@ -19,14 +17,14 @@ struct GridIndex
     int j
 }
 
-IGrid o-- GridIndex
+Grid .> GridIndex
 
-interface ICell
+class Cell
 {
     GridIndex Index
-    IGrid Parent
-    ICover Cover
-    IFlag Flag
+    Grid Parent
+    Cover Cover
+    Flag Flag
     bool HasBomb
     CellState State
     Task Init()
@@ -34,33 +32,30 @@ interface ICell
     Task SwitchFlagAsync()
 }
 
-ICell o-- GridIndex
-ICell <|- Cell
-ICell .-- CellState
+Cell --> GridIndex
+Cell -> CellState
 
-enum CellState
+enum CellStateValue
 {
     Covered
     Flagged
     Revealed
 }
 
-interface IFlag
+class Flag
 {
     Task LiftFlagAsync()
     Task PutDownFlagAsync()
 }
 
-interface ICover
+class Cover
 {
     Task PutCoverAsync()
     Task RevealAsync()
 }
 
-IGrid *-- ICell
-
-ICell *-- IFlag
-ICell *-- ICover
-
+Grid *-- Cell
+Cell *-- Flag
+Cell *-- Cover
 
 @enduml

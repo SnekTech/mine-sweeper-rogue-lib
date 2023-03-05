@@ -1,0 +1,32 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+hide empty members
+
+abstract class CellState {
+    CellStateMachine fsm
+    abstract Task OnEnter()
+    abstract Task OnExit()
+    abstract Task OnReveal()
+    abstract Task OnSwitchFlag()
+}
+
+class CoverState extends CellState
+class FlaggedState extends CellState
+class RevealedState extends CellState
+
+class CellStateMachine {
+    CellState Current
+    Cell ContextCell
+    
+    Task SetInitState(CellState state)
+    Task ChangeState(CellState newState)
+}
+
+class Cell {
+    CellStateMachine fsm
+}
+CellStateMachine -- Cell
+CellStateMachine <- CellState
+
+@enduml
