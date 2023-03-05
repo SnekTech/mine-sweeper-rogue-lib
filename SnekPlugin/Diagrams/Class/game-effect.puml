@@ -1,0 +1,49 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+hide empty members
+
+interface IEffect<T> {
+    void Take(T target)
+}
+
+class CompositeEffect<T> {
+    List<IEffect<T>> Effects
+}
+IEffect <|.. CompositeEffect
+CompositeEffect *-- IEffect
+
+interface IPlayerEffect<T is Player>
+IEffect <|.. IPlayerEffect
+Player <.. IPlayerEffect
+
+interface IGridEffect<T is Grid>
+IEffect <|.. IGridEffect
+Grid <.. IGridEffect
+
+
+class Heal
+class SwitchWeapon
+'class Damage
+class ChangeAbility
+IPlayerEffect <|.. Heal
+'PlayerEffect <|.. Damage
+IPlayerEffect <|.. SwitchWeapon
+IPlayerEffect <|.. ChangeAbility
+'
+'interface GridEffect
+'{
+'    void Take(Grid target)
+'}
+'class Grid
+'GridEffect -> Grid
+'
+class ChangeBombDamage
+class RevealRandom
+'class ChangeGridColor
+IGridEffect <|.. ChangeBombDamage
+IGridEffect <|.. RevealRandom
+'GridEffect <|.. ChangeGridColor
+
+
+@enduml
