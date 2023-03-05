@@ -1,0 +1,41 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+hide empty members
+
+class Inventory
+interface IWeapon
+class AbilityHolder {
+    List<Ability> clickAbilities
+}
+class PlayerStats {
+    int ItemChoiceCount
+    Life Life
+}
+class Life {
+    int Health
+    int MaxHealth
+    int Armour
+}
+PlayerStats *- Life
+
+class Player {
+    Inventory Inventory
+    IWeapon Weapon
+    PlayerStats PlayerStats
+    AbilityHolder AbilityHolder
+    void TakeDamage(int damage)
+    void TakeDamageOnHealth(int damage)
+    void AddHealth(int increment)
+    void AddArmour(int increment)
+    void AddMaxHealth(int increment)
+    void AddClickAbility(Ability ability)
+    void RemoveClickAbility(Ability ability)
+}
+
+Player *-- Inventory
+Player *-- PlayerStats
+Player *-- AbilityHolder
+Player --> IWeapon
+
+@enduml

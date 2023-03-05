@@ -1,0 +1,24 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+hide empty members
+
+interface IRandomGenerator {
+    int Next()
+    bool NextBool(float probability)
+}
+
+class RandomGenerator implements IRandomGenerator {
+    {static} RandomGenerator Instance
+    Random random
+    void Init(string seed)
+}
+
+class LevelManager {
+    IRandomGenerator randomGenerator
+}
+IRandomGenerator <-- LevelManager
+
+class MockGenerator implements IRandomGenerator
+
+@enduml
