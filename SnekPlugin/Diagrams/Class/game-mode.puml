@@ -1,0 +1,39 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+hide empty members
+
+abstract class GameMode {
+    event Action<bool> OnLevelCompleted
+    void InvokeLevelCompleted(bool hasFailed)
+    void Start()
+    void Stop()
+}
+
+class ClassicMode {
+    GridEventChannel GridEventChannel
+    PlayerEventChannel PlayerEventChannel
+    void HandleGridClear()
+    void HandlePlayerHealthRunOut()
+}
+GameMode <|- ClassicMode
+
+class GridEventChannel {
+    event Action OnGridClear
+}
+ClassicMode --> GridEventChannel
+
+class PlayerEventChannel {
+    event Action OnHealthRunOut
+}
+ClassicMode --> PlayerEventChannel
+
+class WithCountDown {
+    int Duration
+    GameMode DecoratedGameMode
+}
+GameMode <|-- WithCountDown
+WithCountDown o-- GameMode
+
+
+@enduml

@@ -1,0 +1,27 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+hide empty members
+
+class GridEventChannel {
+    event Action<Grid, Cell> OnBombRevealed
+    void InvokeBombRevealed(Grid grid, Cell cell)
+}
+
+class Grid {
+    GridEventChannel EventChannel
+}
+Grid -> GridEventChannel
+
+class Player {
+    void HandleBombRevealed(Grid grid, Cell cell)
+}
+GridEventChannel <.. Player
+
+class GridStatusUI {
+    void HandleBombRevealed(Grid grid, Cell cell)
+}
+GridEventChannel <.. GridStatusUI
+
+
+@enduml
