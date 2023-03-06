@@ -5,72 +5,29 @@ hide empty members
 
 class Item
 {
-    List<ItemComponent> components
     Sprite icon
     string description
-}
-Item *-- ItemComponent
-
-interface ItemComponent
-{
-    PlayerEffect? playerEffectOnAdd
-    PlayerEffect? playerEffectOnRemove
-    GridEffect? gridEffectOnAdd
-    GridEffect? gridEffectOnRemove
+    
+    IEffect<Player> PlayerEffectOnAdd
+    IEffect<Grid> GridEffectOnAdd
+    IEffect<Player> PlayerEffectOnRemove
+    IEffect<Grid> GridEffectOnRemove
     void OnAdd()
     void OnRemove()
 }
 
-note left of ItemComponent : T? 表示类型为 T \n的字段是可选的
+Inventory o- Item
 
-interface CompositeItemComponent implements ItemComponent
+class Inventory
 {
-    -List<ItemComponent> components
-    void OnAdd()
-    void OnRemove()
+    List<Item> items
 }
-CompositeItemComponent *- ItemComponent
 
-'Inventory o- Item
-'
-'class Inventory
-'{
-'    List<Item> items
-'}
-
-interface PlayerEffect
-{
-    void TakeOn(Player target)
+interface IEffect<T is Player or Grid> {
+    void Take(T target)
 }
-ItemComponent o-- PlayerEffect
-
-class Player
-PlayerEffect -> Player
-
-class Heal 
-class SwitchWeapon
-class Damage
-class ChangeAbility
-PlayerEffect <|.. Heal
-PlayerEffect <|.. Damage
-PlayerEffect <|... SwitchWeapon
-PlayerEffect <|... ChangeAbility
-
-interface GridEffect
-{
-    void Take(Grid target)
-}
-ItemComponent o-- GridEffect
-class Grid
-GridEffect -> Grid
-
-class ChangeBombDamage
-class RevealRandom
-class ChangeGridColor
-GridEffect <|.. ChangeBombDamage
-GridEffect <|... RevealRandom
-GridEffect <|.. ChangeGridColor
-
-
+Item -> IEffect
+'class PlayerEffect
+'class GridEffect
 
 @enduml
