@@ -1,0 +1,15 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+hide empty members
+
+abstract class RandomPool<T> {
+    T GetRandom()
+}
+
+class CellEventPool<T is CellEvent> extends RandomPool
+class ItemPool<T is Item> extends RandomPool
+class GridDataPool<T is GridData> extends RandomPool
+class GameModePool<T is GameMode> extends RandomPool
+
+@enduml

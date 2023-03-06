@@ -1,0 +1,22 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+hide empty members
+
+abstract class RandomPoolEditor<T> {
+    abstract string GetAssetDirPath()
+    void Populate()
+    void Clear()
+}
+
+class CellEventPoolEditor<T is CellEvent>
+class ItemPoolEditor<T is Item> 
+class GridDataPoolEditor<T is GridData> 
+class GameModePoolEditor<T is GameMode> 
+
+RandomPoolEditor <|--- CellEventPoolEditor
+RandomPoolEditor <|-- ItemPoolEditor
+RandomPoolEditor <|--- GridDataPoolEditor
+RandomPoolEditor <|-- GameModePoolEditor
+
+@enduml
