@@ -1,0 +1,41 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+hide empty members
+
+interface IPersistentDataHolder {
+    void LoadData(GameData gameData)
+    void SaveData(GameData gameData)
+}
+
+class RandomGenerator
+class Player 
+class CurrentRecordHolder implements IPersistentDataHolder
+class GameHistory implements IPersistentDataHolder
+
+Player ..|> IPersistentDataHolder
+RandomGenerator ..|> IPersistentDataHolder
+
+class DataPersistenceManager {
+    List<IPersistentDataHolder> dataHolders
+    GameData gameData
+    FileDataHandler fileDataHandler
+
+    void NewGame()
+    void LoadGame()
+    void SaveGame()
+    void FulfillDataHolders(GameData gameData)
+    void CollectGameData(GameData gameData)
+}
+
+class FileDataHandler {
+    GameData Load()
+    void Save(GameData gameData)
+}
+DataPersistenceManager -> IPersistentDataHolder
+DataPersistenceManager --> FileDataHandler
+
+class GameData
+GameData <-- DataPersistenceManager
+
+@enduml
