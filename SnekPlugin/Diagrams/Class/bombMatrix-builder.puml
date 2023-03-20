@@ -1,0 +1,28 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+hide empty members
+
+class BombMatrix {
+    bool[][] hasBomb
+}
+
+class BombMatrixBuilder {
+    BombMatrixBuilder WithBombRows(string[] rows)
+    BombMatrixBuilder WithOnlyOneCellThat(bool hasBomb)
+    BombMatrixBuilder WithGridData(GridData)
+    BombMatrixBuilder WithBombGenerator(IRandomGenerator)
+    
+    BombMatrix Build()
+}
+
+static class A {
+    static BombMatrixBuilder BombMatrix
+}
+
+A --> BombMatrixBuilder
+BombMatrixBuilder -> BombMatrix
+
+note right of A : 每次调用 BombMatrix 会返回\n一个新的 builder 对象
+
+@enduml
