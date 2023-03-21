@@ -1,3 +1,3 @@
-# SnekTech Tool Belt
+# MineSweeperRogue Library
 
-Cool widgets.
+Managed plugins for [MineSweeperRogue](https://github.com/SnekTech/mine-sweeper-rogue) project.
