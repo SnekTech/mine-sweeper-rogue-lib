@@ -1,4 +1,4 @@
-﻿namespace SnekPlugin.MineSweeper.Grid;
+﻿namespace MineSweeperRogue.Grid;
 
 public interface IGridData
 {

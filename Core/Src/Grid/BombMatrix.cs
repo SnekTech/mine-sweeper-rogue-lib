@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Linq;
 using System.Text;
-using SnekPlugin.Core.CustomExtensions;
-using SnekPlugin.MineSweeper.Cell;
+using MineSweeperRogue.Core.CustomExtensions;
+using MineSweeperRogue.Grid.Cell;
+using MineSweeperRogue.MineSweeper;
 
-namespace SnekPlugin.MineSweeper.Grid;
+namespace MineSweeperRogue.Grid;
 
 public class BombMatrix
 {

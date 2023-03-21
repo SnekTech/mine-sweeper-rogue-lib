@@ -1,6 +1,6 @@
-﻿using SnekPlugin.MineSweeper;
-using SnekPlugin.MineSweeper.Cell;
-using SnekPlugin.MineSweeper.Grid;
+﻿using MineSweeperRogue.Grid;
+using MineSweeperRogue.Grid.Cell;
+using MineSweeperRogue.MineSweeper;
 
 namespace SnekPluginTest.MineSweeper.Builders;
 

@@ -1,7 +1,7 @@
 using System;
 using Cysharp.Threading.Tasks;
 
-namespace SnekPlugin.Core.FSM;
+namespace MineSweeperRogue.Core.FSM;
 
 public abstract class AsyncFsm<TState, TContext> where TState : class, IAsyncState
 {

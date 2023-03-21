@@ -1,6 +1,4 @@
-﻿using SnekPlugin.MineSweeper.Grid;
-
-namespace SnekPlugin.MineSweeper;
+﻿namespace MineSweeperRogue.MineSweeper;
 
 public interface IBombGenerator
 {

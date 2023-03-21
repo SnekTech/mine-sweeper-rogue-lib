@@ -4,9 +4,9 @@
         <Nullable>enable</Nullable>
         <LangVersion>10</LangVersion>
         <TargetFramework>netstandard2.1</TargetFramework>
-        <RootNamespace>SnekPlugin</RootNamespace>
+        <RootNamespace>MineSweeperRogue</RootNamespace>
 <!--        <_PluginDestination>D:\AsgardProjects\mine-sweeper-rogue\Assets\Plugins\$(MSBuildProjectName)</_PluginDestination>-->
-<!--        <_P>D:\AsgardProjects\mine-sweeper-rogue\Assets\Plugins\$(MSBuildProjectName)</_P>-->
+        <_P>D:\AsgardProjects\mine-sweeper-rogue\Assets\Plugins\$(MSBuildProjectName)</_P>
     </PropertyGroup>
 
     <ItemGroup>
@@ -18,21 +18,17 @@
       <PackageReference Include="UniTask" Version="2.3.3" />
     </ItemGroup>
 
-    <ItemGroup>
-      <Folder Include="Src" />
-    </ItemGroup>
 
-
-<!--    <Target Name="CopyPlugin" AfterTargets="Build">-->
-<!--        <Message Text="_FilesToCopy @(_BuildResult), to $(_P)" Importance="high"/>-->
-<!--        <Copy SourceFiles="@(_BuildResult)" DestinationFolder="$(_P)"/>-->
-<!--    </Target>-->
-<!--    -->
-<!--    <Target Name="CustomClean" BeforeTargets="CoreClean">-->
-<!--        <Message Text="Inside Custom Clean" Importance="high"/>-->
-<!--        <ItemGroup>-->
-<!--            <_CustomFilesToDelete Include="$(_P)**\*"/>-->
-<!--        </ItemGroup>-->
-<!--        <Delete Files='@(_CustomFilesToDelete)'/>-->
-<!--    </Target>-->
+    <Target Name="CopyPlugin" AfterTargets="Build">
+        <Message Text="_FilesToCopy @(_BuildResult), to $(_P)" Importance="high"/>
+        <Copy SourceFiles="@(_BuildResult)" DestinationFolder="$(_P)"/>
+    </Target>
+    
+    <Target Name="CustomClean" BeforeTargets="CoreClean">
+        <Message Text="Inside Custom Clean" Importance="high"/>
+        <ItemGroup>
+            <_CustomFilesToDelete Include="$(_P)**\*" Exclude="**\*.meta"/>
+        </ItemGroup>
+        <Delete Files='@(_CustomFilesToDelete)'/>
+    </Target>
 </Project>

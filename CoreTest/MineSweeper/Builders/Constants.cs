@@ -1,6 +1,4 @@
-﻿using SnekPlugin.MineSweeper.Grid;
-
-namespace SnekPluginTest.MineSweeper.Builders;
+﻿namespace SnekPluginTest.MineSweeper.Builders;
 
 public static class Constants
 {

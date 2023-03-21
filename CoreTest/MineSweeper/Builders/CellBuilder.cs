@@ -1,6 +1,6 @@
 ﻿using Cysharp.Threading.Tasks;
-using SnekPlugin.MineSweeper.Cell;
-using SnekPlugin.MineSweeper.Grid;
+using MineSweeperRogue.Grid;
+using MineSweeperRogue.Grid.Cell;
 
 namespace SnekPluginTest.MineSweeper.Builders;
 

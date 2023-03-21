@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using SnekPlugin.MineSweeper.Cell.StateMachine;
+using MineSweeperRogue.Grid.Cell.StateMachine;
 
-namespace SnekPlugin.MineSweeper.Cell;
+namespace MineSweeperRogue.Grid.Cell;
 
 public static class CellExtensions
 {

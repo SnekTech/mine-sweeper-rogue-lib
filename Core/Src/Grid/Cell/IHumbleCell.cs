@@ -1,8 +1,7 @@
 ﻿using Cysharp.Threading.Tasks;
-using SnekPlugin.MineSweeper.Cell.Components;
-using SnekPlugin.MineSweeper.Grid;
+using MineSweeperRogue.Grid.Cell.Components;
 
-namespace SnekPlugin.MineSweeper.Cell;
+namespace MineSweeperRogue.Grid.Cell;
 
 public interface IHumbleCell
 {

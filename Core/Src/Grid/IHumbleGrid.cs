@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using SnekPlugin.MineSweeper.Cell;
+using MineSweeperRogue.Grid.Cell;
 
-namespace SnekPlugin.MineSweeper.Grid;
+namespace MineSweeperRogue.Grid;
 
 public interface IHumbleGrid
 {

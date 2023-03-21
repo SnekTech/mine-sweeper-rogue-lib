@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
-using SnekPlugin.MineSweeper.Cell;
+using MineSweeperRogue.Grid.Cell;
 
-namespace SnekPlugin.MineSweeper.Grid;
+namespace MineSweeperRogue.Grid;
 
 public interface IGrid
 {

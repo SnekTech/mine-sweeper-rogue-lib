@@ -1,6 +1,6 @@
 ﻿using Cysharp.Threading.Tasks;
 
-namespace SnekPlugin.MineSweeper.Cell.StateMachine
+namespace MineSweeperRogue.Grid.Cell.StateMachine
 {
     public class RevealedState : CellState
     {

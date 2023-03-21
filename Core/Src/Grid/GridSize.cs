@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace SnekPlugin.MineSweeper.Grid;
+﻿namespace MineSweeperRogue.Grid;
 
 [System.Serializable]
 public struct GridSize

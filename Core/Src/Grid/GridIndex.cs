@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace SnekPlugin.MineSweeper.Grid
+namespace MineSweeperRogue.Grid
 {
     public readonly struct GridIndex
     {

@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using SnekPlugin.MineSweeper;
-using SnekPlugin.MineSweeper.Grid;
+﻿using System.Collections.Generic;
 
-namespace SnekPlugin.Core.CustomExtensions;
+namespace MineSweeperRogue.Core.CustomExtensions;
 
 public static class MatrixExtensions
 {

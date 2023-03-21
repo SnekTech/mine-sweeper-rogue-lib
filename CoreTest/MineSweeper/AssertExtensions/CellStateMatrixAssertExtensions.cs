@@ -1,6 +1,6 @@
 ﻿using FluentAssertions;
 using FluentAssertions.Execution;
-using SnekPlugin.Core.CustomExtensions;
+using MineSweeperRogue.Core.CustomExtensions;
 using SnekPluginTest.MineSweeper.Tests;
 
 namespace SnekPluginTest.MineSweeper.AssertExtensions;

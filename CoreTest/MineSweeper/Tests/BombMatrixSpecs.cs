@@ -1,6 +1,6 @@
 ﻿using FluentAssertions;
-using SnekPlugin.MineSweeper;
-using SnekPlugin.MineSweeper.Grid;
+using MineSweeperRogue.Grid;
+using MineSweeperRogue.MineSweeper;
 using SnekPluginTest.MineSweeper.AssertExtensions;
 using SnekPluginTest.MineSweeper.Builders;
 

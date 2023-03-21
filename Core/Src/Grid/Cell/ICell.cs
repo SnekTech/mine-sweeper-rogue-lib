@@ -1,9 +1,8 @@
 ﻿using Cysharp.Threading.Tasks;
-using SnekPlugin.MineSweeper.Cell.Components;
-using SnekPlugin.MineSweeper.Cell.StateMachine;
-using SnekPlugin.MineSweeper.Grid;
+using MineSweeperRogue.Grid.Cell.Components;
+using MineSweeperRogue.Grid.Cell.StateMachine;
 
-namespace SnekPlugin.MineSweeper.Cell;
+namespace MineSweeperRogue.Grid.Cell;
 
 public interface ICell
 {

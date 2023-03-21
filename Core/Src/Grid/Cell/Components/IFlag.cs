@@ -1,6 +1,6 @@
 ﻿using Cysharp.Threading.Tasks;
 
-namespace SnekPlugin.MineSweeper.Cell.Components;
+namespace MineSweeperRogue.Grid.Cell.Components;
 
 public interface IFlag
 {
