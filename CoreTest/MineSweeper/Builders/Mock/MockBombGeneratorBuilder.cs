@@ -1,4 +1,4 @@
-﻿using MineSweeperRogue.MineSweeper;
+﻿using MineSweeperRogue;
 using NSubstitute;
 
 namespace SnekPluginTest.MineSweeper.Builders.Mock;

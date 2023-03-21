@@ -1,4 +1,4 @@
-﻿namespace MineSweeperRogue.MineSweeper;
+﻿namespace MineSweeperRogue;
 
 public interface IBombGenerator
 {

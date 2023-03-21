@@ -3,7 +3,6 @@ using System.Linq;
 using System.Text;
 using MineSweeperRogue.Core.CustomExtensions;
 using MineSweeperRogue.Grid.Cell;
-using MineSweeperRogue.MineSweeper;
 
 namespace MineSweeperRogue.Grid;
 
