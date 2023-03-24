@@ -1,0 +1,16 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+
+actor Player as p1
+participant Grid
+participant Weapon
+
+p1 -> Grid : primary input a cell
+Grid --> p1 : cell hovered
+
+p1 -> Weapon : use primary move
+Weapon --> Grid : reveal & take some effects
+
+@enduml

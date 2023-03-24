@@ -5,17 +5,17 @@
         <LangVersion>10</LangVersion>
         <TargetFramework>netstandard2.1</TargetFramework>
         <RootNamespace>MineSweeperRogue</RootNamespace>
-<!--        <_PluginDestination>D:\AsgardProjects\mine-sweeper-rogue\Assets\Plugins\$(MSBuildProjectName)</_PluginDestination>-->
+        <!--        <_PluginDestination>D:\AsgardProjects\mine-sweeper-rogue\Assets\Plugins\$(MSBuildProjectName)</_PluginDestination>-->
         <_P>D:\AsgardProjects\mine-sweeper-rogue\Assets\Plugins\$(MSBuildProjectName)</_P>
     </PropertyGroup>
 
     <ItemGroup>
-        <_BuildResult Include="$(OutputPath)\*" Exclude="**\*.json" />
+        <_BuildResult Include="$(OutputPath)\*" Exclude="**\*.json"/>
     </ItemGroup>
 
     <ItemGroup>
-      <PackageReference Include="Newtonsoft.Json" Version="13.0.2" />
-      <PackageReference Include="UniTask" Version="2.3.3" />
+        <PackageReference Include="Newtonsoft.Json" Version="13.0.2"/>
+        <PackageReference Include="UniTask" Version="2.3.3"/>
     </ItemGroup>
 
 
@@ -23,12 +23,12 @@
         <Message Text="_FilesToCopy @(_BuildResult), to $(_P)" Importance="high"/>
         <Copy SourceFiles="@(_BuildResult)" DestinationFolder="$(_P)"/>
     </Target>
-    
+
     <Target Name="CustomClean" BeforeTargets="CoreClean">
         <Message Text="Inside Custom Clean" Importance="high"/>
         <ItemGroup>
             <_CustomFilesToDelete Include="$(_P)**\*" Exclude="**\*.meta"/>
         </ItemGroup>
-        <Delete Files='@(_CustomFilesToDelete)'/>
+        <Delete Files="@(_CustomFilesToDelete)"/>
     </Target>
 </Project>
