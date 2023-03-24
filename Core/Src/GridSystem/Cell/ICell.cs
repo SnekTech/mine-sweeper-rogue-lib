@@ -1,8 +1,8 @@
 ﻿using Cysharp.Threading.Tasks;
-using MineSweeperRogue.Grid.Cell.Components;
-using MineSweeperRogue.Grid.Cell.StateMachine;
+using MineSweeperRogue.GridSystem.Cell.Components;
+using MineSweeperRogue.GridSystem.Cell.StateMachine;
 
-namespace MineSweeperRogue.Grid.Cell;
+namespace MineSweeperRogue.GridSystem.Cell;
 
 public interface ICell
 {

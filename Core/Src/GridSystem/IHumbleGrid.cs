@@ -1,9 +1,10 @@
 ﻿using System.Collections.Generic;
-using MineSweeperRogue.Grid.Cell;
+using MineSweeperRogue.GridSystem.Cell;
 
-namespace MineSweeperRogue.Grid;
+namespace MineSweeperRogue.GridSystem;
 
 public interface IHumbleGrid
 {
+    IGrid Grid { get; }
     List<IHumbleCell> InstantiateHumbleCells(int count);
 }

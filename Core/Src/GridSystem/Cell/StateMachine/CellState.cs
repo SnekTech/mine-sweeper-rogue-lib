@@ -1,7 +1,7 @@
 ﻿using Cysharp.Threading.Tasks;
 using MineSweeperRogue.Core.FSM;
 
-namespace MineSweeperRogue.Grid.Cell.StateMachine
+namespace MineSweeperRogue.GridSystem.Cell.StateMachine
 {
     public abstract class CellState : IAsyncState
     {

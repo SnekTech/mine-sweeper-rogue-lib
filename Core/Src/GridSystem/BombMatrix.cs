@@ -2,9 +2,9 @@
 using System.Linq;
 using System.Text;
 using MineSweeperRogue.Core.CustomExtensions;
-using MineSweeperRogue.Grid.Cell;
+using MineSweeperRogue.GridSystem.Cell;
 
-namespace MineSweeperRogue.Grid;
+namespace MineSweeperRogue.GridSystem;
 
 public class BombMatrix
 {

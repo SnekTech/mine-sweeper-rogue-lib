@@ -1,7 +1,7 @@
 ﻿using Cysharp.Threading.Tasks;
-using MineSweeperRogue.Grid.Cell.Components;
+using MineSweeperRogue.GridSystem.Cell.Components;
 
-namespace MineSweeperRogue.Grid.Cell;
+namespace MineSweeperRogue.GridSystem.Cell;
 
 public interface IHumbleCell
 {

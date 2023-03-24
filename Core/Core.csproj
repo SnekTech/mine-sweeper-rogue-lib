@@ -10,25 +10,25 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <_BuildResult Include="$(OutputPath)\*" Exclude="**\*.json"/>
+        <_BuildResult Include="$(OutputPath)\*" Exclude="**\*.json" />
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="Newtonsoft.Json" Version="13.0.2"/>
-        <PackageReference Include="UniTask" Version="2.3.3"/>
+        <PackageReference Include="Newtonsoft.Json" Version="13.0.2" />
+        <PackageReference Include="UniTask" Version="2.3.3" />
     </ItemGroup>
 
 
     <Target Name="CopyPlugin" AfterTargets="Build">
-        <Message Text="_FilesToCopy @(_BuildResult), to $(_P)" Importance="high"/>
-        <Copy SourceFiles="@(_BuildResult)" DestinationFolder="$(_P)"/>
+        <Message Text="_FilesToCopy @(_BuildResult), to $(_P)" Importance="high" />
+        <Copy SourceFiles="@(_BuildResult)" DestinationFolder="$(_P)" />
     </Target>
 
     <Target Name="CustomClean" BeforeTargets="CoreClean">
-        <Message Text="Inside Custom Clean" Importance="high"/>
+        <Message Text="Inside Custom Clean" Importance="high" />
         <ItemGroup>
-            <_CustomFilesToDelete Include="$(_P)**\*" Exclude="**\*.meta"/>
+            <_CustomFilesToDelete Include="$(_P)**\*" Exclude="**\*.meta" />
         </ItemGroup>
-        <Delete Files="@(_CustomFilesToDelete)"/>
+        <Delete Files="@(_CustomFilesToDelete)" />
     </Target>
 </Project>

@@ -1,5 +1,5 @@
 ﻿using FluentAssertions;
-using MineSweeperRogue.Grid;
+using MineSweeperRogue.GridSystem;
 using SnekPluginTest.MineSweeper.Builders;
 
 namespace SnekPluginTest.MineSweeper.Tests;

@@ -1,7 +1,8 @@
 ﻿using System;
 
-namespace MineSweeperRogue.Grid
+namespace MineSweeperRogue.GridSystem
 {
+    [Serializable]
     public readonly struct GridIndex
     {
         public readonly int RowIndex;

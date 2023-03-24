@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using Cysharp.Threading.Tasks;
 using MineSweeperRogue.Core.CustomExtensions;
-using MineSweeperRogue.Grid.Cell;
+using MineSweeperRogue.GridSystem.Cell;
 
-namespace MineSweeperRogue.Grid;
+namespace MineSweeperRogue.GridSystem;
 
 public class Grid : IGrid
 {

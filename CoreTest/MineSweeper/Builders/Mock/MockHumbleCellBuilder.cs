@@ -1,5 +1,5 @@
-﻿using MineSweeperRogue.Grid.Cell;
-using MineSweeperRogue.Grid.Cell.Components;
+﻿using MineSweeperRogue.GridSystem.Cell;
+using MineSweeperRogue.GridSystem.Cell.Components;
 using NSubstitute;
 
 namespace SnekPluginTest.MineSweeper.Builders.Mock;

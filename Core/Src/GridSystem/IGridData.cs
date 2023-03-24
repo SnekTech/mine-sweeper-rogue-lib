@@ -1,4 +1,4 @@
-﻿namespace MineSweeperRogue.Grid;
+﻿namespace MineSweeperRogue.GridSystem;
 
 public interface IGridData
 {

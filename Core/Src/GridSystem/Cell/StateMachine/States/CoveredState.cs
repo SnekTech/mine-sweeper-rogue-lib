@@ -1,6 +1,6 @@
 ﻿using Cysharp.Threading.Tasks;
 
-namespace MineSweeperRogue.Grid.Cell.StateMachine
+namespace MineSweeperRogue.GridSystem.Cell.StateMachine
 {
     public class CoveredState : CellState
     {

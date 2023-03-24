@@ -1,4 +1,4 @@
-﻿using MineSweeperRogue.Grid;
+﻿using MineSweeperRogue.GridSystem;
 using NSubstitute;
 using SnekPluginTest.MineSweeper.Builders;
 
