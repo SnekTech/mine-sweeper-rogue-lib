@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using MineSweeperRogue.GridSystem.Cell.StateMachine;
+using MineSweeperRogue.GridSystem.CellSystem.StateMachine;
 
-namespace MineSweeperRogue.GridSystem.Cell;
+namespace MineSweeperRogue.GridSystem.CellSystem;
 
 public static class CellExtensions
 {

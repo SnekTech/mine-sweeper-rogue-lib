@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
-using MineSweeperRogue.GridSystem.Cell;
+using MineSweeperRogue.GridSystem.CellSystem;
 
 namespace MineSweeperRogue.GridSystem;
 

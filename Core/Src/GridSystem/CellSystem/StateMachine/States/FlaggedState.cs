@@ -1,6 +1,6 @@
 ﻿using Cysharp.Threading.Tasks;
 
-namespace MineSweeperRogue.GridSystem.Cell.StateMachine
+namespace MineSweeperRogue.GridSystem.CellSystem.StateMachine
 {
     public class FlaggedState : CellState
     {

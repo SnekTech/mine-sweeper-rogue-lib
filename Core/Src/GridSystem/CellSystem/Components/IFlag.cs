@@ -1,6 +1,6 @@
 ﻿using Cysharp.Threading.Tasks;
 
-namespace MineSweeperRogue.GridSystem.Cell.Components;
+namespace MineSweeperRogue.GridSystem.CellSystem.Components;
 
 public interface IFlag
 {

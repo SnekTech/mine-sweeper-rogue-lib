@@ -1,9 +1,9 @@
 ﻿using System.Linq;
 using Cysharp.Threading.Tasks;
-using MineSweeperRogue.GridSystem.Cell.Components;
-using MineSweeperRogue.GridSystem.Cell.StateMachine;
+using MineSweeperRogue.GridSystem.CellSystem.Components;
+using MineSweeperRogue.GridSystem.CellSystem.StateMachine;
 
-namespace MineSweeperRogue.GridSystem.Cell;
+namespace MineSweeperRogue.GridSystem.CellSystem;
 
 public class Cell : ICell
 {

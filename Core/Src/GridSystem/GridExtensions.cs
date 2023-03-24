@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using MineSweeperRogue.GridSystem.Cell;
-using MineSweeperRogue.GridSystem.Cell.StateMachine;
+using MineSweeperRogue.GridSystem.CellSystem;
+using MineSweeperRogue.GridSystem.CellSystem.StateMachine;
 
 namespace MineSweeperRogue.GridSystem;
 

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Cysharp.Threading.Tasks;
 using MineSweeperRogue.Core.CustomExtensions;
-using MineSweeperRogue.GridSystem.Cell;
+using MineSweeperRogue.GridSystem.CellSystem;
 
 namespace MineSweeperRogue.GridSystem;
 
@@ -71,7 +71,7 @@ public class Grid : IGrid
             var hasBomb = _bombMatrix[i, j];
 
             var cellIndex = new GridIndex(i, j);
-            var cell = new Cell.Cell(cellIndex, this, hasBomb, humbleCell);
+            var cell = new Cell(cellIndex, this, hasBomb, humbleCell);
             _cellMatrix[i, j] = cell;
         }
 

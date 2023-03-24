@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using MineSweeperRogue.GridSystem.Cell;
+using MineSweeperRogue.GridSystem.CellSystem;
 
 namespace MineSweeperRogue.GridSystem;
 

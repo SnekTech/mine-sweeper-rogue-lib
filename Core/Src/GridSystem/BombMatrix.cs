@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Text;
 using MineSweeperRogue.Core.CustomExtensions;
-using MineSweeperRogue.GridSystem.Cell;
+using MineSweeperRogue.GridSystem.CellSystem;
 
 namespace MineSweeperRogue.GridSystem;
 

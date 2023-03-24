@@ -1,7 +1,7 @@
 ﻿using System.Text;
 using MineSweeperRogue.Core.CustomExtensions;
-using MineSweeperRogue.GridSystem.Cell;
-using MineSweeperRogue.GridSystem.Cell.StateMachine;
+using MineSweeperRogue.GridSystem.CellSystem;
+using MineSweeperRogue.GridSystem.CellSystem.StateMachine;
 
 namespace SnekPluginTest.MineSweeper.Tests;
 
