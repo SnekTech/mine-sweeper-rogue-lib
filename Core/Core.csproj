@@ -15,7 +15,12 @@
 
     <ItemGroup>
         <PackageReference Include="Newtonsoft.Json" Version="13.0.2" />
-        <PackageReference Include="UniTask" Version="2.3.3" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Reference Include="UniTask">
+        <HintPath>..\Libs\UniTask.dll</HintPath>
+      </Reference>
     </ItemGroup>
 
 

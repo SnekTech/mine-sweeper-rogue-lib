@@ -28,6 +28,9 @@
       <Reference Include="UniRx">
         <HintPath>..\..\..\MyLibs\UniRx.dll</HintPath>
       </Reference>
+      <Reference Include="UniTask">
+        <HintPath>..\Libs\UniTask.dll</HintPath>
+      </Reference>
     </ItemGroup>
 
 </Project>
