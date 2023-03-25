@@ -10,8 +10,8 @@ namespace SnekTech.MineSweeperRogue.GridSystem;
 public class Grid : IGrid
 {
     private readonly IHumbleGrid _humbleGrid;
-    private ICell[,] _cellMatrix;
-    private BombMatrix _bombMatrix;
+    private ICell[,] _cellMatrix = null !;
+    private BombMatrix _bombMatrix = null !;
 
     private static readonly GridIndex[] NeighborOffsets =
     {
@@ -25,12 +25,9 @@ public class Grid : IGrid
         new GridIndex(1, 1),
     };
 
-    public Grid(BombMatrix bombMatrix, IHumbleGrid humbleGrid)
+    public Grid(IHumbleGrid humbleGrid)
     {
-        _bombMatrix = bombMatrix;
         _humbleGrid = humbleGrid;
-
-        _cellMatrix = new ICell[Size.RowCount, Size.ColumnCount];
     }
 
     public GridSize Size => _bombMatrix.GridSize;

@@ -25,7 +25,7 @@ public class GridBuilder
     {
         _humbleGrid ??= A.MockHumbleGridBuilder.Build();
 
-        var grid = new Grid(_bombMatrix, _humbleGrid);
+        var grid = new Grid(_humbleGrid);
         await grid.InitCells(_bombMatrix);
         
         return grid;
