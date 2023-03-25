@@ -17,4 +17,5 @@ public interface IGrid
     int BombCount { get; }
     int RevealedCellCount { get; }
     int FlaggedCellCount { get; }
+    bool IsCleared { get; }
 }

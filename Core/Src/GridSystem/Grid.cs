@@ -37,6 +37,7 @@ public class Grid : IGrid
     public int BombCount => _bombMatrix.BombCount;
     public int FlaggedCellCount => _cellMatrix.Values().Count(cell => cell.IsFlagged);
     public int RevealedCellCount => _cellMatrix.Values().Count(cell => cell.IsRevealed);
+    public bool IsCleared => _cellMatrix.Values().Where(cell => !cell.HasBomb).All(cell => cell.IsRevealed);
 
     private bool IsValid(GridIndex gridIndex)
     {
@@ -81,7 +82,11 @@ public class Grid : IGrid
 
     public IEnumerable<ICell> GetNeighborsOf(ICell cell)
     {
-        return from offset in NeighborOffsets select cell.Index + offset into cellIndex where IsValid(cellIndex) select GetCellAt(cellIndex);
+        return from offset in NeighborOffsets
+            select cell.Index + offset
+            into cellIndex
+            where IsValid(cellIndex)
+            select GetCellAt(cellIndex);
     }
 
     public async UniTask RevealAtAsync(GridIndex gridIndex)
@@ -96,7 +101,9 @@ public class Grid : IGrid
     public async UniTask RevealAroundAsync(GridIndex gridIndex)
     {
         var cell = GetCellAt(gridIndex);
-        if (cell.IsCovered || cell.IsFlagged || cell.HasBomb) return;
+        var canRevealAround = cell is {IsRevealed: true, HasBomb: false};
+        if (!canRevealAround)
+            return;
 
         var neighbors = GetNeighborsOf(cell).ToList();
         var flaggedNeighborCount = neighbors.Count(neighbor => neighbor.IsFlagged);
@@ -120,12 +127,12 @@ public class Grid : IGrid
         if (!IsValid(gridIndex)) return;
 
         var cell = GetCellAt(gridIndex);
-        
+
         var visited = cellsToReveal.Contains(cell);
         if (visited) return;
-        
+
         if (!cell.IsCovered) return;
-        
+
         cellsToReveal.Add(cell);
 
         if (cell.NeighborBombCount > 0) return;

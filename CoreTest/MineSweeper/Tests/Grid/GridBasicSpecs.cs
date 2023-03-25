@@ -57,13 +57,13 @@ public class GridBasicSpecs
     {
         // Arrange
         var originalBombMatrix = bombMatrix1;
-        
+
         var grid = await A.GridBuilder
             .WithBombMatrix(originalBombMatrix).Build();
 
         var anotherBombMatrix = bombMatrix3;
         anotherBombMatrix.GridSize.Should().NotBeEquivalentTo(originalBombMatrix.GridSize);
-        
+
         // Act
         await grid.InitCells(anotherBombMatrix);
 
@@ -85,7 +85,7 @@ public class GridBasicSpecs
         // Assert
         1.Invoking(_ => grid.GetCellAt(badGridIndex))
             .Should().Throw<ArgumentOutOfRangeException>();
-        
+
         for (var i = 0; i < grid.Size.RowCount; i++)
         {
             for (var j = 0; j < grid.Size.ColumnCount; j++)
@@ -108,7 +108,7 @@ public class GridBasicSpecs
         var exceededGridIndex = new GridIndex(1, 2);
 
         // Act
-        
+
 
         // Assert
         Execute.Assertion
@@ -136,5 +136,61 @@ public class GridBasicSpecs
                     .Should().NotThrow();
             }
         }
+    }
+
+    [Test]
+    public async Task should_be_cleared_if_all_non_bomb_cells_are_revealed()
+    {
+        var bombRows =
+            new[]
+            {
+                "💢💢💢",
+                "💣💢💢",
+                "💣💢💢",
+            };
+
+        var gridState = new[]
+            {
+                "💢💢💢",
+                "🔳💢💢",
+                "🔳💢💢",
+            };
+        // Arrange
+        var bombMatrix = A.BombMatrix.WithBombRows(bombRows);
+        var grid = await A.GridBuilder.WithBombMatrix(bombMatrix).Build();
+
+        // Act
+        await grid.ResetStateAsync(gridState);
+
+        // Assert
+        grid.IsCleared.Should().BeTrue();
+    }
+
+    [Test]
+    public async Task should_not_be_cleared_if_some_non_bomb_cells_are_covered()
+    {
+        var bombRows =
+            new[]
+            {
+                "💢💢💢",
+                "💣💢💢",
+                "💣💢💢",
+            };
+
+        var gridState = new[]
+            {
+                "🔳💢💢",
+                "🔳💢💢",
+                "🔳💢💢",
+            };
+        // Arrange
+        var bombMatrix = A.BombMatrix.WithBombRows(bombRows);
+        var grid = await A.GridBuilder.WithBombMatrix(bombMatrix).Build();
+
+        // Act
+        await grid.ResetStateAsync(gridState);
+
+        // Assert
+        grid.IsCleared.Should().BeFalse();
     }
 }
