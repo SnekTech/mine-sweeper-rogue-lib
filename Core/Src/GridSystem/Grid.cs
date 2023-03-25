@@ -73,8 +73,10 @@ public class Grid : IGrid
             _cellMatrix[i, j] = cell;
         }
 
-        var initTasks = _cellMatrix.Values().Select(cell => cell.Init());
-        await UniTask.WhenAll(initTasks);
+        var initCellTasks = _cellMatrix.Values().Select(cell => cell.Init());
+        await UniTask.WhenAll(initCellTasks);
+
+        await _humbleGrid.OnInitComplete();
     }
 
     public IEnumerable<ICell> GetNeighborsOf(ICell cell)
