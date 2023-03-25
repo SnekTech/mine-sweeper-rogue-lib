@@ -1,6 +1,7 @@
 ﻿using NSubstitute;
 using SnekPluginTest.MineSweeper.Builders;
 using SnekTech.MineSweeperRogue.GridSystem;
+using SnekTech.MineSweeperRogue.GridSystem.CellSystem;
 
 namespace SnekPluginTest.MineSweeper.Tests;
 
@@ -22,6 +23,6 @@ public class CellBasicSpecs
 
 
         // Assert
-        mockCell.Received().Init(Arg.Any<GridIndex>(), Arg.Any<int>());
+        mockCell.Received().Init(Arg.Any<ICell>());
     }
 }

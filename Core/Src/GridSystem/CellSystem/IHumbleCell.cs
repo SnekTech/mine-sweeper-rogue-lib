@@ -6,5 +6,5 @@ public interface IHumbleCell
     ICover Cover { get; }
 
     // void SetHighlight(bool isHighlight);
-    void Init(GridIndex gridIndex, int neighborBombCount);
+    void Init(ICell cell);
 }

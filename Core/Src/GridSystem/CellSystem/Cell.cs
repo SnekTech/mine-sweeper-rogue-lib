@@ -37,8 +37,8 @@ public class Cell : ICell
 
     public async UniTask Init()
     {
+        _humbleCell.Init(this);
         await _stateMachine.SetInitState(_stateMachine.CachedCoveredState);
-        _humbleCell.Init(Index, NeighborBombCount);
     }
 
     public UniTask RevealAsync()
