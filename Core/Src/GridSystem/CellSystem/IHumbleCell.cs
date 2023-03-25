@@ -1,7 +1,10 @@
-﻿namespace SnekTech.MineSweeperRogue.GridSystem.CellSystem;
+﻿using System;
+
+namespace SnekTech.MineSweeperRogue.GridSystem.CellSystem;
 
 public interface IHumbleCell
 {
+    ICell Cell { get; }
     IFlag Flag { get; }
     ICover Cover { get; }
 

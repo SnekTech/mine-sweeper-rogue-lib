@@ -18,4 +18,5 @@ public interface IGrid
     int RevealedCellCount { get; }
     int FlaggedCellCount { get; }
     bool IsCleared { get; }
+    List<ICell> Cells { get; }
 }

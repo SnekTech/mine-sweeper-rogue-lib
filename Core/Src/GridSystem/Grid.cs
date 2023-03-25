@@ -35,6 +35,7 @@ public class Grid : IGrid
     public int FlaggedCellCount => _cellMatrix.Values().Count(cell => cell.IsFlagged);
     public int RevealedCellCount => _cellMatrix.Values().Count(cell => cell.IsRevealed);
     public bool IsCleared => _cellMatrix.Values().Where(cell => !cell.HasBomb).All(cell => cell.IsRevealed);
+    public List<ICell> Cells => _cellMatrix.Values().ToList();
 
     private bool IsValid(GridIndex gridIndex)
     {
