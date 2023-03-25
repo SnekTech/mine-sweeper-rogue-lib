@@ -10,7 +10,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <_BuildResult Include="$(OutputPath)\*" Exclude="**\*.json" />
+        <_BuildResult Include="$(OutputPath)\Core.*" Exclude="**\*.json" />
     </ItemGroup>
 
     <ItemGroup>
