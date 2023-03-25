@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using Cysharp.Threading.Tasks;
-using MineSweeperRogue.Core.CustomExtensions;
-using MineSweeperRogue.GridSystem.CellSystem;
+using SnekTech.MineSweeperRogue.Core.CustomExtensions;
+using SnekTech.MineSweeperRogue.GridSystem.CellSystem;
 
-namespace MineSweeperRogue.GridSystem;
+namespace SnekTech.MineSweeperRogue.GridSystem;
 
 public class Grid : IGrid
 {

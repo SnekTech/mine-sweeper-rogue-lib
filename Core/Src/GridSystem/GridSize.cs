@@ -1,4 +1,4 @@
-﻿namespace MineSweeperRogue.GridSystem;
+﻿namespace SnekTech.MineSweeperRogue.GridSystem;
 
 [System.Serializable]
 public struct GridSize

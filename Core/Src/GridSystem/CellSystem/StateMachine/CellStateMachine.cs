@@ -1,6 +1,6 @@
-﻿using MineSweeperRogue.Core.FSM;
+﻿using SnekTech.MineSweeperRogue.Core.FSM;
 
-namespace MineSweeperRogue.GridSystem.CellSystem.StateMachine
+namespace SnekTech.MineSweeperRogue.GridSystem.CellSystem
 {
     public class CellStateMachine : AsyncFsm<CellState, ICell>
     {

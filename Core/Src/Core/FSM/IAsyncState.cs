@@ -1,6 +1,6 @@
 ﻿using Cysharp.Threading.Tasks;
 
-namespace MineSweeperRogue.Core.FSM;
+namespace SnekTech.MineSweeperRogue.Core.FSM;
 
 public interface IAsyncState
 {

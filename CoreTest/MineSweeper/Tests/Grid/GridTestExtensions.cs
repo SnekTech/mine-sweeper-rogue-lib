@@ -1,8 +1,7 @@
 ﻿using Cysharp.Threading.Tasks;
-using MineSweeperRogue.Core.CustomExtensions;
-using MineSweeperRogue.GridSystem;
-using MineSweeperRogue.GridSystem.CellSystem;
-using MineSweeperRogue.GridSystem.CellSystem.StateMachine;
+using SnekTech.MineSweeperRogue.Core.CustomExtensions;
+using SnekTech.MineSweeperRogue.GridSystem;
+using SnekTech.MineSweeperRogue.GridSystem.CellSystem;
 
 namespace SnekPluginTest.MineSweeper.Tests;
 

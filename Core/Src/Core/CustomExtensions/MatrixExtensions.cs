@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace MineSweeperRogue.Core.CustomExtensions;
+namespace SnekTech.MineSweeperRogue.Core.CustomExtensions;
 
 public static class MatrixExtensions
 {

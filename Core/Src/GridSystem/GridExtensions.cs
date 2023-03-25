@@ -2,10 +2,9 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using MineSweeperRogue.GridSystem.CellSystem;
-using MineSweeperRogue.GridSystem.CellSystem.StateMachine;
+using SnekTech.MineSweeperRogue.GridSystem.CellSystem;
 
-namespace MineSweeperRogue.GridSystem;
+namespace SnekTech.MineSweeperRogue.GridSystem;
 
 public static class GridExtensions
 {

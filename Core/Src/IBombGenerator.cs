@@ -1,4 +1,4 @@
-﻿namespace MineSweeperRogue;
+﻿namespace SnekTech.MineSweeperRogue;
 
 public interface IBombGenerator
 {

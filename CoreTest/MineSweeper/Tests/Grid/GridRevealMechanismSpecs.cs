@@ -1,7 +1,7 @@
 ﻿using FluentAssertions;
-using MineSweeperRogue.GridSystem;
 using SnekPluginTest.MineSweeper.Builders;
 using SnekPluginTest.MineSweeper.AssertExtensions;
+using SnekTech.MineSweeperRogue.GridSystem;
 
 namespace SnekPluginTest.MineSweeper.Tests;
 

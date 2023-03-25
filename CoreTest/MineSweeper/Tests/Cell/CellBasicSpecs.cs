@@ -1,6 +1,6 @@
-﻿using MineSweeperRogue.GridSystem;
-using NSubstitute;
+﻿using NSubstitute;
 using SnekPluginTest.MineSweeper.Builders;
+using SnekTech.MineSweeperRogue.GridSystem;
 
 namespace SnekPluginTest.MineSweeper.Tests;
 

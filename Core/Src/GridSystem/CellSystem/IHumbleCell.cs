@@ -1,6 +1,4 @@
-﻿using MineSweeperRogue.GridSystem.CellSystem.Components;
-
-namespace MineSweeperRogue.GridSystem.CellSystem;
+﻿namespace SnekTech.MineSweeperRogue.GridSystem.CellSystem;
 
 public interface IHumbleCell
 {

@@ -1,5 +1,6 @@
-﻿using MineSweeperRogue;
-using NSubstitute;
+﻿using NSubstitute;
+using SnekTech;
+using SnekTech.MineSweeperRogue;
 
 namespace SnekPluginTest.MineSweeper.Builders.Mock;
 

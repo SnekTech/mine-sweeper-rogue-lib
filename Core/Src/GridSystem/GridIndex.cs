@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace MineSweeperRogue.GridSystem
+namespace SnekTech.MineSweeperRogue.GridSystem
 {
     [Serializable]
     public readonly struct GridIndex
