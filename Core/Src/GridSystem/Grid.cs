@@ -124,18 +124,22 @@ public class Grid : IGrid
 
     private void FindCellsToReveal(GridIndex gridIndex, ICollection<ICell> cellsToReveal)
     {
-        if (!IsValid(gridIndex)) return;
+        if (!IsValid(gridIndex)) 
+            return;
 
         var cell = GetCellAt(gridIndex);
 
         var visited = cellsToReveal.Contains(cell);
-        if (visited) return;
+        if (visited) 
+            return;
 
-        if (!cell.IsCovered) return;
+        if (!cell.IsCovered) 
+            return;
 
         cellsToReveal.Add(cell);
 
-        if (cell.NeighborBombCount > 0) return;
+        if (cell.HasBomb || cell.NeighborBombCount > 0)
+            return;
 
         foreach (var neighborCell in GetNeighborsOf(cell))
         {
