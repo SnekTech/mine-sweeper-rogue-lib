@@ -3,8 +3,8 @@
 [System.Serializable]
 public struct GridSize
 {
-    public readonly int RowCount;
-    public readonly int ColumnCount;
+    public int RowCount;
+    public int ColumnCount;
 
     public int TotalCount => RowCount * ColumnCount;
 
