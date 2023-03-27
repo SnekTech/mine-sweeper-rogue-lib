@@ -1,4 +1,5 @@
 ﻿using System;
+using Newtonsoft.Json;
 
 namespace SnekTech.MineSweeperRogue.GridSystem
 {
@@ -22,6 +23,7 @@ namespace SnekTech.MineSweeperRogue.GridSystem
         public static GridIndex First => new GridIndex(0, 0);
         public static GridIndex Invalid => new GridIndex(-1, -1);
 
+        [JsonIgnore]
         public (int i, int j) Tuple => (RowIndex, ColumnIndex);
 
         public static implicit operator GridIndex((int i, int j) tuple)
